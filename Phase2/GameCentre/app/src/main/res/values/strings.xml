@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">SlidingTiles</string>
+    <string name="slidingtiles">Sliding Tiles</string>
+    <string name="gameselect">Choose the game you want to play</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="home">Home</string>
+    <string name="login">Login</string>
+    <string name="guestlogin">Guest Login</string>
+    <string name="signup">Signup</string>
+    <string name="of_undo"># of undo:</string>
+    <string name="_3_x_3">3 x 3</string>
+    <string name="_4_x_4">4 x 4</string>
+    <string name="_5_x_5">5 x 5</string>
+    <string name="start">Start</string>
+    <string name="save">Save</string>
+    <string name="undo">Undo</string>
+    <string name="newgame">New Game</string>
+    <string name="loadgame">Load Saved Game</string>
+    <string name="loadtemp">Load Autosave</string>
+    <string name="logout">Logout</string>
+    <string name="yourscore">Your Score</string>
+    <string name="first">1ST</string>
+    <string name="second">2ND</string>
+    <string name="third">3RD</string>
+    <string name="instructions">Instructions</string>
+    <string name="instructionsheader">Instructions Header</string>
+    <string name="proceed">Proceed</string>
+    <string name="highscore">0x0 HIGHSCORE</string>
+    <string name="back">Back to menu</string>
+    <string name="firstscore">First Score</string>
+    <string name="secondscore">Second Score</string>
+    <string name="thirdscore">Third Score</string>
+    <string name="scoreboard">Scoreboard</string>
+    <string name="welcomeST">Welcome To Sliding Tiles</string>
+    <string name="choose_scoreboard">Choose the ScoreBoard that you want to view</string>
+    <string name="choose_the_size_of_the_board">Choose the size of the board</string>
+    <string name="choose_the_maximum_number_of_undos_in_the_game_n_leave_it_blank_if_you_wish_to_undo_infinitely">Choose the maximum number of undos in the game   (leave it blank if you wish to undo infinitely):</string>
+    <string name="choose_the_background_image">Choose the Background Image</string>
+    <string name="STinstructions">This is a Puzzle Game where you must arrange the numbers in the correct order.\nScoring will be based on number of moves made - The least number of moves made to complete the game will be scored the highest.</string>
+    <string name="_3">3</string>
+    <string name="select">Select</string>
+    <string name="choose_background">Choose Background</string>
+    <string name="quit">Quit</string>
+    <string name="confirm">Confirm</string>
+    <string name="back_to_selection">Back To Selection</string>
+	<string-array name="boardsizechoices">
+        <item>@string/_3_x_3</item>
+        <item>@string/_4_x_4</item>
+        <item>@string/_5_x_5</item>
+    </string-array>
+
+</resources>
