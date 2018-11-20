@@ -1,3 +1,4 @@
+
 package fall2018.csc2017.slidingtiles;
 
 import android.support.annotation.NonNull;
@@ -11,12 +12,12 @@ import java.util.Observable;
 /**
  * The sliding tiles board.
  */
-public class Board extends Observable implements Serializable, Iterable<Tile> {
+public class SlidTilesBoard extends Board{
 
     /**
      * The tiles on the board in row-major order.
      */
-    private Tile[] tiles;
+    private SlideTileTile[] tiles;
 
     /**
      * The number of rows (columns).
@@ -30,17 +31,15 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      * @param tiles the tiles for the board
      * @param size  the size for the board
      */
-    Board(List<Tile> tiles, int size) {
+    SlidTilesBoard(List<SlideTileTile> tiles, int size) {
         boardSize = size;
-        this.tiles = new Tile[boardSize * boardSize];
-        Iterator<Tile> iter = tiles.iterator();
+        this.tiles = new SlideTileTile[boardSize * boardSize];
+        Iterator<SlideTileTile> iter = tiles.iterator();
 
         for (int i = 0; i != boardSize * boardSize; i++) {
             this.tiles[i] = iter.next();
         }
     }
-
-    Board(){};
 
     /**
      * Return the tile at index index.
@@ -48,7 +47,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      * @param index the index of the tile
      * @return the tile at the index
      */
-    Tile getTile(int index) {
+    SlideTileTile getTile(int index) {
         return tiles[index];
     }
 
@@ -70,6 +69,21 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         return boardSize * boardSize;
     }
 
+    /**
+     * Swap the tiles at indexes index1 and index2.
+     *
+     * @param index1 the first tile index
+     * @param index2 the second tile index
+     */
+    void swapTiles(int index1, int index2) {
+        SlideTileTile heldTile = tiles[index1];
+        tiles[index1] = tiles[index2];
+        tiles[index2] = heldTile;
+
+        setChanged();
+        notifyObservers();
+    }
+
     @Override
     public String toString() {
         return "Board{" +
@@ -77,27 +91,4 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
                 '}';
     }
 
-    @NonNull
-    @Override
-    public Iterator<Tile> iterator() {
-        return new TileIterator();
-    }
-
-    private class TileIterator implements Iterator<Tile> {
-
-        // The index of the current tile to iterate on
-        private int index = 0;
-
-        @Override
-        public boolean hasNext() {
-            return (index < numTiles());
-        }
-
-        @Override
-        public Tile next() {
-            Tile returned = tiles[index];
-            index++;
-            return returned;
-        }
-    }
 }
