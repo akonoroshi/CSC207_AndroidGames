@@ -123,7 +123,7 @@ public class STManager implements BoardManager, Serializable {
      * @param tileList The list of tiles
      * @return true if and only if tileList is solvable on STboard
      */
-    private boolean checkSolvable(int size, List<Tile> tileList) {
+    boolean checkSolvable(int size, List<Tile> tileList) {
         int count = 0;
         int blankPosition = 0;
         int numTiles = size * size;
@@ -170,7 +170,7 @@ public class STManager implements BoardManager, Serializable {
      * @param position the tile to check
      * @return int[] of blank tile position in the form {row, col} (or null if no blank neighbour)
      */
-    private int findBlankNeighbour(int position) {
+    int findBlankNeighbour(int position) {
         int blankId = board.numTiles();
         int boardSize = board.getBoardWidth();
 

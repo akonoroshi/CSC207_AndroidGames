@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -57,6 +58,48 @@ public class STBoardAndTileTest {
         assertTrue(boardManager.puzzleSolved());
         swapFirstTwoTiles();
         assertFalse(boardManager.puzzleSolved());
+    }
+
+    /**
+     * Test whether checkSolvable correctly identifies solvable Boards
+     */
+    @Test
+    public void testSolvable() {
+        setUpCorrect();
+        List<Tile> tiles = new ArrayList<>();
+        for(Tile t : boardManager.getBoard()) {
+            tiles.add(t);
+        }
+        assertTrue(boardManager.checkSolvable(4, tiles));
+        tiles.add(13, tiles.remove(14));
+        assertFalse(boardManager.checkSolvable(4, tiles));
+    }
+
+    /**
+     * Test whether undoing all moves reverts the Board
+     */
+    @Test
+    public void testUndo() {
+        Random random = new Random();
+        boardManager = new STManager(5, 3, "");
+        List<Tile> tiles = new ArrayList<>();
+        for(Tile t : boardManager.getBoard()) {
+            tiles.add(t);
+        }
+        for(int i = 0; i < 3; i++){
+            int next = 0;
+            while (boardManager.findBlankNeighbour(next) == -1) {
+                next = random.nextInt(25);
+            }
+        }
+        for(int i = 0; i < 3; i++){
+            boardManager.undo();
+        }
+        for(int i = 0; i < 25; i++) {
+            if(boardManager.getBoard().getTile(i).getId() != tiles.get(i).getId()) {
+                fail();
+            }
+        }
     }
 
     /**
