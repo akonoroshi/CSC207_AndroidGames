@@ -12,10 +12,10 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class BoardAndTileTest {
+public class STBoardAndTileTest {
 
     /** The board manager for testing. */
-    BoardManager boardManager;
+    private STManager boardManager;
 
     /**
      * Make a set of tiles that are in order.
@@ -37,8 +37,8 @@ public class BoardAndTileTest {
     private void setUpCorrect() {
         int boardSize = 4;
         List<Tile> tiles = makeTiles(boardSize);
-        Board board = new Board(tiles, boardSize);
-        boardManager = new BoardManager(board);
+        STBoard board = new STBoard(tiles, boardSize);
+        boardManager = new STManager(board);
     }
 
     /**
@@ -54,9 +54,9 @@ public class BoardAndTileTest {
     @Test
     public void testIsSolved() {
         setUpCorrect();
-        assertEquals(true, boardManager.puzzleSolved());
+        assertTrue(boardManager.puzzleSolved());
         swapFirstTwoTiles();
-        assertEquals(false, boardManager.puzzleSolved());
+        assertFalse(boardManager.puzzleSolved());
     }
 
     /**
@@ -91,9 +91,9 @@ public class BoardAndTileTest {
     @Test
     public void testIsValidTap() {
         setUpCorrect();
-        assertEquals(true, boardManager.isValidTap(11));
-        assertEquals(true, boardManager.isValidTap(14));
-        assertEquals(false, boardManager.isValidTap(10));
+        assertTrue(boardManager.isValidTap(11));
+        assertTrue(boardManager.isValidTap(14));
+        assertFalse(boardManager.isValidTap(10));
     }
 }
 
