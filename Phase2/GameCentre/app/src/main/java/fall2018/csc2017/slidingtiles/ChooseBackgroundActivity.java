@@ -36,6 +36,7 @@ public class ChooseBackgroundActivity extends AppCompatActivity {
     private void createBackgroundButtons() {
         addBackgroundButtonListener(R.id.tile_, "tile_");
         addBackgroundButtonListener(R.id.autumn_, "autumn_");
+        addBackgroundButtonListener(R.id.flower_, "flower_");
     }
 
 
