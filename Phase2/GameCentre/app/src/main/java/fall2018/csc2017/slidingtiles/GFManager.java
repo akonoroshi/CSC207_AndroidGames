@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class STManager implements BoardManager, Serializable {
+public class GFManager implements BoardManager, Serializable {
 
 
     /**
@@ -41,13 +41,13 @@ public class STManager implements BoardManager, Serializable {
     /**
      * A default BoardManager constructor.
      */
-    STManager() {
+    GFManager() {
     }
 
     /**
      * A constructor with a pre-populated STBoard.
      */
-    STManager(STBoard board) {
+    GFManager(STBoard board) {
         this.board = board;
     }
 
@@ -63,7 +63,7 @@ public class STManager implements BoardManager, Serializable {
     /**
      * Manage a new shuffled board.
      */
-    STManager(int size, int numOfUndo, String background) {
+    GFManager(int size, int numOfUndo, String background) {
         List<Tile> tiles = new ArrayList<>();
 
         for (int tileNum = 0; tileNum != size * size; tileNum++) {
@@ -123,7 +123,7 @@ public class STManager implements BoardManager, Serializable {
      * @param tileList The list of tiles
      * @return true if and only if tileList is solvable on STboard
      */
-    boolean checkSolvable(int size, List<Tile> tileList) {
+    private boolean checkSolvable(int size, List<Tile> tileList) {
         int count = 0;
         int blankPosition = 0;
         int numTiles = size * size;
@@ -170,7 +170,7 @@ public class STManager implements BoardManager, Serializable {
      * @param position the tile to check
      * @return int[] of blank tile position in the form {row, col} (or null if no blank neighbour)
      */
-    int findBlankNeighbour(int position) {
+    private int findBlankNeighbour(int position) {
         int blankId = board.numTiles();
         int boardSize = board.getBoardWidth();
 

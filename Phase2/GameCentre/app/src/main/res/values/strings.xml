@@ -33,19 +33,23 @@
     <string name="secondscore">Second Score</string>
     <string name="thirdscore">Third Score</string>
     <string name="scoreboard">Scoreboard</string>
-    <string name="welcomeST">Welcome To Sliding Tiles</string>
+    <string name="welcome">Welcome To </string>
     <string name="choose_scoreboard">Choose the ScoreBoard that you want to view</string>
     <string name="choose_the_size_of_the_board">Choose the size of the board</string>
     <string name="choose_the_maximum_number_of_undos_in_the_game_n_leave_it_blank_if_you_wish_to_undo_infinitely">Choose the maximum number of undos in the game   (leave it blank if you wish to undo infinitely):</string>
     <string name="choose_the_background_image">Choose the Background Image</string>
     <string name="STinstructions">This is a Puzzle Game where you must arrange the numbers in the correct order.\nScoring will be based on number of moves made - The least number of moves made to complete the game will be scored the highest.</string>
+    <string name="MSinstructions">In this game, you must find mines in a obscured field. Tap on a tile to reveal it. Numbered tiles tell you how many mines are adjacent to that tile.\nScoring will be based on how long it takes to find the mines - Try to find them as quickly as possible.</string>
+    <string name="GFinstructions">Grid Filler is a game where you place tetromino blocks on a grid. These blocks cannot overlap. When a row or column of tiles is filled, it will be removed.\nScoring will be based on how many tiles you were able to place - Larger tile counts are ranked higher.</string>
     <string name="_3">3</string>
     <string name="select">Select</string>
     <string name="choose_background">Choose Background</string>
     <string name="quit">Quit</string>
     <string name="confirm">Confirm</string>
     <string name="back_to_selection">Back To Selection</string>
-	<string-array name="boardsizechoices">
+    <string name="minesweeper">Minesweeper</string>
+    <string name="gridfiller">Grid Filler</string>
+    <string-array name="boardsizechoices">
         <item>@string/_3_x_3</item>
         <item>@string/_4_x_4</item>
         <item>@string/_5_x_5</item>
