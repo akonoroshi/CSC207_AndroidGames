@@ -17,7 +17,7 @@ class STBoard extends Board implements Serializable, Iterable<Tile> {
      * @param size  the size for the board
      */
     STBoard(List<Tile> tiles, int size) {
-        super(tiles, size);
+        super(tiles, size, size);
     }
 
     /**

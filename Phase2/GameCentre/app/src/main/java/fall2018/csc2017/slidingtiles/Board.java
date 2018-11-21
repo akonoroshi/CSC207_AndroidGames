@@ -19,23 +19,25 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
     private Tile[] tiles;
 
     /**
-     * The number of rows (columns).
+     * The number of columns and row.
      */
-    private int boardSize;
+    private int boardWidth, boardHeight;
 
     /**
      * A new board of tiles in row-major order.
      * Precondition: len(tiles) == BOARD_SIZE * BOARD_SIZE
      *
      * @param tiles the tiles for the board
-     * @param size  the size for the board
+     * @param width the width for the board
+     * @param height the height for the board
      */
-    Board(List<Tile> tiles, int size) {
-        boardSize = size;
-        this.tiles = new Tile[boardSize * boardSize];
+    Board(List<Tile> tiles, int width, int height) {
+        boardWidth = width;
+        boardHeight = height;
+        this.tiles = new Tile[boardWidth * boardHeight];
         Iterator<Tile> iter = tiles.iterator();
 
-        for (int i = 0; i != boardSize * boardSize; i++) {
+        for (int i = 0; i != boardWidth * boardHeight; i++) {
             this.tiles[i] = iter.next();
         }
     }
@@ -64,12 +66,21 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
     }
 
     /**
-     * Return the size of the board.
+     * Return the width of the board.
      *
      * @return the size of the board.
      */
-    int getBoardSize() {
-        return boardSize;
+    int getBoardWidth() {
+        return boardWidth;
+    }
+
+    /**
+     * Return the height of the board.
+     *
+     * @return the size of the board.
+     */
+    int getBoardHeight() {
+        return boardHeight;
     }
 
     /**
@@ -78,7 +89,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      * @return the number of tiles on the board.
      */
     int numTiles() {
-        return boardSize * boardSize;
+        return boardWidth * boardHeight;
     }
 
     @Override

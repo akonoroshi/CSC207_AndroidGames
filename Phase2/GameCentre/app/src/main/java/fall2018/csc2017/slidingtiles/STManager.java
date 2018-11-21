@@ -172,7 +172,7 @@ public class STManager implements BoardManager, Serializable {
      */
     private int findBlankNeighbour(int position) {
         int blankId = board.numTiles();
-        int boardSize = board.getBoardSize();
+        int boardSize = board.getBoardWidth();
 
         Tile above = position < boardSize ? null : board.getTile(position - boardSize);
         Tile below = position >= boardSize * (boardSize - 1) ? null : board.getTile(position + boardSize);
