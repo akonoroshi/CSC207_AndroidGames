@@ -45,6 +45,13 @@ public class STManager implements BoardManager, Serializable {
     }
 
     /**
+     * A constructor with a pre-populated STBoard.
+     */
+    STManager(STBoard board) {
+        this.board = board;
+    }
+
+    /**
      * Return the current board.
      *
      * @return the current board
@@ -77,7 +84,7 @@ public class STManager implements BoardManager, Serializable {
      *
      * @return the number of moves made
      */
-    int getMoveCount() {
+    public int getScore() {
         return this.moveCount;
     }
 
@@ -95,7 +102,7 @@ public class STManager implements BoardManager, Serializable {
      *
      * @return the background of the current board
      */
-    String getBackground() {
+    public String getBackground() {
         return background;
     }
 

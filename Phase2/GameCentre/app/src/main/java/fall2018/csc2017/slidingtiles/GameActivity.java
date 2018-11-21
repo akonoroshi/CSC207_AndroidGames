@@ -57,9 +57,9 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
 
         // Add View to activity
         gridView = findViewById(R.id.grid);
-        gridView.setNumColumns(((STManager)boardmanager).getBoard().getBoardSize());
-        gridView.setBoardManager(((STManager)boardmanager));
-        ((STManager)boardmanager).getBoard().addObserver(this);
+        gridView.setNumColumns(boardmanager.getBoard().getBoardSize());
+        gridView.setBoardManager(boardmanager);
+        boardmanager.getBoard().addObserver(this);
         // Observer sets up desired dimensions as well as calls our display function
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -70,8 +70,8 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
                         int displayWidth = gridView.getMeasuredWidth();
                         int displayHeight = gridView.getMeasuredHeight();
 
-                        columnWidth = displayWidth / ((STManager)boardmanager).getBoard().getBoardSize();
-                        columnHeight = displayHeight / ((STManager)boardmanager).getBoard().getBoardSize();
+                        columnWidth = displayWidth / boardmanager.getBoard().getBoardSize();
+                        columnHeight = displayHeight / boardmanager.getBoard().getBoardSize();
 
                         display(con);
                     }
@@ -87,13 +87,13 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
      * @param context the context used to create tile buttons
      */
     private void createTileButtons(Context context) {
-        Board board = ((STManager)boardmanager).getBoard();
+        Board board = boardmanager.getBoard();
         tileButtons = new ArrayList<>();
         Resources res = context.getResources();
         for (int index = 0; index != board.numTiles(); index++) {
             Button tmp = new Button(context);
             tmp.setBackground(res.getDrawable(res.getIdentifier(
-                    ((STManager)boardmanager).getBackground() + board.getBoardSize() + "_" + board.getTile(index).getId(),
+                    boardmanager.getBackground() + board.getBoardSize() + "_" + board.getTile(index).getId(),
                     "drawable", context.getPackageName()), null));
             this.tileButtons.add(tmp);
         }
@@ -124,8 +124,8 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentCentre.saveGame(GameActivity.this, ((STManager)boardmanager), false);
-                currentCentre.saveGame(GameActivity.this, ((STManager)boardmanager), true);
+                currentCentre.saveGame(GameActivity.this, (boardmanager), false);
+                currentCentre.saveGame(GameActivity.this, (boardmanager), true);
                 makeToastSavedText();
             }
         });
@@ -139,8 +139,8 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentCentre.saveGame(GameActivity.this, ((STManager)boardmanager), false);
-                currentCentre.saveGame(GameActivity.this, ((STManager)boardmanager), true);
+                currentCentre.saveGame(GameActivity.this, (boardmanager), false);
+                currentCentre.saveGame(GameActivity.this, (boardmanager), true);
                 switchToActivity(StartingActivity.class);
             }
         });
@@ -164,12 +164,12 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
      * Update the backgrounds on the buttons to match the tiles.
      */
     private void updateTileButtons(Context context) {
-        Board board = ((STManager)boardmanager).getBoard();
+        Board board = boardmanager.getBoard();
         Resources res = context.getResources();
         int nextPos = 0;
         for (Button b : tileButtons) {
             b.setBackground(res.getDrawable(res.getIdentifier(
-                    ((STManager)boardmanager).getBackground() + board.getBoardSize() + "_" + board.getTile(nextPos).getId(),
+                    boardmanager.getBackground() + board.getBoardSize() + "_" + board.getTile(nextPos).getId(),
                     "drawable", context.getPackageName()), null));
             nextPos++;
         }
@@ -179,8 +179,8 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
      * Auto-save the game after a certain amount of moves.
      */
     private void autoSave() {
-        if (((STManager)boardmanager).getMoveCount() % 4 == 0) {
-            currentCentre.saveGame(GameActivity.this, ((STManager)boardmanager), true);
+        if (boardmanager.getScore() % 4 == 0) {
+            currentCentre.saveGame(GameActivity.this, (boardmanager), true);
             makeToastAutoSavedText();
         }
     }
@@ -191,21 +191,21 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
     @Override
     protected void onPause() {
         super.onPause();
-        currentCentre.saveGame(this, ((STManager)boardmanager), true);
+        currentCentre.saveGame(this, boardmanager, true);
     }
 
 
     @Override
     public void update(Observable o, Object arg) {
-        if (((STManager)boardmanager).puzzleSolved()) {
+        if (boardmanager.puzzleSolved()) {
             currentCentre.clearSavedGame(GameActivity.this, false);
-            String size = String.valueOf(((STManager)boardmanager).getBoard().getBoardSize());
-            if(currentCentre.addScore(this, size, ((STManager)boardmanager).getMoveCount(), true)) {
+            String size = String.valueOf(boardmanager.getBoard().getBoardSize());
+            if(currentCentre.addScore(this, size, boardmanager.getScore(), true)) {
                 Toast.makeText(this, "You got a high score!", Toast.LENGTH_LONG).show();
             }else {
                 Toast.makeText(this, "You win!", Toast.LENGTH_LONG).show();
             }
-            switchToScoreBoard(size, ((STManager)boardmanager).getMoveCount());
+            switchToScoreBoard(size, boardmanager.getScore());
         } else {
             autoSave();
         }

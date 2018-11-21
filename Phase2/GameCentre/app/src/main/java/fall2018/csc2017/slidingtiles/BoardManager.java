@@ -27,6 +27,19 @@ interface BoardManager{
      */
     boolean isValidTap(int position);
 
+    /**
+     * Return the background.
+     *
+     * @return the background of the current board
+     */
+    String getBackground();
+
+    /**
+     * Return the score.
+     *
+     * @return the score (based on game played)
+     */
+    int getScore();
 
     /**
      * Process a touch at position in the board
