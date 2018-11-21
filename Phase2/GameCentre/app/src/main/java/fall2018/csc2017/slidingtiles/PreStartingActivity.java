@@ -48,10 +48,10 @@ public class PreStartingActivity extends GameAppCompatActivity {
                     background = extras.getString("background");
                 }
                 if (und.length() == 0) {
-                    boardManager = new BoardManager(boardSize, 0, background);
-                    boardManager.setInfiniteUndo();// default case: a player can undo infinitely
+                    boardManager = new STManager(boardSize, 0, background);
+                    ((STManager)boardManager).setInfiniteUndo();// default case: a player can undo infinitely
                 } else {
-                    boardManager = new BoardManager(boardSize, Integer.parseInt(und), background);
+                    boardManager = new STManager(boardSize, Integer.parseInt(und), background);
                 }
                 save();
                 switchToActivity(GameActivity.class);
