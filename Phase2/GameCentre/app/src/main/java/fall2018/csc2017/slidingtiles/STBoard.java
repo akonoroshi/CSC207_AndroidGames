@@ -12,12 +12,9 @@ import java.util.Observable;
 /**
  * The sliding tiles board.
  */
-public class SlidTilesBoard extends Board{
+public class STBoard extends Board implements Iterable<STTile>{
 
-    /**
-     * The tiles on the board in row-major order.
-     */
-    private SlideTileTile[] tiles;
+    private STTile[] tiles;
 
     /**
      * The number of rows (columns).
@@ -31,10 +28,10 @@ public class SlidTilesBoard extends Board{
      * @param tiles the tiles for the board
      * @param size  the size for the board
      */
-    SlidTilesBoard(List<SlideTileTile> tiles, int size) {
+    STBoard(List<STTile> tiles, int size) {
         boardSize = size;
-        this.tiles = new SlideTileTile[boardSize * boardSize];
-        Iterator<SlideTileTile> iter = tiles.iterator();
+        this.tiles = new STTile[boardSize * boardSize];
+        Iterator<STTile> iter = tiles.iterator();
 
         for (int i = 0; i != boardSize * boardSize; i++) {
             this.tiles[i] = iter.next();
@@ -47,7 +44,7 @@ public class SlidTilesBoard extends Board{
      * @param index the index of the tile
      * @return the tile at the index
      */
-    SlideTileTile getTile(int index) {
+    STTile getTile(int index) {
         return tiles[index];
     }
 
@@ -76,7 +73,7 @@ public class SlidTilesBoard extends Board{
      * @param index2 the second tile index
      */
     void swapTiles(int index1, int index2) {
-        SlideTileTile heldTile = tiles[index1];
+        STTile heldTile = tiles[index1];
         tiles[index1] = tiles[index2];
         tiles[index2] = heldTile;
 
@@ -89,6 +86,30 @@ public class SlidTilesBoard extends Board{
         return "Board{" +
                 "tiles=" + Arrays.toString(tiles) +
                 '}';
+    }
+
+    @NonNull
+    @Override
+    public Iterator<STTile> iterator() {
+        return new TileIterator();
+    }
+
+    private class TileIterator implements Iterator<STTile> {
+
+        // The index of the current tile to iterate on
+        private int index = 0;
+
+        @Override
+        public boolean hasNext() {
+            return (index < numTiles());
+        }
+
+        @Override
+        public STTile next() {
+            STTile returned = tiles[index];
+            index++;
+            return returned;
+        }
     }
 
 }

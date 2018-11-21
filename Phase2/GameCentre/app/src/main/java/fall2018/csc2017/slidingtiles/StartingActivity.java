@@ -168,7 +168,7 @@ public class StartingActivity extends GameAppCompatActivity {
         super.onResume();
         boardManager = currentCentre.loadGame(StartingActivity.this, true);
         if (boardManager == null) {
-            boardManager = new BoardManager();
+            boardManager = new STManager();
         }
     }
 

@@ -1,16 +1,17 @@
 package fall2018.csc2017.slidingtiles;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SlidingTileManager implements BoardManager {
+public class STManager implements BoardManager, Serializable {
 
 
     /**
      * The board being managed.
      */
-    private SlidTilesBoard board;
+    private STBoard board;
 
     /**
      * The number of undo's a player can have in a game.
@@ -42,7 +43,7 @@ public class SlidingTileManager implements BoardManager {
      *
      * @param board the board
      */
-    SlidingTileManager(SlidTilesBoard board) {
+    STManager(STBoard board) {
         this.board = board;
     }
 
@@ -50,7 +51,7 @@ public class SlidingTileManager implements BoardManager {
     /**
      * A default BoardManager constructor.
      */
-    SlidingTileManager() {
+    STManager() {
     }
 
     /**
@@ -58,22 +59,22 @@ public class SlidingTileManager implements BoardManager {
      *
      * @return the current board
      */
-    public SlidTilesBoard getBoard() {
+    public STBoard getBoard() {
         return board;
     }
 
     /**
      * Manage a new shuffled board.
      */
-    SlidingTileManager(int size, int numOfUndo, String background) {
-        List<SlideTileTile> tiles = new ArrayList<>();
+    STManager(int size, int numOfUndo, String background) {
+        List<STTile> tiles = new ArrayList<>();
 
         for (int tileNum = 0; tileNum != size * size; tileNum++) {
-            tiles.add(new SlideTileTile(tileNum));
+            tiles.add(new STTile(tileNum));
         }
 
         Collections.shuffle(tiles);
-        this.board = new SlidTilesBoard(tiles, size);
+        this.board = new STBoard(tiles, size);
         this.numOfUndo = numOfUndo;
         this.undoStack = new ArrayList<>();
         this.background = background;
@@ -120,7 +121,7 @@ public class SlidingTileManager implements BoardManager {
      */
     public boolean puzzleSolved() {
         int id = 1;
-        for (Tile tile : board) {
+        for(Tile tile : board) {
             if (tile.getId() == id) {
                 id++;
             } else {

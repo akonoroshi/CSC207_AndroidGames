@@ -11,7 +11,7 @@ import java.util.Observable;
 /**
  * The sliding tiles board.
  */
-public class Board extends Observable implements Serializable, Iterable<Tile> {
+public class Board extends Observable implements Serializable {
 
     /**
      * The tiles on the board in row-major order.
@@ -40,7 +40,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         }
     }
 
-    Board(){};
+    Board(){}
 
     /**
      * Return the tile at index index.
@@ -77,27 +77,4 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
                 '}';
     }
 
-    @NonNull
-    @Override
-    public Iterator<Tile> iterator() {
-        return new TileIterator();
-    }
-
-    private class TileIterator implements Iterator<Tile> {
-
-        // The index of the current tile to iterate on
-        private int index = 0;
-
-        @Override
-        public boolean hasNext() {
-            return (index < numTiles());
-        }
-
-        @Override
-        public Tile next() {
-            Tile returned = tiles[index];
-            index++;
-            return returned;
-        }
-    }
 }
