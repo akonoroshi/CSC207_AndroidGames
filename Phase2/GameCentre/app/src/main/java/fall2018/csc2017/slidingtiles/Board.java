@@ -31,11 +31,11 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      * @param width the width for the board
      * @param height the height for the board
      */
-    Board(List<Tile> tiles, int width, int height) {
+    <T extends Tile> Board (List<T> tiles, int width, int height) {
         boardWidth = width;
         boardHeight = height;
         this.tiles = new Tile[boardWidth * boardHeight];
-        Iterator<Tile> iter = tiles.iterator();
+        Iterator<T> iter = tiles.iterator();
 
         for (int i = 0; i != boardWidth * boardHeight; i++) {
             this.tiles[i] = iter.next();
