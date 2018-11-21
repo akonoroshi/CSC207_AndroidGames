@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * A Tile in a sliding tiles puzzle.
  */
-public abstract class Tile implements Comparable<Tile>, Serializable {
+public class Tile implements Comparable<Tile>, Serializable {
 
     /**
      * The unique id.

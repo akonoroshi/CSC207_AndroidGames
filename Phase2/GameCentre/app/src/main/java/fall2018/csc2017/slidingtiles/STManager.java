@@ -39,16 +39,6 @@ public class STManager implements BoardManager, Serializable {
     private String background;
 
     /**
-     * Manage a board that has been pre-populated.
-     *
-     * @param board the board
-     */
-    STManager(STBoard board) {
-        this.board = board;
-    }
-
-
-    /**
      * A default BoardManager constructor.
      */
     STManager() {
@@ -67,13 +57,15 @@ public class STManager implements BoardManager, Serializable {
      * Manage a new shuffled board.
      */
     STManager(int size, int numOfUndo, String background) {
-        List<STTile> tiles = new ArrayList<>();
+        List<Tile> tiles = new ArrayList<>();
 
         for (int tileNum = 0; tileNum != size * size; tileNum++) {
-            tiles.add(new STTile(tileNum));
+            tiles.add(new Tile(tileNum));
         }
-
         Collections.shuffle(tiles);
+        while (!(checkSolvable(size, tiles))) {
+            Collections.shuffle(tiles);
+        }
         this.board = new STBoard(tiles, size);
         this.numOfUndo = numOfUndo;
         this.undoStack = new ArrayList<>();
@@ -115,13 +107,45 @@ public class STManager implements BoardManager, Serializable {
     }
 
     /**
+     * Reference to: Ryan, M. (2004) Solvability of the Tiles Game.
+     * https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
+     * <p>
+     * Returns whether the tileList will be solvable on a STboard.
+     *
+     * @param size     The size of the board
+     * @param tileList The list of tiles
+     * @return true if and only if tileList is solvable on STboard
+     */
+    private boolean checkSolvable(int size, List<Tile> tileList) {
+        int count = 0;
+        int blankPosition = 0;
+        int numTiles = size * size;
+        for (int i = 0; i < numTiles; i++) {
+            for (int j = i + 1; j < numTiles; j++) {
+                if (tileList.get(i).getId() > tileList.get(j).getId()) {
+                    count++;
+                }
+            }
+            if (tileList.get(i).getId() == numTiles) {
+                blankPosition = i;
+            }
+        }
+        if (size % 2 == 1) {
+            return count % 2 == 0;
+        }
+        int blankRow = blankPosition % size;
+        return blankRow % 2 != count % 2;
+    }
+
+
+    /**
      * Return whether the tiles are in row-major order.
      *
      * @return whether the tiles are in row-major order
      */
     public boolean puzzleSolved() {
         int id = 1;
-        for(Tile tile : board) {
+        for (Tile tile : board) {
             if (tile.getId() == id) {
                 id++;
             } else {
