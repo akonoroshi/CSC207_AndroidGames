@@ -47,7 +47,7 @@ public class SelectingGameActivity extends GameAppCompatActivity {
             @Override
             public void onClick(View v) {
                 currentCentre.setCurrentGame("MS");
-                Toast.makeText(SelectingGameActivity.this, "TODO: Begin playing Minesweeper", Toast.LENGTH_SHORT).show();
+                switchToActivity(InstructionsActivity.class);
             }
         });
     }
@@ -61,7 +61,7 @@ public class SelectingGameActivity extends GameAppCompatActivity {
             @Override
             public void onClick(View v) {
                 currentCentre.setCurrentGame("GF");
-                Toast.makeText(SelectingGameActivity.this, "TODO: Begin playing Grid Filler", Toast.LENGTH_SHORT).show();
+                switchToActivity(InstructionsActivity.class);
             }
         });
     }

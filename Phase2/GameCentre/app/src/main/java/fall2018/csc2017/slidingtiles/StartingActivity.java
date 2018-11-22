@@ -2,6 +2,7 @@ package fall2018.csc2017.slidingtiles;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,10 +46,16 @@ public class StartingActivity extends GameAppCompatActivity {
      */
 
     private String getGameName(String currentGame) {
-        if (currentGame.equals("ST")) {
-            return getString(R.string.slidingtiles);
+        switch(currentGame) {
+            case "ST":
+                return getString(R.string.slidingtiles);
+            case "MS":
+                return getString(R.string.minesweeper);
+            case "GF":
+                return getString(R.string.gridfiller);
+            default:
+                return "Game not set";
         }
-        return "";
     }
 
     /**
@@ -86,8 +93,11 @@ public class StartingActivity extends GameAppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToActivity(PreStartingActivity.class);
-
+                if(currentCentre.getCurrentGame().equals("ST")) {
+                    switchToActivity(PreStartingActivity.class);
+                }else {
+                    Toast.makeText(StartingActivity.this, "TODO: Go to new PreStartingActivity", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -105,7 +115,11 @@ public class StartingActivity extends GameAppCompatActivity {
                     boardManager = tempManager;
                     currentCentre.saveGame(StartingActivity.this, boardManager, true);
                     makeToastLoadedText(true);
-                    switchToActivity(GameActivity.class);
+                    if(currentCentre.getCurrentGame().equals("ST")) {
+                        switchToActivity(GameActivity.class);
+                    }else {
+                        Toast.makeText(StartingActivity.this, "TODO: Go to new GameActivity", Toast.LENGTH_LONG).show();
+                    }
                 } else {
                     makeToastLoadedText(false);
                 }
@@ -131,22 +145,24 @@ public class StartingActivity extends GameAppCompatActivity {
      * Activate the LoadAutoSave button.
      */
     private void addLoadAutosaveButtonListener() {
-        Button loadAutosaveButton = findViewById(R.id.ContinueButton);
-        loadAutosaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BoardManager tempManager = currentCentre.loadGame(StartingActivity.this, true);
-                if (tempManager != null) {
-                    boardManager = tempManager;
-                    currentCentre.saveGame(StartingActivity.this, boardManager, true);
-                    makeToastLoadedText(true);
-                    switchToActivity(GameActivity.class);
+        if(currentCentre.getCurrentGame().equals("ST")) {
+            Button loadAutosaveButton = findViewById(R.id.ContinueButton);
+            loadAutosaveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    BoardManager tempManager = currentCentre.loadGame(StartingActivity.this, true);
+                    if (tempManager != null) {
+                        boardManager = tempManager;
+                        currentCentre.saveGame(StartingActivity.this, boardManager, true);
+                        makeToastLoadedText(true);
+                        switchToActivity(GameActivity.class);
 
-                } else {
-                    makeToastLoadedText(false);
+                    } else {
+                        makeToastLoadedText(false);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     /**
@@ -168,7 +184,17 @@ public class StartingActivity extends GameAppCompatActivity {
         super.onResume();
         boardManager = currentCentre.loadGame(StartingActivity.this, true);
         if (boardManager == null) {
-            boardManager = new STManager();
+            switch(currentCentre.getCurrentGame()) {
+                case "ST":
+                    boardManager = new STManager();
+                    break;
+                case "MS":
+                    boardManager = new MSManager();
+                    break;
+                case "GF":
+                    boardManager = new GFManager();
+                    break;
+            }
         }
     }
 
