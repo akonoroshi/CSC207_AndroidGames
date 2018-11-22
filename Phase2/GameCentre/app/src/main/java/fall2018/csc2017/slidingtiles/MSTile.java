@@ -1,31 +1,35 @@
 package fall2018.csc2017.slidingtiles;
 
+/**
+ * A class representing a Minesweeper Tile.
+ */
 class MSTile extends Tile {
 
     /**
-     *  The number of mines adjacent to this tile, including diagonals.
+     * The number of mines adjacent to this tile, including diagonals.
      */
-    int numMines;
+    private int numMines;
     /**
-     *  Whether this tile is revealed or not.
+     * Whether this tile is revealed or not.
      */
-    boolean revealed;
+    private boolean revealed;
 
     /**
-     *  Whether this tile is flagged or not.
+     * Whether this tile is flagged or not.
      */
-    boolean flagged;
+    private boolean flagged;
 
     /**
-     *  Whether this tile has a mine or not.
+     * Whether this tile has a mine or not.
      */
-    boolean hasMine;
+    private boolean hasMine;
 
     /**
      * Constructor for a MineSweeper Tile, set default for an unrevealed Tile.
+     *
      * @param backgroundId the unique id of this tile.
      */
-    MSTile(int backgroundId){
+    MSTile(int backgroundId) {
         super(backgroundId);
         revealed = false;
         flagged = false;
@@ -33,9 +37,68 @@ class MSTile extends Tile {
     }
 
     /**
-     *  Set this Tile to have a mine.
+     * Set this Tile to have a mine.
      */
-    void setMine(){
+    void setMine() {
         hasMine = true;
+    }
+
+    /**
+     * Return whether this tile has a mine.
+     *
+     * @return whether this tile has a mine.
+     */
+    boolean hasAMine() {
+        return this.hasMine;
+    }
+
+    /**
+     * Set this tile to be revealed.
+     */
+    void setRevealed() {
+        revealed = true;
+    }
+
+    /**
+     * Return whether this tile is revealed.
+     *
+     * @return whether this tile is revealed.
+     */
+    boolean isRevealed() {
+        return this.revealed;
+    }
+
+    /**
+     * Return whether this tile is flagged.
+     *
+     * @return whether this tile is flagged.
+     */
+    boolean isFlagged() {
+        return this.flagged;
+    }
+
+    /**
+     * Set this tile to be flagged.
+     */
+    void setFlagged() {
+        flagged = true;
+    }
+
+    /**
+     * Set the number of adjacent mines to this tile.
+     *
+     * @param mines the number of adjacent mines
+     */
+    void setAdjacentMines(int mines) {
+        numMines = mines;
+    }
+
+    /**
+     * Return the number of adjacent mines to this tile.
+     *
+     * @return the number of adjacent mines
+     */
+    int getNumMines() {
+        return numMines;
     }
 }
