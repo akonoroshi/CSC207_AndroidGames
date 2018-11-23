@@ -108,7 +108,7 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
         neighbours.add(position + getBoardWidth() + 1);
         neighbours.add(position + getBoardWidth() - 1);
         for (int i = 0; i < 8; i++) {
-            if (neighbours.get(i).equals(mineLocations.get(i))) {
+            if (mineLocations.contains(neighbours.get(i))) {
                 mines++;
             }
         }
