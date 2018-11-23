@@ -42,9 +42,13 @@ class MSManager implements BoardManager, Serializable {
     /**
      * Manage a new board.
      */
-    MSManager(int numRows, int numCol, String background) {
+    MSManager(int width, int height, String background) {
         List<MSTile> tiles = new ArrayList<>();
-
+        for (int tileNum = 0; tileNum != width * height; tileNum++) {
+            tiles.add(new MSTile(tileNum));
+        }
+        this.background = background;
+        this.board = new MSBoard(tiles, width, height);
     }
 
     /**
