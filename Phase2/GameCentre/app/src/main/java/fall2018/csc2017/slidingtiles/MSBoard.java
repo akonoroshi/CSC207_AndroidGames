@@ -1,6 +1,8 @@
 package fall2018.csc2017.slidingtiles;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -18,6 +20,11 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
      * The number of mines on the board.
      */
     private int totalMines;
+
+    /**
+     * The locations of the mines on the board.
+     */
+    private ArrayList<Integer> mineLocations;
 
     /**
      * Constructor for a Minesweeper Board.
@@ -55,11 +62,70 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
      */
     void createMines() {
         int mines = totalMines;
+        ArrayList<Integer> locationList = new ArrayList<>();
         Random r = new Random();
         while (mines > 0) {
             int location = r.nextInt(boardSize);
             ((MSTile) getTile(location)).setMine();
+            locationList.add(location);
+            mineLocations = locationList;
             mines--;
+        }
+    }
+
+    /**
+     * Alternate algorithm for creating mines, guarantees no duplicates.
+     */
+    void createMines2() {
+        ArrayList<Integer> shuffleList = new ArrayList<>();
+        ArrayList<Integer> locationList = new ArrayList<>();
+        for (int i = 0; i < boardSize; i++) {
+            shuffleList.add(i);
+        }
+        Collections.shuffle(shuffleList);
+        for (int j = 0; j < totalMines; j++) {
+            ((MSTile) getTile(shuffleList.get(j))).setMine();
+            locationList.add(shuffleList.get(j));
+        }
+        mineLocations = locationList;
+    }
+
+    /**
+     * Count the number of mines in the adjacent positions of position.
+     *
+     * @param position the position that we want to look at the neighbours of
+     * @return the number of mines adjacent to position
+     */
+    private int countMines(int position) {
+        int mines = 0;
+        ArrayList<Integer> neighbours = new ArrayList<>();
+        neighbours.add(position - 1);
+        neighbours.add(position - getBoardWidth());
+        neighbours.add(position - getBoardWidth() + 1);
+        neighbours.add(position - getBoardWidth() - 1);
+        neighbours.add(position + 1);
+        neighbours.add(position + getBoardWidth());
+        neighbours.add(position + getBoardWidth() + 1);
+        neighbours.add(position + getBoardWidth() - 1);
+        for (int i = 0; i < 8; i++) {
+            if (neighbours.get(i).equals(mineLocations.get(i))) {
+                mines++;
+            }
+        }
+        return mines;
+    }
+
+    /**
+     * Flag or un-flag a tile.
+     *
+     * @param position the position of the tile to be flagged
+     */
+    void flagTile(int position) {
+        MSTile tile = ((MSTile) getTile(position));
+        if (tile.isFlagged()) {
+            tile.unFlag();
+        } else {
+            tile.setFlagged();
         }
     }
 
@@ -73,6 +139,7 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
             return;
         }
         MSTile tile = ((MSTile) getTile(position));
+        tile.setAdjacentMines(countMines(position));
         if (tile.getNumMines() > 0) {
             tile.setRevealed();
             // draw tile with number
