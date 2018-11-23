@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class STBoardAndTileTest {
+public class STTest {
 
     /** The board manager for testing. */
     private STManager boardManager;
