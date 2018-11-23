@@ -85,6 +85,13 @@ class MSTile extends Tile {
     }
 
     /**
+     * Un-flag this tile.
+     */
+    void unFlag() {
+        flagged = false;
+    }
+
+    /**
      * Set the number of adjacent mines to this tile.
      *
      * @param mines the number of adjacent mines
