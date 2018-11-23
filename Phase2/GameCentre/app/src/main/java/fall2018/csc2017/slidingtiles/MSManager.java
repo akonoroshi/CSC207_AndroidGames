@@ -24,6 +24,11 @@ class MSManager implements BoardManager, Serializable {
     private int timer = 0;
 
     /**
+     * The number of mines left, after subtracting flagged spaces.
+     */
+    private int remainingMines;
+
+    /**
      * A default MSManager constructor.
      */
     MSManager() {
@@ -49,6 +54,7 @@ class MSManager implements BoardManager, Serializable {
         }
         this.background = background;
         this.board = new MSBoard(tiles, width, height);
+        this.remainingMines = board.getTotalMines();
     }
 
     /**
@@ -83,6 +89,20 @@ class MSManager implements BoardManager, Serializable {
      */
     private void increaseTimer() {
         timer++;
+    }
+
+    /**
+     * Subtract a mine from the remaining mines.
+     */
+    void subtractMine() {
+        remainingMines--;
+    }
+
+    /**
+     * Add a mine to the remaining mines.
+     */
+    void addMine() {
+        remainingMines++;
     }
 
     /**
