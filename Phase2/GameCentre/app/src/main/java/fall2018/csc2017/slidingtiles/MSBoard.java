@@ -53,7 +53,7 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
     /**
      * Generate the locations of the mines.
      */
-    public void createMines() {
+    void createMines() {
         int mines = totalMines;
         Random r = new Random();
         while (mines > 0) {
@@ -68,7 +68,7 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
      *
      * @param position location tapped
      */
-    public void reveal(int position) {
+    void reveal(int position) {
         if (position < getBoardSize() || position > getBoardSize()) {
             return;
         }
