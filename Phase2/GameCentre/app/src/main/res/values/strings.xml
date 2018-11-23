@@ -49,6 +49,10 @@
     <string name="back_to_selection">Back To Selection</string>
     <string name="minesweeper">Minesweeper</string>
     <string name="gridfiller">Grid Filler</string>
+    <string name="difficulty">Choose your difficulty</string>
+    <string name="easy">Easy</string>
+    <string name="normal">Normal</string>
+    <string name="hard">Hard</string>
     <string-array name="boardsizechoices">
         <item>@string/_3_x_3</item>
         <item>@string/_4_x_4</item>
