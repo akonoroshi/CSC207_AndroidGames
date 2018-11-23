@@ -100,6 +100,15 @@ class MSManager implements BoardManager, Serializable {
     }
 
     /**
+     * Check and return true if the player lost with a tap at position position.
+     *
+     * @return whether the player lost or not.
+     */
+    boolean gameOverCheck(int position) {
+        return (((MSTile) board.getTile(position)).hasAMine() && ((MSTile) board.getTile(position)).isRevealed());
+    }
+
+    /**
      * Return whether all the tiles have been revealed.
      *
      * @return whether all the tiles have been revealed.
@@ -126,7 +135,6 @@ class MSManager implements BoardManager, Serializable {
         }
         return isValid;
     }
-
 
     /**
      * Process a tap.
