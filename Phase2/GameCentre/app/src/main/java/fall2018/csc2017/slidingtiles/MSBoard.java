@@ -135,7 +135,7 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
      * @param position location tapped
      */
     void reveal(int position) {
-        if (position < getBoardSize() || position > getBoardSize()) {
+        if (position < 0 || position > getBoardSize()) {
             return;
         }
         MSTile tile = ((MSTile) getTile(position));
