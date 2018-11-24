@@ -99,7 +99,7 @@ public class GFGameActivity extends GameAppCompatActivity implements Observer {
             Button tmp = new Button(context);
             tmp.setBackground(res.getDrawable(res.getIdentifier(
                     // TODO: Fix game-dependent code (another way to prefix drawables?)
-                    boardmanager.getBackground() + 3 + "_" + (board.getTile(index)).getId(),
+                    "gf_" + board.getTile(index).getId(),
                     "drawable", context.getPackageName()), null));
             this.tileButtons.add(tmp);
         }
@@ -176,7 +176,7 @@ public class GFGameActivity extends GameAppCompatActivity implements Observer {
         for (Button b : tileButtons) {
             b.setBackground(res.getDrawable(res.getIdentifier(
                     // TODO: Fix game-dependent code (another way to prefix drawables?)
-                    boardmanager.getBackground() + 3 + "_" + board.getTile(nextPos).getId(),
+                    "gf_" + board.getTile(nextPos).getId(),
                     "drawable", context.getPackageName()), null));
             nextPos++;
         }
