@@ -16,13 +16,26 @@ class GFBoard extends Board implements Serializable, Iterable<Tile> {
      * @param tiles the tiles for the board
      * @param size  the size for the board
      */
-    GFBoard(List<Tile> tiles, int size) {
+    GFBoard(List<GFTile> tiles, int size) {
+        super(tiles, size, size);
     }
 
 
-    private void placeTiles(Tetromino tetro){
-
+    /**
+     * Set the tile at positions in positionList to revealed.
+     * @param positionList list of tile positions to be revealed
+     */
+    private void placeTiles(List<Integer> positionList){
+        for (int i: positionList){
+            (getTile(i)).placeTile();
+        }
     }
+
+    @Override
+    GFTile getTile(int index) {
+        return (GFTile)super.getTile(index);
+    }
+
 }
 
 

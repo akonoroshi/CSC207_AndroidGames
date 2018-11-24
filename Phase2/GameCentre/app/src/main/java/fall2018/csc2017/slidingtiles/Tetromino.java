@@ -8,14 +8,12 @@ import java.util.Map;
 /**
  * A Tetromino in Grid Filler game.
  */
-public class Tetromino implements Serializable {
+class Tetromino implements Serializable {
 
     /**
-     * List of position indexes, 0 being anchor and the rest being the surrounding shape of the
-     * tetromino
+     * Map of tetrominoes with the key being the name of the tetromino and the value being its
+     * position relative to the anchor which is at index 0 on a 10x10 board.
      */
-    private List<Integer> positionList;
-
     static final Map<String, int[]> tetrominoMap = new HashMap<String, int[]>(){
         {
             put("I", new int[]{0,10, 20, 30});
@@ -27,8 +25,5 @@ public class Tetromino implements Serializable {
             put("T", new int[]{0, 1, 2, 11});
         }
     };
-
-
-
 
 }
