@@ -16,10 +16,10 @@ class GFTile extends Tile implements Serializable {
     }
 
     /**
-     *Sets tile to placed
+     *Changes the state of the tile from placed to not placed and vice versa
      */
     void placeTile(){
-        placed = true;
+        placed = !placed;
     }
 
     /**

@@ -2,7 +2,6 @@ package fall2018.csc2017.slidingtiles;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -38,7 +37,7 @@ public class GFManager implements BoardManager, Serializable {
      */
     private String background;
     /**
-     *The current Tetromino selected
+     * The current Tetromino selected
      */
     private String tetromino;
 
@@ -119,9 +118,12 @@ public class GFManager implements BoardManager, Serializable {
      * @return whether the tiles are in row-major order
      */
     public boolean puzzleSolved() {
-        for (int i : Tetromino.tetrominoMap.get(tetromino)){
+        for (int i = 0; i != getBoard().numTiles(); i++) {
+            if (isValidTap(i)) {
+                return true;
+            }
         }
-        return true;
+        return false;
     }
 
     /**
@@ -132,9 +134,9 @@ public class GFManager implements BoardManager, Serializable {
      */
     public boolean isValidTap(int position) {
         int[] positionList = Tetromino.tetrominoMap.get(tetromino);
-        for (int num: positionList){
+        for (int num : positionList) {
             int tilePosition = num + position;
-            if (getBoard().getTile(num + position).isPlaced() || tilePosition < getBoard().numTiles()){
+            if (getBoard().getTile(num + position).isPlaced() || tilePosition < getBoard().numTiles()) {
                 return false;
             }
         }
@@ -149,13 +151,10 @@ public class GFManager implements BoardManager, Serializable {
      */
     public void touchMove(int position) {
         int[] positionList = Tetromino.tetrominoMap.get(tetromino);
-        for (int num : positionList) {
-            int tilePosition = num + position;
-            getBoard().getTile(tilePosition).placeTile();
-        }
+        board.placeTiles(positionList);
         List<String> tempList = new ArrayList<>(Tetromino.tetrominoMap.keySet());
         tetromino = tempList.get(new Random().nextInt(tempList.size()));
-        if (infiniteUndo || numOfUndo > undoStack.size()){
+        if (infiniteUndo || numOfUndo > undoStack.size()) {
             undoStack.add(getBoard());
         }
         score += 4;
@@ -165,8 +164,8 @@ public class GFManager implements BoardManager, Serializable {
     /**
      * Process an undo, undoing the previous move made.
      */
-    void undo(){
-        if (undoStack.size() != 0){
+    void undo() {
+        if (undoStack.size() != 0) {
             int lastMoveIndex = undoStack.size() - 1;
             board = undoStack.get(lastMoveIndex);
             undoStack.remove(lastMoveIndex);
