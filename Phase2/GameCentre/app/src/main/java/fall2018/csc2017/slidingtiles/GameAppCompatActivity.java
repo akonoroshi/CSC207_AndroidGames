@@ -14,6 +14,18 @@ public class GameAppCompatActivity extends AppCompatActivity {
     }
 
     /**
+     * Switch to the chosen GameActivity view.
+     */
+    protected void switchToGame(String game) {
+        Class activity = GameActivity.class;
+        if (game.equals("GF")){
+            activity = GFGameActivity.class;
+        }
+        Intent tmp = new Intent(this, activity);
+        startActivity(tmp);
+    }
+
+    /**
      * Switch to the Score Board view.
      */
     protected void switchToScoreBoard(String boardSize, int current) {

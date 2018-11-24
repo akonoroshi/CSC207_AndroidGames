@@ -93,10 +93,16 @@ public class StartingActivity extends GameAppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(currentCentre.getCurrentGame().equals("ST")) {
-                    switchToActivity(PreStartingActivity.class);
-                }else {
-                    Toast.makeText(StartingActivity.this, "TODO: Go to new PreStartingActivity", Toast.LENGTH_LONG).show();
+                switch (currentCentre.getCurrentGame()) {
+                    case "ST":
+                        switchToActivity(PreStartingActivity.class);
+                        break;
+                    case "GF":
+                        switchToActivity(PreStartingActivity.class);
+                        break;
+                    default:
+                        Toast.makeText(StartingActivity.this, "TODO: Go to new PreStartingActivity", Toast.LENGTH_LONG).show();
+                        break;
                 }
             }
         });

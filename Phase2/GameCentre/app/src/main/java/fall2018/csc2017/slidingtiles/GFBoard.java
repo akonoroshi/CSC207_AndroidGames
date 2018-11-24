@@ -26,14 +26,14 @@ class GFBoard extends Board implements Serializable, Iterable<Tile> {
      *
      * @param positionList list of tile positions to be revealed
      */
-    void placeTiles(int[] positionList) {
+    void placeTiles(int[] positionList, int currentPosition) {
         for (int i : positionList) {
-            (getTile(i)).placeTile();
-
+            (getTile(currentPosition + i)).placeTile();
         }
+
         for (int i : positionList) {
-            int row = i / getBoardWidth();
-            int col = i % getBoardWidth();
+            int row = (currentPosition + i) / getBoardWidth();
+            int col = (currentPosition + i) % getBoardWidth();
             if (checkRow(row)) {
                 clearRow(row);
             }
@@ -47,7 +47,7 @@ class GFBoard extends Board implements Serializable, Iterable<Tile> {
     }
 
     private boolean checkCol(int col) {
-        for (int i = 0; i != 10; i += 10) {
+        for (int i = 0; i != numTiles(); i += getBoardWidth()) {
             if (!(getTile(i + col).isPlaced())) {
                 return false;
             }
@@ -57,14 +57,14 @@ class GFBoard extends Board implements Serializable, Iterable<Tile> {
 
 
     private void clearCol(int col) {
-        for (int i = 0; i != 10; i += 10) {
+        for (int i = 0; i != numTiles(); i += getBoardWidth()) {
             getTile(i + col).placeTile();
         }
     }
 
     private boolean checkRow(int row) {
-        int start = row * 10;
-        for (int i = 0; i != 10; i++) {
+        int start = row * getBoardWidth();
+        for (int i = 0; i != getBoardWidth(); i++) {
             if (!(getTile(i + start).isPlaced())) {
                 return false;
             }
@@ -73,8 +73,8 @@ class GFBoard extends Board implements Serializable, Iterable<Tile> {
     }
 
     private void clearRow(int row) {
-        int start = row * 10;
-        for (int i = 0; i != 10; i++) {
+        int start = row * getBoardWidth();
+        for (int i = 0; i != getBoardWidth(); i++) {
             getTile(i + start).placeTile();
         }
     }

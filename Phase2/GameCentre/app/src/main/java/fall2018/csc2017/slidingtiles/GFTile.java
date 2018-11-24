@@ -29,4 +29,11 @@ class GFTile extends Tile implements Serializable {
         return placed;
     }
 
+    @Override
+    public int getId() {
+        if (isPlaced()){
+            return super.getId() + 1;
+        }
+        return super.getId();
+    }
 }

@@ -13,6 +13,7 @@
     <string name="_3_x_3">3 x 3</string>
     <string name="_4_x_4">4 x 4</string>
     <string name="_5_x_5">5 x 5</string>
+    <string name="_10_x_10">10 x 10</string>
     <string name="start">Start</string>
     <string name="save">Save</string>
     <string name="undo">Undo</string>
@@ -53,10 +54,14 @@
     <string name="easy">Easy</string>
     <string name="normal">Normal</string>
     <string name="hard">Hard</string>
+    <string name="tetrominoes">Tetrominoes</string>
     <string-array name="boardsizechoices">
         <item>@string/_3_x_3</item>
         <item>@string/_4_x_4</item>
         <item>@string/_5_x_5</item>
     </string-array>
 
+    <string-array name="gridfillerchoices">
+        <item>@string/_10_x_10</item>
+    </string-array>
 </resources>

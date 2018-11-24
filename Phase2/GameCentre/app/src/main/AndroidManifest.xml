@@ -26,6 +26,7 @@
         <activity android:name="fall2018.csc2017.slidingtiles.ChooseBackgroundActivity" />
         <activity android:name="fall2018.csc2017.slidingtiles.InstructionsActivity" />
         <activity android:name="fall2018.csc2017.slidingtiles.GameAppCompatActivity"/>
+        <activity android:name="fall2018.csc2017.slidingtiles.GFGameActivity" />
     </application>
 
 </manifest>

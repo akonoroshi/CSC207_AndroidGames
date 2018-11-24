@@ -36,6 +36,7 @@ public class GFManager implements BoardManager, Serializable {
      * The background for the board.
      */
     private String background;
+
     /**
      * The current Tetromino selected
      */
@@ -73,8 +74,11 @@ public class GFManager implements BoardManager, Serializable {
             tiles.add(new GFTile(0));
         }
         this.board = new GFBoard(tiles, size);
+        this.background = background;
         this.numOfUndo = numOfUndo;
         this.undoStack = new ArrayList<>();
+        List<String> tempList = new ArrayList<>(Tetromino.tetrominoMap.keySet());
+        tetromino = tempList.get(new Random().nextInt(tempList.size()));
     }
 
     /**
@@ -95,6 +99,14 @@ public class GFManager implements BoardManager, Serializable {
         return background;
     }
 
+    /**
+     * Return the tetromino
+     *
+     * @return the tetromino of the current board
+     */
+    public String getTetromino() {
+        return tetromino;
+    }
 
     /**
      * Return the length of undo stack.
@@ -120,10 +132,10 @@ public class GFManager implements BoardManager, Serializable {
     public boolean puzzleSolved() {
         for (int i = 0; i != getBoard().numTiles(); i++) {
             if (isValidTap(i)) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     /**
@@ -136,7 +148,12 @@ public class GFManager implements BoardManager, Serializable {
         int[] positionList = Tetromino.tetrominoMap.get(tetromino);
         for (int num : positionList) {
             int tilePosition = num + position;
-            if (getBoard().getTile(num + position).isPlaced() || tilePosition < getBoard().numTiles()) {
+            if (tilePosition >= getBoard().numTiles() || getBoard().getTile(tilePosition).isPlaced()) {
+                return false;
+            }
+            int positionRow = position / getBoard().getBoardWidth();
+            int tilePositionRow = tilePosition / getBoard().getBoardWidth();
+            if ((num < 3 ) && positionRow < tilePositionRow) {
                 return false;
             }
         }
@@ -151,12 +168,9 @@ public class GFManager implements BoardManager, Serializable {
      */
     public void touchMove(int position) {
         int[] positionList = Tetromino.tetrominoMap.get(tetromino);
-        board.placeTiles(positionList);
         List<String> tempList = new ArrayList<>(Tetromino.tetrominoMap.keySet());
         tetromino = tempList.get(new Random().nextInt(tempList.size()));
-        if (infiniteUndo || numOfUndo > undoStack.size()) {
-            undoStack.add(getBoard());
-        }
+        board.placeTiles(positionList, position);
         score += 4;
     }
 
@@ -165,11 +179,6 @@ public class GFManager implements BoardManager, Serializable {
      * Process an undo, undoing the previous move made.
      */
     void undo() {
-        if (undoStack.size() != 0) {
-            int lastMoveIndex = undoStack.size() - 1;
-            board = undoStack.get(lastMoveIndex);
-            undoStack.remove(lastMoveIndex);
-        }
-        score -= 4;
+        // Old version did not work so it was removed.
     }
 }
