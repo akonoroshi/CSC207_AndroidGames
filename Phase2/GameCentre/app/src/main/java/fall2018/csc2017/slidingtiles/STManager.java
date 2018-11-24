@@ -129,7 +129,7 @@ public class STManager implements BoardManager, Serializable {
         int numTiles = size * size;
         for (int i = 0; i < numTiles; i++) {
             for (int j = i + 1; j < numTiles; j++) {
-                if (tileList.get(i).getId() > tileList.get(j).getId()) {
+                if (tileList.get(i).getId() > tileList.get(j).getId() && tileList.get(i).getId() != numTiles) {
                     count++;
                 }
             }
