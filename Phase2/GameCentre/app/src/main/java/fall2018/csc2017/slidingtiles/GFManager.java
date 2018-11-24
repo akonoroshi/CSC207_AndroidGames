@@ -38,9 +38,14 @@ public class GFManager implements BoardManager, Serializable {
     private String background;
 
     /**
-     * The current Tetromino selected
+     * The list of Tetrominos
      */
-    private String tetromino;
+    private List<Tetromino> tetrominos;
+
+    /**
+     * The start and end of the list tetrominos
+     */
+    private int start, end;
 
     /**
      * A default BoardManager constructor.
@@ -69,6 +74,8 @@ public class GFManager implements BoardManager, Serializable {
      */
     GFManager(int size, int numOfUndo, String background) {
         List<GFTile> tiles = new ArrayList<>();
+        start = -3;
+        end = 0;
 
         for (int tileNum = 0; tileNum != size * size; tileNum++) {
             tiles.add(new GFTile(0));
@@ -77,8 +84,10 @@ public class GFManager implements BoardManager, Serializable {
         this.background = background;
         this.numOfUndo = numOfUndo;
         this.undoStack = new ArrayList<>();
-        List<String> tempList = new ArrayList<>(Tetromino.tetrominoMap.keySet());
-        tetromino = tempList.get(new Random().nextInt(tempList.size()));
+        this.tetrominos = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            updateTetrominos();
+        }
     }
 
     /**
@@ -104,8 +113,8 @@ public class GFManager implements BoardManager, Serializable {
      *
      * @return the tetromino of the current board
      */
-    public String getTetromino() {
-        return tetromino;
+    public List<Tetromino> getTetrominos() {
+        return tetrominos.subList(start, end);
     }
 
     /**
@@ -122,6 +131,15 @@ public class GFManager implements BoardManager, Serializable {
      */
     void setInfiniteUndo() {
         this.infiniteUndo = true;
+    }
+
+    /**
+     * Create a new tetromino and update the list of tetrominos
+     */
+    private void updateTetrominos() {
+        tetrominos.add(new Tetromino());
+        start++;
+        end++;
     }
 
     /**
@@ -145,7 +163,7 @@ public class GFManager implements BoardManager, Serializable {
      * @return whether the tile at position is surrounded by a blank tile
      */
     public boolean isValidTap(int position) {
-        int[] positionList = Tetromino.tetrominoMap.get(tetromino);
+        int[] positionList = Tetromino.tetrominoMap.get(tetrominos.get(start).getShape());
         for (int num : positionList) {
             int tilePosition = num + position;
             if (tilePosition >= getBoard().numTiles() || getBoard().getTile(tilePosition).isPlaced()) {
@@ -167,9 +185,8 @@ public class GFManager implements BoardManager, Serializable {
      * @param position the position that was tapped
      */
     public void touchMove(int position) {
-        int[] positionList = Tetromino.tetrominoMap.get(tetromino);
-        List<String> tempList = new ArrayList<>(Tetromino.tetrominoMap.keySet());
-        tetromino = tempList.get(new Random().nextInt(tempList.size()));
+        int[] positionList = Tetromino.tetrominoMap.get(tetrominos.get(start).getShape());
+        updateTetrominos();
         board.placeTiles(positionList, position);
         score += 4;
     }

@@ -84,9 +84,17 @@ public class GFGameActivity extends GameAppCompatActivity implements Observer {
 
     private void updateTetromino() {
         ImageView tetro = findViewById(R.id.CurrentTetromino);
+        updateTetrominoHelper(tetro, 0);
+        tetro = findViewById(R.id.NextTetromino);
+        updateTetrominoHelper(tetro, 1);
+        tetro = findViewById(R.id.NextTetromino2);
+        updateTetrominoHelper(tetro, 2);
+    }
+
+    private void updateTetrominoHelper(ImageView tetro, int index) {
         Resources res = this.getResources();
         tetro.setImageResource(res.getIdentifier(
-                "gf_" + ((GFManager) boardmanager).getTetromino(),
+                "gf_" + ((GFManager) boardmanager).getTetrominos().get(index).getShape(),
                 "drawable", this.getPackageName()));
     }
 

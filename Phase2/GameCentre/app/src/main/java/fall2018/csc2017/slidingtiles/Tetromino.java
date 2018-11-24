@@ -1,8 +1,11 @@
 package fall2018.csc2017.slidingtiles;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * A Tetromino in Grid Filler game.
@@ -24,5 +27,24 @@ class Tetromino implements Serializable {
             put("t", new int[]{0, 1, 2, 11});
         }
     };
+
+    /**
+     * The shape of this tetromino
+     */
+    private String shape;
+
+    Tetromino() {
+        List<String> tempList = new ArrayList<>(tetrominoMap.keySet());
+        shape = tempList.get(new Random().nextInt(tempList.size()));
+    }
+
+    /**
+     * Returns the shape of this tetromino
+     *
+     * @return the shape of this tetromino
+     */
+    public String getShape() {
+        return shape;
+    }
 
 }
