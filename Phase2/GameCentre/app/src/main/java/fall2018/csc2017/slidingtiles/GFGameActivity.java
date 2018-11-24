@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.res.Resources;
@@ -82,8 +83,11 @@ public class GFGameActivity extends GameAppCompatActivity implements Observer {
     }
 
     private void updateTetromino() {
-        TextView tetro = findViewById(R.id.Tetromino);
-        tetro.setText(((GFManager) boardmanager).getTetromino());
+        ImageView tetro = findViewById(R.id.CurrentTetromino);
+        Resources res = this.getResources();
+        tetro.setImageResource(res.getIdentifier(
+                "gf_" + ((GFManager) boardmanager).getTetromino(),
+                "drawable", this.getPackageName()));
     }
 
     /**

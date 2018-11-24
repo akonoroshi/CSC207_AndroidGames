@@ -55,6 +55,7 @@
     <string name="normal">Normal</string>
     <string name="hard">Hard</string>
     <string name="tetrominoes">Tetrominoes</string>
+    <string name="next">next:</string>
     <string-array name="boardsizechoices">
         <item>@string/_3_x_3</item>
         <item>@string/_4_x_4</item>

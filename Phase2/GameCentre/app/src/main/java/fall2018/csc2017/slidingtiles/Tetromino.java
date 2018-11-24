@@ -15,13 +15,13 @@ class Tetromino implements Serializable {
      */
     static final Map<String, int[]> tetrominoMap = new HashMap<String, int[]>(){
         {
-            put("I", new int[]{0,10, 20, 30});
-            put("S", new int[]{0, 1, 9, 10});
-            put("Z", new int[]{0, 1, 11, 12});
-            put("O", new int[]{0, 1, 10, 11});
-            put("P", new int[]{0, 1, 10, 20});
-            put("Q", new int[]{0, 1, 11, 21});
-            put("T", new int[]{0, 1, 2, 11});
+            put("i", new int[]{0,10, 20, 30});
+            put("s", new int[]{0, 1, 9, 10});
+            put("z", new int[]{0, 1, 11, 12});
+            put("o", new int[]{0, 1, 10, 11});
+            put("p", new int[]{0, 1, 10, 20});
+            put("q", new int[]{0, 1, 11, 21});
+            put("t", new int[]{0, 1, 2, 11});
         }
     };
 
