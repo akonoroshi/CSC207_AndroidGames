@@ -120,6 +120,15 @@ class MSManager implements BoardManager, Serializable {
     }
 
     /**
+     * Set all tiles to be revealed.
+     */
+    void revealAll() {
+        for (Tile tile : board) {
+            ((MSTile) tile).setRevealed();
+        }
+    }
+
+    /**
      * Check and return true if the player lost with a tap at position position.
      *
      * @return whether the player lost or not.
