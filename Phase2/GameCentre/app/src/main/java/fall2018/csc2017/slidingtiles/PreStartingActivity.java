@@ -27,21 +27,12 @@ public class PreStartingActivity extends GameAppCompatActivity {
         currentCentre = GameCentre.getInstance(this);
         setContentView(R.layout.activity_choosing);
         Spinner mySpinner = findViewById(R.id.BoardSizeSelect);
-        String[] choicesArray = getChoices(currentCentre.getCurrentGame());
+        String[] choicesArray = getResources().getStringArray(R.array.boardsizechoices);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, choicesArray);
         myAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
         addSelectButtonListener();
         addChooseBackgroundButtonListener();
-    }
-
-    private String[] getChoices(String game) {
-        if (game.equals("ST")) {
-            return getResources().getStringArray(R.array.boardsizechoices);
-        }
-        else{
-            return getResources().getStringArray(R.array.gridfillerchoices);
-        }
     }
 
     /**
@@ -63,39 +54,15 @@ public class PreStartingActivity extends GameAppCompatActivity {
                 if (extras != null) {
                     background = extras.getString("background");
                 }
-                createManager(boardSize, und, currentCentre.getCurrentGame(), background);
-                save();
-                switchToGame(currentCentre.getCurrentGame());
+                if (und.length() == 0) {
+                    boardManager = new STManager(boardSize, 0, background);
+                    ((STManager)boardManager).setInfiniteUndo();// default case: a player can undo infinitely
+                } else {
+                    boardManager = new STManager(boardSize, Integer.parseInt(und), background);
+                }                save();
+                switchToActivity(GameActivity.class);
             }
         }));
-    }
-
-    /**
-     * Create a BoardManager for the game selected
-     * @param boardSize the size of the board being played
-     * @param und number of undoes that was chosen for the game
-     * @param currentGame the current game selected
-     * @param background the identifier for the the tiles of the board.
-     */
-    private void createManager(int boardSize, String und, String currentGame, String background) {
-        if (currentGame.equals("ST")){
-            if (und.length() == 0) {
-                boardManager = new STManager(boardSize, 0, background);
-                ((STManager)boardManager).setInfiniteUndo();// default case: a player can undo infinitely
-            } else {
-                boardManager = new STManager(boardSize, Integer.parseInt(und), background);
-            }
-        }
-        else if (currentGame.equals("GF")){
-            if (und.length() == 0) {
-                boardManager = new GFManager(boardSize, 0);
-                ((GFManager)boardManager).setInfiniteUndo();// default case: a player can undo infinitely
-            } else {
-                boardManager = new GFManager(boardSize, Integer.parseInt(und));
-            }
-
-        }
-
     }
 
     /**
