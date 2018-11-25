@@ -200,6 +200,7 @@ public class GFManager implements BoardManager, Serializable {
             undoStack.remove(lastMoveIndex);
             start--;
             end--;
+            score -= 4;
         }
     }
 }
