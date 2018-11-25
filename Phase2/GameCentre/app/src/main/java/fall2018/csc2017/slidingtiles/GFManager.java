@@ -159,10 +159,10 @@ public class GFManager implements BoardManager, Serializable {
             if (tilePosition >= getBoard().numTiles()) {
                 return false;
             }
-            if (num % getBoard().getBoardWidth() != 0 && tilePosition % getBoard().getBoardWidth() == 0) {
+            if (position % getBoard().getBoardWidth() >= 8 && tilePosition / getBoard().getBoardWidth() > (tilePosition - 1) / getBoard().getBoardWidth()) {
                 return false;
             }
-            if (num == getBoard().getBoardWidth() - 1 && tilePosition % getBoard().getBoardWidth() == num) {
+            if (num % getBoard().getBoardWidth() == getBoard().getBoardWidth() - 1 && num == tilePosition % getBoard().getBoardWidth()) {
                 return false;
             }
             if (getBoard().getTile(tilePosition).isPlaced()) {
@@ -171,7 +171,6 @@ public class GFManager implements BoardManager, Serializable {
         }
         return true;
     }
-
 
     /**
      * Process a touch at position in the board, swapping tiles as appropriate.
