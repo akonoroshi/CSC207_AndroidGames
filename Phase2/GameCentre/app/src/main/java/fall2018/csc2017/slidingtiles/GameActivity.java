@@ -41,7 +41,7 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
      * of positions, and then call the adapter to set the view.
      */
     // Display
-    private void display(Context context) {
+    void display(Context context) {
         updateTileButtons(context);
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
     }
@@ -183,7 +183,7 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
     /**
      * Auto-save the game after a certain amount of moves.
      */
-    private void autoSave() {
+    void autoSave() {
         if (boardmanager.getScore() % 4 == 0) {
             currentCentre.saveGame(GameActivity.this, (boardmanager), true);
             makeToastAutoSavedText();
