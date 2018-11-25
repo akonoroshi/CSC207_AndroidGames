@@ -23,8 +23,9 @@ public class MovementController {
         }
     }
     public void processPressMovement(Context context, int position, boolean display) {
-        if (boardManager.isValidTap(position)) {
-            ((MSBoard)boardManager.getBoard()).flagTile(position);
+        if (((MSManager)boardManager).isValidPress(position)) {
+            ((MSManager)boardManager).flag(position);
+            Toast.makeText(context, "Flagged/Unflagged successfully", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "Invalid Flag", Toast.LENGTH_SHORT).show();
         }
