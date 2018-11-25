@@ -108,4 +108,23 @@ class MSTile extends Tile {
     int getNumMines() {
         return numMines;
     }
+
+    /**
+     * Return the id of each tile
+     *
+     * @return id of the tile
+     */
+    String getID() {
+        if (!this.isRevealed()) {
+            return "ms_default";
+        } else if (this.hasAMine()) {
+            return "ms_bomb";
+        } else if (this.getNumMines() != 0) {
+            return "ms" + "_" + this.getNumMines();
+        } else if (this.isFlagged()) {
+            return "ms_flagged";
+        } else {
+            return "ms_blank";
+        }
+    }
 }

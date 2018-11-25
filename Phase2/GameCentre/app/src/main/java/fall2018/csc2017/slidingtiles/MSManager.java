@@ -21,7 +21,7 @@ class MSManager implements BoardManager, Serializable {
     /**
      * The score for the game.
      */
-    private int timer = 0;
+    public int timer = 0;
 
     /**
      * The number of mines left, after subtracting flagged spaces.
@@ -47,12 +47,11 @@ class MSManager implements BoardManager, Serializable {
     /**
      * Manage a new board.
      */
-    MSManager(int width, int height, String background) {
+    MSManager(int width, int height) {
         List<MSTile> tiles = new ArrayList<>();
         for (int tileNum = 0; tileNum != width * height; tileNum++) {
             tiles.add(new MSTile(tileNum));
         }
-        this.background = background;
         this.board = new MSBoard(tiles, width, height);
         this.remainingMines = board.getTotalMines();
     }
@@ -159,11 +158,13 @@ class MSManager implements BoardManager, Serializable {
      */
     public boolean isValidTap(int position) {
         boolean isValid = false;
-        if (!(((MSTile) board.getTile(position)).isRevealed())) {
+        if (!(((MSTile) board.getTile(position)).isRevealed()) && !(((MSTile) board.getTile(position)).isFlagged())) {
             isValid = true;
         }
         return isValid;
     }
+
+
 
     /**
      * Process a tap.

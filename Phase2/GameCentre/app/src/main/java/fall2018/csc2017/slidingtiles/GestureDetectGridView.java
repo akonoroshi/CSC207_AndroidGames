@@ -60,7 +60,12 @@ public class GestureDetectGridView extends GridView {
                 mController.processTapMovement(context, position, true);
                 return true;
             }
-
+            @Override
+            public void onLongPress(MotionEvent e){
+                int position = GestureDetectGridView.this.pointToPosition
+                        (Math.round(e.getX()), Math.round(e.getY()));
+                mController.processPressMovement(context, position, true);
+            }
             @Override
             public boolean onDown(MotionEvent event) {
                 return true;

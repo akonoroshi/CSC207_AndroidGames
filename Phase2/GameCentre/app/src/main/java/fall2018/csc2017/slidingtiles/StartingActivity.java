@@ -97,11 +97,14 @@ public class StartingActivity extends GameAppCompatActivity {
                     case "ST":
                         switchToActivity(PreStartingActivity.class);
                         break;
+                    case "MS":
+                        switchToActivity(MSPreStartingActivity.class);
+                        break;
                     case "GF":
                         switchToActivity(PreStartingActivity.class);
                         break;
                     default:
-                        Toast.makeText(StartingActivity.this, "TODO: Go to new PreStartingActivity", Toast.LENGTH_LONG).show();
+                        switchToActivity(PreStartingActivity.class);
                         break;
                 }
             }

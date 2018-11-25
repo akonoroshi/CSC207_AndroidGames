@@ -22,4 +22,11 @@ public class MovementController {
             Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
         }
     }
+    public void processPressMovement(Context context, int position, boolean display) {
+        if (boardManager.isValidTap(position)) {
+            ((MSBoard)boardManager.getBoard()).flagTile(position);
+        } else {
+            Toast.makeText(context, "Invalid Flag", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

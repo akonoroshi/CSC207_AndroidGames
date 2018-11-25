@@ -20,6 +20,8 @@ public class GameAppCompatActivity extends AppCompatActivity {
         Class activity = GameActivity.class;
         if (game.equals("GF")){
             activity = GFGameActivity.class;
+        } else if (game.equals("MS")){
+            activity = MSGameActivity.class;
         }
         Intent tmp = new Intent(this, activity);
         startActivity(tmp);
