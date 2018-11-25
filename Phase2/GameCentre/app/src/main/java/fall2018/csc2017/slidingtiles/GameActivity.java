@@ -20,12 +20,12 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
     /**
      * The board manager.
      */
-    private BoardManager boardmanager;
+    BoardManager boardmanager;
 
     /**
      * A reference to the GameCentre singleton instance.
      */
-    private GameCentre currentCentre;
+    GameCentre currentCentre;
 
     /**
      * The buttons to display.
@@ -41,7 +41,7 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
      * of positions, and then call the adapter to set the view.
      */
     // Display
-    public void display(Context context) {
+    private void display(Context context) {
         updateTileButtons(context);
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
     }
@@ -50,51 +50,55 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         currentCentre = GameCentre.getInstance(this);
-        final Context con = this;
-        boardmanager = currentCentre.loadGame(con, true);
-        createTileButtons(con);
+        boardmanager = currentCentre.loadGame(this, true);
+        createTileButtons(this);
         setContentView(R.layout.activity_main);
 
-        // Add View to activity
-        gridView = findViewById(R.id.grid);
-        gridView.setNumColumns(boardmanager.getBoard().getBoardWidth());
-        gridView.setBoardManager(boardmanager);
-        boardmanager.getBoard().addObserver(this);
-        // Observer sets up desired dimensions as well as calls our display function
-        gridView.getViewTreeObserver().addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        gridView.getViewTreeObserver().removeOnGlobalLayoutListener(
-                                this);
-                        int displayWidth = gridView.getMeasuredWidth();
-                        int displayHeight = gridView.getMeasuredHeight();
-
-                        columnWidth = displayWidth / boardmanager.getBoard().getBoardWidth();
-                        columnHeight = displayHeight / boardmanager.getBoard().getBoardHeight();
-
-                        display(con);
-                    }
-                });
+        setupGridView();
         addSaveButtonListener();
         addUndoButtonListener();
         addReturnButtonListener();
     }
+    
+    void setupGridView() {
+		final Context con = this;
+		
+		// Add View to activity
+		gridView = findViewById(R.id.grid);
+		gridView.setNumColumns(boardmanager.getBoard().getBoardWidth());
+		gridView.setBoardManager(boardmanager);
+		boardmanager.getBoard().addObserver(this);
+		// Observer sets up desired dimensions as well as calls our display function
+		gridView.getViewTreeObserver().addOnGlobalLayoutListener(
+				new ViewTreeObserver.OnGlobalLayoutListener() {
+					@Override
+					public void onGlobalLayout() {
+						gridView.getViewTreeObserver().removeOnGlobalLayoutListener(
+								this);
+						int displayWidth = gridView.getMeasuredWidth();
+						int displayHeight = gridView.getMeasuredHeight();
+					
+						columnWidth = displayWidth / boardmanager.getBoard().getBoardWidth();
+						columnHeight = displayHeight / boardmanager.getBoard().getBoardHeight();
+					
+						display(con);
+					}
+				});
+	}
 
     /**
      * Create the buttons for displaying the tiles.
      *
      * @param context the context used to create tile buttons
      */
-    private void createTileButtons(Context context) {
+    void createTileButtons(Context context) {
         Board board = boardmanager.getBoard();
         tileButtons = new ArrayList<>();
         Resources res = context.getResources();
         for (int index = 0; index != board.numTiles(); index++) {
             Button tmp = new Button(context);
             tmp.setBackground(res.getDrawable(res.getIdentifier(
-                    // TODO: Fix game-dependent code (another way to prefix drawables?)
-                    boardmanager.getBackground() + board.getBoardWidth() + "_" + board.getTile(index).getId(),
+                    boardmanager.getTileDrawable(index),
                     "drawable", context.getPackageName()), null));
             this.tileButtons.add(tmp);
         }
@@ -103,7 +107,7 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
     /**
      * Activate the undo button.
      */
-    private void addUndoButtonListener() {
+    void addUndoButtonListener() {
         Button undoButton = findViewById(R.id.UndoButton);
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +124,7 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
     /**
      * Activate the save button.
      */
-    private void addSaveButtonListener() {
+    void addSaveButtonListener() {
         Button saveButton = findViewById(R.id.SaveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,7 +139,7 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
     /**
      * Activate the return button.
      */
-    private void addReturnButtonListener() {
+    void addReturnButtonListener() {
         Button returnButton = findViewById(R.id.ReturnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,8 +174,7 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
         int nextPos = 0;
         for (Button b : tileButtons) {
             b.setBackground(res.getDrawable(res.getIdentifier(
-                    // TODO: Fix game-dependent code (another way to prefix drawables?)
-                    boardmanager.getBackground() + board.getBoardWidth() + "_" + board.getTile(nextPos).getId(),
+                    boardmanager.getTileDrawable(nextPos),
                     "drawable", context.getPackageName()), null));
             nextPos++;
         }
@@ -201,7 +204,6 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
     public void update(Observable o, Object arg) {
         if (boardmanager.puzzleSolved()) {
             currentCentre.clearSavedGame(GameActivity.this, false);
-            // TODO: Fix game-dependent code (another way to identify scoreboards?)
             String size = String.valueOf(boardmanager.getBoard().getBoardWidth());
             if(currentCentre.addScore(this, size, boardmanager.getScore(), true)) {
                 Toast.makeText(this, "You got a high score!", Toast.LENGTH_LONG).show();
