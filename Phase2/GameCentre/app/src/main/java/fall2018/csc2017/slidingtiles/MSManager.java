@@ -14,11 +14,6 @@ class MSManager implements BoardManager, Serializable {
     private MSBoard board;
 
     /**
-     * The background for the board.
-     */
-    private String background;
-
-    /**
      * The score for the game.
      */
     public int timer = 0;
@@ -66,15 +61,6 @@ class MSManager implements BoardManager, Serializable {
     }
 
     /**
-     * Return the background.
-     *
-     * @return the current background
-     */
-    public String getBackground() {
-        return this.background;
-    }
-
-    /**
      * Return the time taken to complete the game.
      *
      * @return the time taken to complete the game.
@@ -82,7 +68,12 @@ class MSManager implements BoardManager, Serializable {
     public int getScore() {
         return timer;
     }
-
+    
+    @Override
+    public String getTileDrawable(int index) {
+        return ((MSTile) board.getTile(index)).getID();
+    }
+    
     /**
      * Increment the time taken.
      */

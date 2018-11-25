@@ -87,10 +87,10 @@ public class PreStartingActivity extends GameAppCompatActivity {
         }
         else if (currentGame.equals("GF")){
             if (und.length() == 0) {
-                boardManager = new GFManager(boardSize, 0, background);
+                boardManager = new GFManager(boardSize, 0);
                 ((GFManager)boardManager).setInfiniteUndo();// default case: a player can undo infinitely
             } else {
-                boardManager = new GFManager(boardSize, Integer.parseInt(und), background);
+                boardManager = new GFManager(boardSize, Integer.parseInt(und));
             }
 
         }
