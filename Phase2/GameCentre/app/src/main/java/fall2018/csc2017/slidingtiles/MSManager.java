@@ -72,7 +72,7 @@ class MSManager implements BoardManager, Serializable {
     
     @Override
     public String getTileDrawable(int index) {
-        return ((MSTile) board.getTile(index)).getID();
+        return ((MSBoard)board).getID(index);
     }
     
     /**
@@ -110,22 +110,20 @@ class MSManager implements BoardManager, Serializable {
         timer.schedule(task, 1000, 1000);
     }
 
-    /**
-     * Set all tiles to be revealed.
-     */
-    void revealAll() {
-        for (Tile tile : board) {
-            ((MSTile) tile).setRevealed();
-        }
-    }
 
     /**
      * Check and return true if the player lost with a tap at position position.
      *
      * @return whether the player lost or not.
      */
-    boolean gameOverCheck(int position) {
-        return (((MSTile) board.getTile(position)).hasAMine() && ((MSTile) board.getTile(position)).isRevealed());
+    boolean gameOverCheck() {
+        boolean lose = true;
+        for (int i = 0; i != board.getBoardWidth() * board.getBoardHeight(); i ++){
+            if (!((MSTile)board.getTile(i)).isRevealed()){
+                lose = false;
+            }
+        }
+        return lose;
     }
 
     /**
@@ -134,12 +132,7 @@ class MSManager implements BoardManager, Serializable {
      * @return whether all the tiles have been revealed.
      */
     public boolean puzzleSolved() {
-        for (Tile tile : board) {
-            if (!(((MSTile) tile).isRevealed() || ((MSTile) tile).hasAMine())) {
-                return false;
-            }
-        }
-        return true;
+        return board.getTotalMines() == 0;
     }
 
     /**
