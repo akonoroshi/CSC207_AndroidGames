@@ -54,7 +54,8 @@ public class PreStartingActivity extends GameAppCompatActivity {
             public void onClick(View v) {
                 Spinner mySpinner = findViewById(R.id.BoardSizeSelect);
                 String selectedSize = mySpinner.getSelectedItem().toString();
-                int boardSize = Integer.parseInt(selectedSize.substring(0, 1));
+                int parseWidth = currentCentre.getCurrentGame().equals("GF") ? 2 : 1;
+                int boardSize = Integer.parseInt(selectedSize.substring(0, parseWidth));
                 EditText tempUndo = findViewById(R.id.undo);
                 String und = tempUndo.getText().toString();
                 Bundle extras = getIntent().getExtras();
