@@ -59,6 +59,8 @@ public class ScoreBoardActivity extends GameAppCompatActivity {
         if ("ST".equals(currentCentre.getCurrentGame())) {
             String boardSize = this.getIntent().getStringExtra("boardSize");
             title.setText(String.format("%s x %s HIGHSCORE", boardSize, boardSize));
+        } else if ("GF".equals(currentCentre.getCurrentGame())) {
+            title.setText(R.string.highscore);
         }
     }
 

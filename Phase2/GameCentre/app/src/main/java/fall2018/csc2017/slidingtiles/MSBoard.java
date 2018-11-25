@@ -116,40 +116,57 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
     }
 
     /**
+     * Processing revealing tiles after a tap.
+     *
+     * @param position location tapped
+     */
+    void reveal(int position){
+        MSTile currentTile = (MSTile)getTile(position);
+        currentTile.setRevealed();
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
      * Flag or un-flag a tile.
      *
      * @param position the position of the tile to be flagged
      */
     void flagTile(int position) {
-        MSTile tile = ((MSTile) getTile(position));
+        MSTile tile = ((MSTile)getTile(position));
         if (tile.isFlagged()) {
             tile.unFlag();
         } else {
             tile.setFlagged();
         }
+        setChanged();
+        notifyObservers();
     }
 
-    /**
-     * Processing revealing tiles after a tap.
-     *
-     * @param position location tapped
-     */
-    void reveal(int position) {
-        if (position < 0 || position > getBoardSize()) {
-            return;
-        }
-        MSTile tile = ((MSTile) getTile(position));
-        tile.setAdjacentMines(countMines(position));
-        if (tile.getNumMines() > 0) {
-            tile.setRevealed();
-            // draw tile with number
-        } else {
-            tile.setRevealed();
-            // draw tile with 0 mines
-            reveal(position + 1);
-            reveal(position - 1);
-            reveal(position + getBoardWidth());
-            reveal(position - getBoardWidth());
-        }
-    }
+//    /**
+//     * Processing revealing tiles after a tap.
+//     *
+//     * @param position location tapped
+//     */
+//    void reveal(int position) {
+//        if (position < 0 || position > getBoardSize()) {
+//            return;
+//        }
+//        MSTile tile = ((MSTile) getTile(position));
+//        tile.setAdjacentMines(countMines(position));
+//        if (tile.getNumMines() > 0) {
+//            tile.setRevealed();
+//            // draw tile with number
+//        } else {
+//            tile.setRevealed();
+//            // draw tile with 0 mines
+//            reveal(position + 1);
+//            reveal(position - 1);
+//            reveal(position + getBoardWidth());
+//            reveal(position - getBoardWidth());
+//        }
+//    }
+
+
 }

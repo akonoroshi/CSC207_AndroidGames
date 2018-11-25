@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.content.res.Resources;
 
@@ -80,7 +79,6 @@ public class GFGameActivity extends GameAppCompatActivity implements Observer {
         addUndoButtonListener();
         addReturnButtonListener();
         updateTetromino();
-
     }
 
     /**
