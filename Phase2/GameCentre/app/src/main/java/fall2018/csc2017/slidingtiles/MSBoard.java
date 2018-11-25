@@ -116,6 +116,15 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
     }
 
     /**
+     * Set all tiles to be revealed.
+     */
+    void revealAll() {
+        for (int i = 0; i != boardSize; i++) {
+            ((MSTile)getTile(i)).setRevealed();
+        }
+    }
+
+    /**
      * Processing revealing tiles after a tap.
      *
      * @param position location tapped
@@ -123,6 +132,9 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
     void reveal(int position){
         MSTile currentTile = (MSTile)getTile(position);
         currentTile.setRevealed();
+        if (currentTile.hasAMine()){
+            revealAll();
+        }
 
         setChanged();
         notifyObservers();
@@ -144,6 +156,25 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
         notifyObservers();
     }
 
+    /**
+     * Return the id of each tile
+     *
+     * @param index the index in the array containing tiles
+     * @return id of the tile
+     */
+    String getID(int index) {
+        if (!(((MSTile)getTile(index)).isRevealed()) && !(((MSTile)getTile(index)).isFlagged())) {
+            return "ms_default";
+        } else if ((((MSTile)getTile(index)).hasAMine())) {
+            return "ms_bomb";
+        } else if (countMines(index) != 0) {
+            return "ms" + "_" + countMines(index);
+        } else if (!(((MSTile)getTile(index)).isRevealed()) && (((MSTile)getTile(index)).isFlagged()) ) {
+            return "ms_flagged";
+        } else {
+            return "ms_blank";
+        }
+    }
 //    /**
 //     * Processing revealing tiles after a tap.
 //     *
