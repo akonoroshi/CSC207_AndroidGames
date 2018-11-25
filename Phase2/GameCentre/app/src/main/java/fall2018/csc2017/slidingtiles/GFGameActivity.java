@@ -83,12 +83,9 @@ public class GFGameActivity extends GameAppCompatActivity implements Observer {
     }
 
     private void updateTetromino() {
-        ImageView tetro = findViewById(R.id.CurrentTetromino);
-        updateTetrominoHelper(tetro, 0);
-        tetro = findViewById(R.id.NextTetromino);
-        updateTetrominoHelper(tetro, 1);
-        tetro = findViewById(R.id.NextTetromino2);
-        updateTetrominoHelper(tetro, 2);
+        updateTetrominoHelper((ImageView) findViewById(R.id.CurrentTetromino), 0);
+        updateTetrominoHelper((ImageView) findViewById(R.id.NextTetromino), 1);
+        updateTetrominoHelper((ImageView) findViewById(R.id.NextTetromino2), 2);
     }
 
     private void updateTetrominoHelper(ImageView tetro, int index) {
