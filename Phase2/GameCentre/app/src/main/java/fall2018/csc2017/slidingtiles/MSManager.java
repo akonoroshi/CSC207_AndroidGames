@@ -18,6 +18,7 @@ class MSManager implements BoardManager, Serializable {
      */
     public int timer = 0;
 
+
     /**
      * The number of mines left, after subtracting flagged spaces.
      */
@@ -155,7 +156,35 @@ class MSManager implements BoardManager, Serializable {
         return isValid;
     }
 
+    /**
+     * Return whether a flag is valid.
+     *
+     * @param position the tile to flag
+     * @return whether the tap is a valid move
+     */
+    public boolean isValidPress(int position) {
+        boolean isValid = false;
+        if (!(((MSTile) board.getTile(position)).isRevealed()) && !(((MSTile) board.getTile(position)).isFlagged())) {
+            isValid = true;
+        }else if (!(((MSTile) board.getTile(position)).isRevealed()) && (((MSTile) board.getTile(position)).isFlagged())){
+            isValid = true;
+        }
+        return isValid;
+    }
 
+    /**
+     * Flagging a tile
+     *
+     * @param position position of tile that is to be flagged
+     */
+    public void flag(int position){
+        board.flagTile(position);
+        if (((MSTile)board.getTile(position)).isFlagged() && ((MSTile)board.getTile(position)).hasAMine()){
+            subtractMine();
+        }else{
+            addMine();
+        }
+    }
 
     /**
      * Process a tap.
@@ -163,6 +192,6 @@ class MSManager implements BoardManager, Serializable {
      * @param position the position that was tapped
      */
     public void touchMove(int position) {
-        board.reveal(position);
+        this.board.reveal(position);
     }
 }
