@@ -103,7 +103,7 @@ public class GFManager implements BoardManager, Serializable {
      *
      * @return the tetromino of the current board
      */
-    public List<Tetromino> getTetrominos() {
+    List<Tetromino> getTetrominos() {
         return tetrominos.subList(start, end);
     }
 
@@ -156,12 +156,16 @@ public class GFManager implements BoardManager, Serializable {
         int[] positionList = Tetromino.tetrominoMap.get(tetrominos.get(start).getShape());
         for (int num : positionList) {
             int tilePosition = num + position;
-            if (tilePosition >= getBoard().numTiles() || getBoard().getTile(tilePosition).isPlaced()) {
+            if (tilePosition >= getBoard().numTiles()) {
                 return false;
             }
-            int positionRow = position / getBoard().getBoardWidth();
-            int tilePositionRow = tilePosition / getBoard().getBoardWidth();
-            if ((num < 3 ) && positionRow < tilePositionRow) {
+            if (num % getBoard().getBoardWidth() != 0 && tilePosition % getBoard().getBoardWidth() == 0) {
+                return false;
+            }
+            if (num == getBoard().getBoardWidth() - 1 && tilePosition % getBoard().getBoardWidth() == num) {
+                return false;
+            }
+            if (getBoard().getTile(tilePosition).isPlaced()) {
                 return false;
             }
         }
