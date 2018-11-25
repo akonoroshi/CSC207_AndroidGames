@@ -165,12 +165,12 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
     String getID(int index) {
         if (!(((MSTile)getTile(index)).isRevealed()) && !(((MSTile)getTile(index)).isFlagged())) {
             return "ms_default";
+        } else if (!(((MSTile)getTile(index)).isRevealed()) && (((MSTile)getTile(index)).isFlagged()) ) {
+            return "ms_flagged";
         } else if ((((MSTile)getTile(index)).hasAMine())) {
             return "ms_bomb";
         } else if (countMines(index) != 0) {
             return "ms" + "_" + countMines(index);
-        } else if (!(((MSTile)getTile(index)).isRevealed()) && (((MSTile)getTile(index)).isFlagged()) ) {
-            return "ms_flagged";
         } else {
             return "ms_blank";
         }
