@@ -33,6 +33,9 @@ class Tetromino implements Serializable {
      */
     private String shape;
 
+    /**
+     * Assign the shape of the tetromino randomly from the pre-defined set
+     */
     Tetromino() {
         List<String> tempList = new ArrayList<>(tetrominoMap.keySet());
         shape = tempList.get(new Random().nextInt(tempList.size()));
@@ -43,7 +46,7 @@ class Tetromino implements Serializable {
      *
      * @return the shape of this tetromino
      */
-    public String getShape() {
+    String getShape() {
         return shape;
     }
 

@@ -2,6 +2,7 @@ package fall2018.csc2017.slidingtiles;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
@@ -82,13 +83,22 @@ public class GFGameActivity extends GameAppCompatActivity implements Observer {
 
     }
 
+    /**
+     * Update the images of current and next tetrominos
+     */
     private void updateTetromino() {
         updateTetrominoHelper((ImageView) findViewById(R.id.CurrentTetromino), 0);
         updateTetrominoHelper((ImageView) findViewById(R.id.NextTetromino), 1);
         updateTetrominoHelper((ImageView) findViewById(R.id.NextTetromino2), 2);
     }
 
-    private void updateTetrominoHelper(ImageView tetro, int index) {
+    /**
+     * Set the corresponding image of the tetromino to ImageView
+     *
+     * @param tetro ImageView of tetromino
+     * @param index 0 if CurrentTetromino, 1 if NextTetromino, and 2 if NextTetromino2
+     */
+    private void updateTetrominoHelper(@NonNull ImageView tetro, int index) {
         Resources res = this.getResources();
         tetro.setImageResource(res.getIdentifier(
                 "gf_" + ((GFManager) boardmanager).getTetrominos().get(index).getShape(),
@@ -209,7 +219,6 @@ public class GFGameActivity extends GameAppCompatActivity implements Observer {
         super.onPause();
         currentCentre.saveGame(this, boardmanager, true);
     }
-
 
     @Override
     public void update(Observable o, Object arg) {
