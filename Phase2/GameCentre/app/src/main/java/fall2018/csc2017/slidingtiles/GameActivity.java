@@ -93,7 +93,6 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
         for (int index = 0; index != board.numTiles(); index++) {
             Button tmp = new Button(context);
             tmp.setBackground(res.getDrawable(res.getIdentifier(
-                    // TODO: Fix game-dependent code (another way to prefix drawables?)
                     boardmanager.getBackground() + board.getBoardWidth() + "_" + board.getTile(index).getId(),
                     "drawable", context.getPackageName()), null));
             this.tileButtons.add(tmp);
@@ -170,7 +169,6 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
         int nextPos = 0;
         for (Button b : tileButtons) {
             b.setBackground(res.getDrawable(res.getIdentifier(
-                    // TODO: Fix game-dependent code (another way to prefix drawables?)
                     boardmanager.getBackground() + board.getBoardWidth() + "_" + board.getTile(nextPos).getId(),
                     "drawable", context.getPackageName()), null));
             nextPos++;
@@ -201,7 +199,6 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
     public void update(Observable o, Object arg) {
         if (boardmanager.puzzleSolved()) {
             currentCentre.clearSavedGame(GameActivity.this, false);
-            // TODO: Fix game-dependent code (another way to identify scoreboards?)
             String size = String.valueOf(boardmanager.getBoard().getBoardWidth());
             if(currentCentre.addScore(this, size, boardmanager.getScore(), true)) {
                 Toast.makeText(this, "You got a high score!", Toast.LENGTH_LONG).show();
