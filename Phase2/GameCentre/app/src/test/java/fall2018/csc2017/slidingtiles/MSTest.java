@@ -15,7 +15,9 @@ public class MSTest {
         for(int i = 0; i < size * size; i++) {
             tiles.add(new MSTile(0));
         }
-        return new MSBoard(tiles, size, size);
+        MSBoard board = new MSBoard(tiles, size, size);
+        board.mineLocations = new ArrayList<>();
+        return board;
     }
 
     @Test
@@ -28,12 +30,47 @@ public class MSTest {
         }
         assertTrue(manager.puzzleSolved());
     }
+    
+    @Test
+    public void testRevealedAndSolvedBoard() {
+        MSBoard board = createEmptyBoard(5);
+        board.createMines();
+        MSManager manager = new MSManager(board);
+        manager.revealAll();
+        assertTrue(manager.puzzleSolved());
+    }
+    
+    @Test
+    public void testRevealedInvalidTap() {
+        MSBoard board = createEmptyBoard(5);
+        board.createMines();
+        MSManager manager = new MSManager(board);
+        manager.revealAll();
+        for(int i = 0; i < board.getBoardWidth() * board.getBoardHeight(); i++) {
+            assertFalse(manager.isValidTap(i));
+        }
+    }
 
     @Test
     public void testMinePopulation() {
         for(int i = 1; i < 10; i++) {
             MSBoard board = createEmptyBoard(i);
             board.createMines();
+            int mines = 0;
+            for (Tile t : board) {
+                if (((MSTile) t).hasAMine()) {
+                    mines++;
+                }
+            }
+            assertEquals(mines, board.getTotalMines());
+        }
+    }
+    
+    @Test
+    public void testMinePopulation2() {
+        for(int i = 1; i < 10; i++) {
+            MSBoard board = createEmptyBoard(i);
+            board.createMines2();
             int mines = 0;
             for (Tile t : board) {
                 if (((MSTile) t).hasAMine()) {
