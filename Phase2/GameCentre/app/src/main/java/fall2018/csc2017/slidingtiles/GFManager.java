@@ -127,7 +127,9 @@ public class GFManager implements BoardManager, Serializable {
      * Create a new tetromino and update the list of tetrominos
      */
     private void updateTetrominos() {
-        tetrominos.add(new Tetromino());
+        if (end >= tetrominos.size()) {
+            tetrominos.add(new Tetromino());
+        }
         start++;
         end++;
     }
@@ -196,6 +198,8 @@ public class GFManager implements BoardManager, Serializable {
             int lastMoveIndex = undoStack.size() - 1;
             board.placeTiles(undoStack.get(lastMoveIndex));
             undoStack.remove(lastMoveIndex);
+            start--;
+            end--;
         }
     }
 }

@@ -108,14 +108,13 @@ public class GFGameActivity extends GameAppCompatActivity implements Observer {
      *
      * @param context the context used to create tile buttons
      */
-    private void createTileButtons(Context context) {
+    private void createTileButtons(@NonNull Context context) {
         Board board = boardmanager.getBoard();
         tileButtons = new ArrayList<>();
         Resources res = context.getResources();
         for (int index = 0; index != board.numTiles(); index++) {
             Button tmp = new Button(context);
             tmp.setBackground(res.getDrawable(res.getIdentifier(
-                    // TODO: Fix game-dependent code (another way to prefix drawables?)
                     "gf_" + board.getTile(index).getId(),
                     "drawable", context.getPackageName()), null));
             this.tileButtons.add(tmp);
@@ -134,6 +133,7 @@ public class GFGameActivity extends GameAppCompatActivity implements Observer {
                     Toast.makeText(GFGameActivity.this, "Undo failed", Toast.LENGTH_SHORT).show();
                 } else {
                     ((GFManager) boardmanager).undo();
+                    updateTetromino();
                 }
             }
         });
@@ -186,13 +186,12 @@ public class GFGameActivity extends GameAppCompatActivity implements Observer {
     /**
      * Update the backgrounds on the buttons to match the tiles.
      */
-    private void updateTileButtons(Context context) {
+    private void updateTileButtons(@NonNull Context context) {
         Board board = boardmanager.getBoard();
         Resources res = context.getResources();
         int nextPos = 0;
         for (Button b : tileButtons) {
             b.setBackground(res.getDrawable(res.getIdentifier(
-                    // TODO: Fix game-dependent code (another way to prefix drawables?)
                     "gf_" + board.getTile(nextPos).getId(),
                     "drawable", context.getPackageName()), null));
             nextPos++;
@@ -222,7 +221,6 @@ public class GFGameActivity extends GameAppCompatActivity implements Observer {
     public void update(Observable o, Object arg) {
         if (boardmanager.puzzleSolved()) {
             currentCentre.clearSavedGame(GFGameActivity.this, false);
-            // TODO: Fix game-dependent code (another way to identify scoreboards?)
             String size = String.valueOf(boardmanager.getBoard().getBoardWidth());
             if (currentCentre.addScore(this, size, boardmanager.getScore(), false)) {
                 Toast.makeText(this, "You got a high score!", Toast.LENGTH_LONG).show();
