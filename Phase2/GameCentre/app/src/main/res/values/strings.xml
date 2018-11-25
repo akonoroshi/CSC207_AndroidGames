@@ -28,7 +28,7 @@
     <string name="instructions">Instructions</string>
     <string name="instructionsheader">Instructions Header</string>
     <string name="proceed">Proceed</string>
-    <string name="highscore">0x0 HIGHSCORE</string>
+    <string name="highscore">HIGHSCORE</string>
     <string name="back">Back to menu</string>
     <string name="firstscore">First Score</string>
     <string name="secondscore">Second Score</string>

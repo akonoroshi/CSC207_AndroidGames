@@ -21,11 +21,20 @@ public class PreScoreBoardActivity extends GameAppCompatActivity {
         currentCentre = GameCentre.getInstance(this);
         setContentView(R.layout.activity_prescoreboard_);
         Spinner mySpinner = findViewById(R.id.BoardSizeChoices);
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.boardsizechoices));
+        String[] choiceArray = getChoices(currentCentre.getCurrentGame());
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, choiceArray);
         myAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
         addConfirmButtonListener();
 
+    }
+
+    private String[] getChoices(String game) {
+        if (game.equals("ST")) {
+            return getResources().getStringArray(R.array.boardsizechoices);
+        } else {
+            return getResources().getStringArray(R.array.gridfillerchoices);
+        }
     }
 
     /**

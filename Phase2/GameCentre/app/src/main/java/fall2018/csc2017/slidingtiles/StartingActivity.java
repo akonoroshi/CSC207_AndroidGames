@@ -101,7 +101,7 @@ public class StartingActivity extends GameAppCompatActivity {
                         switchToActivity(MSPreStartingActivity.class);
                         break;
                     case "GF":
-                        switchToActivity(PreStartingActivity.class);
+                        switchToActivity(GFPreStartingActivity.class);
                         break;
                     default:
                         switchToActivity(PreStartingActivity.class);
@@ -124,9 +124,11 @@ public class StartingActivity extends GameAppCompatActivity {
                     boardManager = tempManager;
                     currentCentre.saveGame(StartingActivity.this, boardManager, true);
                     makeToastLoadedText(true);
-                    if(currentCentre.getCurrentGame().equals("ST")) {
-                        switchToActivity(GameActivity.class);
-                    }else {
+
+                    if (!(currentCentre.getCurrentGame().equals(""))){
+                        switchToGame(currentCentre.getCurrentGame());
+                    }
+                    else {
                         Toast.makeText(StartingActivity.this, "TODO: Go to new GameActivity", Toast.LENGTH_LONG).show();
                     }
                 } else {
@@ -144,8 +146,11 @@ public class StartingActivity extends GameAppCompatActivity {
         scoreboardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToActivity(PreScoreBoardActivity.class);
-
+                if (currentCentre.getCurrentGame().equals("GF")) {
+                    switchToScoreBoard("10", 0);
+                } else {
+                    switchToActivity(PreScoreBoardActivity.class);
+                }
             }
         });
     }
