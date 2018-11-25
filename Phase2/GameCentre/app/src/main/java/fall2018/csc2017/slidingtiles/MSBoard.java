@@ -24,7 +24,7 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
     /**
      * The locations of the mines on the board.
      */
-    private ArrayList<Integer> mineLocations;
+    ArrayList<Integer> mineLocations;
 
     /**
      * Constructor for a Minesweeper Board.

@@ -10,7 +10,7 @@
         android:layout_height="500dp" />
 
     <Button
-        android:id="@+id/msreturnbutton"
+        android:id="@+id/ReturnButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -20,13 +20,13 @@
         android:text="Return" />
 
     <Button
-        android:id="@+id/mssavebutton"
+        android:id="@+id/SaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/msreturnbutton"
+        android:layout_alignTop="@id/ReturnButton"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="34dp"
-        android:text="save" />
+        android:text="Save" />
 
 
 </RelativeLayout>

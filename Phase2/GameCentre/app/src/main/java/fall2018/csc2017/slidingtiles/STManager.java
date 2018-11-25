@@ -87,7 +87,12 @@ public class STManager implements BoardManager, Serializable {
     public int getScore() {
         return this.moveCount;
     }
-
+    
+    @Override
+    public String getTileDrawable(int index) {
+        return getBackground() + board.getBoardWidth() + "_" + board.getTile(index).getId();
+    }
+    
     /**
      * Return the length of undo stack.
      *

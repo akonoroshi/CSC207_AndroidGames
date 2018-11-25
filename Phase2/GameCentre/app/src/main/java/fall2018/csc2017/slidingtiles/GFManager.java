@@ -33,11 +33,6 @@ public class GFManager implements BoardManager, Serializable {
     private boolean infiniteUndo;
 
     /**
-     * The background for the board.
-     */
-    private String background;
-
-    /**
      * The list of Tetrominos
      */
     private List<Tetromino> tetrominos;
@@ -72,7 +67,7 @@ public class GFManager implements BoardManager, Serializable {
     /**
      * Manage a new shuffled board.
      */
-    GFManager(int size, int numOfUndo, String background) {
+    GFManager(int size, int numOfUndo) {
         List<GFTile> tiles = new ArrayList<>();
         start = -3;
         end = 0;
@@ -81,7 +76,6 @@ public class GFManager implements BoardManager, Serializable {
             tiles.add(new GFTile(0));
         }
         this.board = new GFBoard(tiles, size);
-        this.background = background;
         this.numOfUndo = numOfUndo;
         this.undoStack = new ArrayList<>();
         this.tetrominos = new ArrayList<>();
@@ -98,14 +92,10 @@ public class GFManager implements BoardManager, Serializable {
     public int getScore() {
         return this.score;
     }
-
-    /**
-     * Return the background.
-     *
-     * @return the background of the current board
-     */
-    public String getBackground() {
-        return background;
+    
+    @Override
+    public String getTileDrawable(int index) {
+        return "gf_" + board.getTile(index).getId();
     }
 
     /**
