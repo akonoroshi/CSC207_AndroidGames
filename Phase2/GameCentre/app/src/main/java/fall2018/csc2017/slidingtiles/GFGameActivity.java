@@ -224,7 +224,7 @@ public class GFGameActivity extends GameAppCompatActivity implements Observer {
             currentCentre.clearSavedGame(GFGameActivity.this, false);
             // TODO: Fix game-dependent code (another way to identify scoreboards?)
             String size = String.valueOf(boardmanager.getBoard().getBoardWidth());
-            if (currentCentre.addScore(this, size, boardmanager.getScore(), true)) {
+            if (currentCentre.addScore(this, size, boardmanager.getScore(), false)) {
                 Toast.makeText(this, "You got a high score!", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, "You win!", Toast.LENGTH_LONG).show();
