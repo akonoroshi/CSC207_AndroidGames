@@ -25,7 +25,7 @@ public class GFManager implements BoardManager, Serializable {
     /**
      * The undo stack.
      */
-    private ArrayList<GFBoard> undoStack;
+    private ArrayList<List<Integer>> undoStack;
 
     /**
      * Whether or not the player has infinite undo's.
@@ -180,7 +180,10 @@ public class GFManager implements BoardManager, Serializable {
     public void touchMove(int position) {
         int[] positionList = Tetromino.tetrominoMap.get(tetrominos.get(start).getShape());
         updateTetrominos();
-        board.placeTiles(positionList, position);
+        undoStack.add(board.placeTiles(positionList, position));
+        if (undoStack.size() > numOfUndo && !infiniteUndo) {
+            undoStack.remove(0);
+        }
         score += 4;
     }
 
@@ -189,6 +192,10 @@ public class GFManager implements BoardManager, Serializable {
      * Process an undo, undoing the previous move made.
      */
     void undo() {
-        // Old version did not work so it was removed.
+        if (!undoStack.isEmpty()) {
+            int lastMoveIndex = undoStack.size() - 1;
+            board.placeTiles(undoStack.get(lastMoveIndex));
+            undoStack.remove(lastMoveIndex);
+        }
     }
 }
