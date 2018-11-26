@@ -104,7 +104,7 @@ public class StartingActivity extends GameAppCompatActivity {
                         switchToActivity(GFPreStartingActivity.class);
                         break;
                     default:
-                        switchToActivity(PreStartingActivity.class);
+                        makeToastLoadedText(false);
                         break;
                 }
             }
@@ -128,7 +128,7 @@ public class StartingActivity extends GameAppCompatActivity {
                     if (!(currentCentre.getCurrentGame().equals(""))) {
                         switchToGame(currentCentre.getCurrentGame());
                     } else {
-                        Toast.makeText(StartingActivity.this, "TODO: Go to new GameActivity", Toast.LENGTH_LONG).show();
+                        makeToastLoadedText(false);
                     }
                 } else {
                     makeToastLoadedText(false);
@@ -167,8 +167,11 @@ public class StartingActivity extends GameAppCompatActivity {
                     boardManager = tempManager;
                     currentCentre.saveGame(StartingActivity.this, boardManager, true);
                     makeToastLoadedText(true);
-                    switchToGame(currentCentre.getCurrentGame());
-
+                    if (!(currentCentre.getCurrentGame().equals(""))) {
+                        switchToGame(currentCentre.getCurrentGame());
+                    } else {
+                        makeToastLoadedText(false);
+                    }
                 } else {
                     makeToastLoadedText(false);
                 }
