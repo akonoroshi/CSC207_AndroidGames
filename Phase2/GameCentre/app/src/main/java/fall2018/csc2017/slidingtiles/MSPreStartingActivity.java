@@ -19,7 +19,7 @@ public class MSPreStartingActivity extends GameAppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         currentCentre = GameCentre.getInstance(this);
-        setContentView(R.layout.activity_ms_prestarting);;
+        setContentView(R.layout.activity_ms_prestarting);
         addReturnButtonListener();
         addEasyButtonListener();
         addNormalButtonListener();
@@ -103,6 +103,7 @@ public class MSPreStartingActivity extends GameAppCompatActivity{
                 boardManager = new MSManager(10, 12);
                 break;
         }
+        ((MSBoard) boardManager.getBoard()).createMines();
     }
 
     /**

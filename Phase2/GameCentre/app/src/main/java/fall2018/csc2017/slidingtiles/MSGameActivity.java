@@ -26,7 +26,6 @@ public class MSGameActivity extends GameActivity {
         setContentView(R.layout.activity_ms_main);
 
         setupGridView();
-        (((MSBoard) boardmanager.getBoard())).createMines();
         ((MSManager) boardmanager).activateTimer();
         addSaveButtonListener();
         addReturnButtonListener();
