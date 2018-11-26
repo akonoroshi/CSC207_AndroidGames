@@ -36,7 +36,7 @@ public class MSTest {
         MSBoard board = createEmptyBoard(5);
         board.createMines();
         MSManager manager = new MSManager(board);
-        manager.revealAll();
+        board.revealAll();
         assertTrue(manager.puzzleSolved());
     }
     
@@ -45,7 +45,7 @@ public class MSTest {
         MSBoard board = createEmptyBoard(5);
         board.createMines();
         MSManager manager = new MSManager(board);
-        manager.revealAll();
+        board.revealAll();
         for(int i = 0; i < board.getBoardWidth() * board.getBoardHeight(); i++) {
             assertFalse(manager.isValidTap(i));
         }
