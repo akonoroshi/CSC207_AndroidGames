@@ -56,14 +56,6 @@ public class GFTest {
         boardManager = new GFManager(board);
     }
 
-
-    /**
-     * Place
-     */
-    private void placeTetromino(List<Integer> positionList) {
-        boardManager.getBoard().placeTiles(positionList);
-    }
-
     private void setTetrominos(String key) {
         List<Tetromino> tempList = new ArrayList<>();
         tempList.add(new Tetromino(key));
@@ -71,12 +63,15 @@ public class GFTest {
     }
 
     /**
-     *
+     * Test whether an unplayable board will end the game.
      */
     @Test
     public void testIsSolved() {
         setUpUnplayable();
-        assertTrue(boardManager.puzzleSolved());
+        for (String key: Tetromino.tetrominoMap.keySet()) {
+            setTetrominos(key);
+            assertTrue(boardManager.puzzleSolved());
+        }
     }
 
     /**
@@ -84,7 +79,6 @@ public class GFTest {
      */
     @Test
     public void testUndo() {
-        Random random = new Random();
         boardManager = new GFManager(10, 3);
         List<Tile> tiles = new ArrayList<>();
         for (Tile t : boardManager.getBoard()) {
