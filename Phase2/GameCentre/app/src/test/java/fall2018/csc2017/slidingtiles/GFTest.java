@@ -25,11 +25,11 @@ public class GFTest {
      *
      * @return a set of tiles that are in order
      */
-    private List<GFTile> makeTiles(int boardSize, int state) {
+    private List<GFTile> makeTiles(int boardSize, boolean placed) {
         List<GFTile> tiles = new ArrayList<>();
         final int numTiles = boardSize * boardSize;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-            tiles.add(new GFTile(state));
+            tiles.add(new GFTile(placed));
         }
 
         return tiles;
@@ -39,8 +39,8 @@ public class GFTest {
      * Make a Blank Board.
      */
     private void setUpBlank() {
-        int boardSize = 4;
-        List<GFTile> tiles = makeTiles(boardSize, 0);
+        int boardSize = 10;
+        List<GFTile> tiles = makeTiles(boardSize, false);
         GFBoard board = new GFBoard(tiles, boardSize);
         boardManager = new GFManager(board);
     }
@@ -50,8 +50,8 @@ public class GFTest {
      * Make a unplayable GFBoard
      */
     private void setUpUnplayable() {
-        int boardSize = 4;
-        List<GFTile> tiles = makeTiles(boardSize, 1);
+        int boardSize = 10;
+        List<GFTile> tiles = makeTiles(boardSize, true);
         GFBoard board = new GFBoard(tiles, boardSize);
         boardManager = new GFManager(board);
     }
@@ -62,6 +62,12 @@ public class GFTest {
      */
     private void placeTetromino(List<Integer> positionList) {
         boardManager.getBoard().placeTiles(positionList);
+    }
+
+    private void setTetrominos(String key) {
+        List<Tetromino> tempList = new ArrayList<>();
+        tempList.add(new Tetromino(key));
+        boardManager.setTetrominos(tempList);
     }
 
     /**
@@ -112,9 +118,26 @@ public class GFTest {
     public void testIsValidTap() {
         setUpBlank();
         for (String key: Tetromino.tetrominoMap.keySet()){
-            boardManager.setTetrominos(key);
+            setTetrominos(key);
             assertTrue(boardManager.isValidTap(11));
-            assertFalse(boardManager.isValidTap(99));
+            assertFalse(boardManager.isValidTap(94));
+            if (key.equals("i")) {
+                assertTrue(boardManager.isValidTap(29));
+            }else{
+                assertFalse(boardManager.isValidTap(29));
+            }
+            if (key.equals("s")) {
+                assertFalse(boardManager.isValidTap(40));
+            }else{
+                assertTrue(boardManager.isValidTap(40));
+            }
+        }
+        setUpUnplayable();
+        for (String key: Tetromino.tetrominoMap.keySet()){
+            setTetrominos(key);
+            for (int i = 0; i < boardManager.getBoard().numTiles(); i++){
+                assertFalse(boardManager.isValidTap(i));
+            }
         }
     }
 }
