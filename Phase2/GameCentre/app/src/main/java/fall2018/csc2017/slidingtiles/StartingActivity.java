@@ -46,7 +46,7 @@ public class StartingActivity extends GameAppCompatActivity {
      */
 
     private String getGameName(String currentGame) {
-        switch(currentGame) {
+        switch (currentGame) {
             case "ST":
                 return getString(R.string.slidingtiles);
             case "MS":
@@ -125,10 +125,9 @@ public class StartingActivity extends GameAppCompatActivity {
                     currentCentre.saveGame(StartingActivity.this, boardManager, true);
                     makeToastLoadedText(true);
 
-                    if (!(currentCentre.getCurrentGame().equals(""))){
+                    if (!(currentCentre.getCurrentGame().equals(""))) {
                         switchToGame(currentCentre.getCurrentGame());
-                    }
-                    else {
+                    } else {
                         Toast.makeText(StartingActivity.this, "TODO: Go to new GameActivity", Toast.LENGTH_LONG).show();
                     }
                 } else {
@@ -159,24 +158,22 @@ public class StartingActivity extends GameAppCompatActivity {
      * Activate the LoadAutoSave button.
      */
     private void addLoadAutosaveButtonListener() {
-        if(currentCentre.getCurrentGame().equals("ST")) {
-            Button loadAutosaveButton = findViewById(R.id.ContinueButton);
-            loadAutosaveButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    BoardManager tempManager = currentCentre.loadGame(StartingActivity.this, true);
-                    if (tempManager != null) {
-                        boardManager = tempManager;
-                        currentCentre.saveGame(StartingActivity.this, boardManager, true);
-                        makeToastLoadedText(true);
-                        switchToActivity(GameActivity.class);
+        Button loadAutosaveButton = findViewById(R.id.ContinueButton);
+        loadAutosaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BoardManager tempManager = currentCentre.loadGame(StartingActivity.this, true);
+                if (tempManager != null) {
+                    boardManager = tempManager;
+                    currentCentre.saveGame(StartingActivity.this, boardManager, true);
+                    makeToastLoadedText(true);
+                    switchToGame(currentCentre.getCurrentGame());
 
-                    } else {
-                        makeToastLoadedText(false);
-                    }
+                } else {
+                    makeToastLoadedText(false);
                 }
-            });
-        }
+            }
+        });
     }
 
     /**
@@ -198,7 +195,7 @@ public class StartingActivity extends GameAppCompatActivity {
         super.onResume();
         boardManager = currentCentre.loadGame(StartingActivity.this, true);
         if (boardManager == null) {
-            switch(currentCentre.getCurrentGame()) {
+            switch (currentCentre.getCurrentGame()) {
                 case "ST":
                     boardManager = new STManager();
                     break;

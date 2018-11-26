@@ -69,12 +69,12 @@ class MSManager implements BoardManager, Serializable {
     public int getScore() {
         return timer;
     }
-    
+
     @Override
     public String getTileDrawable(int index) {
-        return ((MSBoard)board).getID(index);
+        return ((MSBoard) board).getID(index);
     }
-    
+
     /**
      * Increment the time taken.
      */
@@ -118,8 +118,8 @@ class MSManager implements BoardManager, Serializable {
      */
     boolean gameOverCheck() {
         boolean lose = true;
-        for (int i = 0; i != board.getBoardWidth() * board.getBoardHeight(); i ++){
-            if (!((MSTile)board.getTile(i)).isRevealed()){
+        for (int i = 0; i != board.getBoardWidth() * board.getBoardHeight(); i++) {
+            if (!((MSTile) board.getTile(i)).isRevealed()) {
                 lose = false;
             }
         }
@@ -132,7 +132,12 @@ class MSManager implements BoardManager, Serializable {
      * @return whether all the tiles have been revealed.
      */
     public boolean puzzleSolved() {
-        return board.getTotalMines() == 0;
+        for (Tile tile : board) {
+            if (!((MSTile) tile).isRevealed() && !((MSTile) tile).hasAMine()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -159,7 +164,7 @@ class MSManager implements BoardManager, Serializable {
         boolean isValid = false;
         if (!(((MSTile) board.getTile(position)).isRevealed()) && !(((MSTile) board.getTile(position)).isFlagged())) {
             isValid = true;
-        }else if (!(((MSTile) board.getTile(position)).isRevealed()) && (((MSTile) board.getTile(position)).isFlagged())){
+        } else if (!(((MSTile) board.getTile(position)).isRevealed()) && (((MSTile) board.getTile(position)).isFlagged())) {
             isValid = true;
         }
         return isValid;
@@ -170,11 +175,11 @@ class MSManager implements BoardManager, Serializable {
      *
      * @param position position of tile that is to be flagged
      */
-    public void flag(int position){
+    public void flag(int position) {
         board.flagTile(position);
-        if (((MSTile)board.getTile(position)).isFlagged() && ((MSTile)board.getTile(position)).hasAMine()){
+        if (((MSTile) board.getTile(position)).isFlagged() && ((MSTile) board.getTile(position)).hasAMine()) {
             subtractMine();
-        }else{
+        } else {
             addMine();
         }
     }
