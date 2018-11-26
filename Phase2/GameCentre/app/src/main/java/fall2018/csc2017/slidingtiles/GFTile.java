@@ -5,21 +5,23 @@ import java.io.Serializable;
 class GFTile extends Tile implements Serializable {
 
     private boolean placed;
+
     /**
-     * A tile with a background id; look up and set the id.
+     * A tile with its state (whether it is filled or not)
      *
-     * @param backgroundId the integer going to be set as id after being added by 1
+     * @param placed true if the tile is filled
      */
-    GFTile(int backgroundId) {
-        super(backgroundId);
-        placed = false;
+    GFTile(boolean placed) {
+        super(placed ? 1 : 0);
+        this.placed = placed;
     }
 
     /**
-     *Changes the state of the tile from placed to not placed and vice versa
+     * Changes the state of the tile from placed to not placed and vice versa
      */
     void placeTile(){
         placed = !placed;
+        setBackgroundId(placed ? 1 : 0);
     }
 
     /**
@@ -27,13 +29,5 @@ class GFTile extends Tile implements Serializable {
      */
     boolean isPlaced(){
         return placed;
-    }
-
-    @Override
-    public int getId() {
-        if (isPlaced()){
-            return super.getId() + 1;
-        }
-        return super.getId();
     }
 }
