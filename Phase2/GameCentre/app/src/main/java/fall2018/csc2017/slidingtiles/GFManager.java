@@ -53,6 +53,7 @@ public class GFManager implements BoardManager, Serializable {
      */
     GFManager(GFBoard board) {
         this.board = board;
+        this.tetrominos = new ArrayList<>();
     }
 
     /**
@@ -73,7 +74,7 @@ public class GFManager implements BoardManager, Serializable {
         end = 0;
 
         for (int tileNum = 0; tileNum != size * size; tileNum++) {
-            tiles.add(new GFTile(0));
+            tiles.add(new GFTile(false));
         }
         this.board = new GFBoard(tiles, size);
         this.numOfUndo = numOfUndo;
@@ -99,9 +100,9 @@ public class GFManager implements BoardManager, Serializable {
     }
 
     /**
-     * Return the tetromino
+     * Return the tetrominos currently visible
      *
-     * @return the tetromino of the current board
+     * @return three tetrominos currently visible
      */
     List<Tetromino> getTetrominos() {
         return tetrominos.subList(start, end);
@@ -121,6 +122,17 @@ public class GFManager implements BoardManager, Serializable {
      */
     void setInfiniteUndo() {
         this.infiniteUndo = true;
+    }
+
+    /**
+     * Set the list of tetrominos and update start and end
+     *
+     * @param tetrominos a list of tetrominos
+     */
+    void setTetrominos(List<Tetromino> tetrominos) {
+        this.tetrominos = tetrominos;
+        start = 0;
+        end = tetrominos.size();
     }
 
     /**
@@ -202,14 +214,5 @@ public class GFManager implements BoardManager, Serializable {
             end--;
             score -= 4;
         }
-    }
-
-    void setTetrominos(String shapeName){
-        tetrominos.clear();
-        if (end >= tetrominos.size()) {
-            tetrominos.add(new Tetromino(shapeName));
-        }
-        start++;
-        end++;
     }
 }
