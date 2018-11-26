@@ -203,4 +203,13 @@ public class GFManager implements BoardManager, Serializable {
             score -= 4;
         }
     }
+
+    void setTetrominos(String shapeName){
+        tetrominos.clear();
+        if (end >= tetrominos.size()) {
+            tetrominos.add(new Tetromino(shapeName));
+        }
+        start++;
+        end++;
+    }
 }
