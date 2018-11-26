@@ -33,24 +33,8 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
     private ArrayList<Button> tileButtons;
 
     // Grid View and calculated column height and width based on device size
-    private GestureDetectGridView gridView;
-    private static int columnWidth, columnHeight;
-
-    public GestureDetectGridView getGridView() {
-        return gridView;
-    }
-
-    public void setGridView(GestureDetectGridView gridView) {
-        this.gridView = gridView;
-    }
-
-    public static void setColumnWidth(int columnWidth) {
-        GameActivity.columnWidth = columnWidth;
-    }
-
-    public static void setColumnHeight(int columnHeight) {
-        GameActivity.columnHeight = columnHeight;
-    }
+    GestureDetectGridView gridView;
+    static int columnWidth, columnHeight;
 
     /**
      * Set up the background image for each button based on the master list
