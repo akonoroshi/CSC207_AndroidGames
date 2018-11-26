@@ -23,11 +23,11 @@ public class MovementController {
         }
     }
     public void processPressMovement(Context context, int position, boolean display) {
-        if (boardManager.getBoard().getBoardHeight() != boardManager.getBoard().getBoardWidth() && ((MSManager)boardManager).isValidPress(position)) {
+        if (boardManager instanceof MSManager && ((MSManager)boardManager).isValidPress(position)) {
             ((MSManager)boardManager).flag(position);
             Toast.makeText(context, "Flagged/Unflagged successfully", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, "Invalid Press", Toast.LENGTH_SHORT).show();
+            processTapMovement(context, position, display);
         }
     }
 }
