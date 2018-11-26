@@ -10,9 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.content.res.Resources;
 
-import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
 public class GFGameActivity extends GameActivity {
 
@@ -95,12 +93,12 @@ public class GFGameActivity extends GameActivity {
         if (boardmanager.puzzleSolved()) {
             currentCentre.clearSavedGame(GFGameActivity.this, false);
             String size = String.valueOf(boardmanager.getBoard().getBoardWidth());
-            if (currentCentre.addScore(this, size, boardmanager.getScore(), false)) {
+            if (currentCentre.addScore(this, size, boardmanager.getScore() * 4, false)) {
                 Toast.makeText(this, "You got a high score!", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, "You win!", Toast.LENGTH_LONG).show();
             }
-            switchToScoreBoard(size, boardmanager.getScore());
+            switchToScoreBoard(size, boardmanager.getScore() * 4);
         } else {
             autoSave();
 

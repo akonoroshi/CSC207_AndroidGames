@@ -3,7 +3,6 @@ package fall2018.csc2017.slidingtiles;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class GFManager implements BoardManager, Serializable {
 
@@ -198,7 +197,7 @@ public class GFManager implements BoardManager, Serializable {
         if (undoStack.size() > numOfUndo && !infiniteUndo) {
             undoStack.remove(0);
         }
-        score += 4;
+        score += 1;
     }
 
 
@@ -208,11 +207,11 @@ public class GFManager implements BoardManager, Serializable {
     void undo() {
         if (!undoStack.isEmpty()) {
             int lastMoveIndex = undoStack.size() - 1;
-            board.placeTiles(undoStack.get(lastMoveIndex));
+            board.switchTiles(undoStack.get(lastMoveIndex));
             undoStack.remove(lastMoveIndex);
             start--;
             end--;
-            score -= 4;
+            score -= 1;
         }
     }
 }
