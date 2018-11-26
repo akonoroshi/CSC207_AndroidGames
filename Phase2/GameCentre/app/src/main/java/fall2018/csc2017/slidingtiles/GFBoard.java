@@ -22,8 +22,8 @@ class GFBoard extends Board implements Serializable, Iterable<Tile> {
     }
 
     /**
-     * Set the tile at positions in positionList to revealed.
-     *
+     * Set the tile at positions in positionList to revealed and update the rows and columns if they
+     * are filled
      * @param positionList list of tile positions to be revealed
      */
     List<Integer> placeTiles(int[] positionList, int currentPosition) {
@@ -36,19 +36,19 @@ class GFBoard extends Board implements Serializable, Iterable<Tile> {
         for (int i : positionList) {
             int row = (currentPosition + i) / getBoardWidth();
             int col = (currentPosition + i) % getBoardWidth();
-            if (checkRow(row)) {
-                clearRow(row, moveList);
-            }
-            if (checkCol(col)) {
-                clearCol(col, moveList);
-            }
+            checkAndClearRow(row, moveList);
+            checkAndClearCol(col, moveList);
         }
         setChanged();
         notifyObservers();
         return moveList;
     }
 
-    void placeTiles(List<Integer> positionList) {
+    /**
+     * Switch the state of tiles in the given list of positions.
+     * @param positionList the list of position of tiles to be placed
+     */
+    void switchTiles(List<Integer> positionList) {
         for (int i : positionList) {
             (getTile(i)).placeTile();
         }
@@ -56,38 +56,48 @@ class GFBoard extends Board implements Serializable, Iterable<Tile> {
         notifyObservers();
     }
 
-    private boolean checkCol(int col) {
-        for (int i = 0; i != numTiles(); i += getBoardWidth()) {
+    /**
+     * Checks and clears the selected column if its filled and updates the current moveList
+     * @param col the selected column number
+     * @param moveList the current list of positions of tiles being cleared.
+     */
+    private void checkAndClearCol(int col, List<Integer> moveList) {
+        boolean filled = true;
+        int i = 0;
+        while (i != numTiles() && filled) {
             if (!(getTile(i + col).isPlaced())) {
-                return false;
+                filled = false;
+            }
+            i += getBoardWidth();
+        }
+        if (filled){
+            for (int j = 0; j != numTiles(); j += getBoardWidth()) {
+                getTile(j + col).placeTile();
+                moveList.add(j + col);
             }
         }
-        return true;
     }
 
-
-    private void clearCol(int col, List<Integer> moveList) {
-        for (int i = 0; i != numTiles(); i += getBoardWidth()) {
-            getTile(i + col).placeTile();
-            moveList.add(i + col);
-        }
-    }
-
-    private boolean checkRow(int row) {
-        int start = row * getBoardWidth();
-        for (int i = 0; i != getBoardWidth(); i++) {
+    /**
+     * Checks and clears the selected row if its filled and updates the current moveList
+     * @param row the selected row number
+     * @param moveList the current list of positions of tiles being switched.
+     */
+    private void checkAndClearRow(int row, List<Integer> moveList) {
+        boolean filled = true;
+        int start = row * getBoardHeight();
+        int i = 0;
+        while (i != numTiles() && filled) {
             if (!(getTile(i + start).isPlaced())) {
-                return false;
+                filled = false;
             }
+            i++;
         }
-        return true;
-    }
-
-    private void clearRow(int row, List<Integer> moveList) {
-        int start = row * getBoardWidth();
-        for (int i = 0; i != getBoardWidth(); i++) {
-            getTile(i + start).placeTile();
-            moveList.add(i + start);
+        if (filled){
+            for (int j = 0; j != numTiles(); j += getBoardWidth()) {
+                getTile(j + start).placeTile();
+                moveList.add(j + start);
+            }
         }
     }
 
