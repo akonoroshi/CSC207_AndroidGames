@@ -152,11 +152,7 @@ public class GFTest {
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
             if (tileNum > 0 && tileNum < 10) {
                 placed = true;
-            } else if (tileNum >= 40 && tileNum % 10 == 0) {
-                placed = true;
-            } else {
-                placed = false;
-            }
+            } else placed = tileNum >= 40 && tileNum % 10 == 0;
             tiles.add(new GFTile(placed));
         }
         GFBoard board = new GFBoard(tiles, boardSize);
