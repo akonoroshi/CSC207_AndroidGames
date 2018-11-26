@@ -71,6 +71,11 @@ public class GFTest {
             setTetrominos(key);
             assertTrue(boardManager.puzzleSolved());
         }
+        setUpBlank();
+        for (String key: Tetromino.tetrominoMap.keySet()) {
+            setTetrominos(key);
+            assertFalse(boardManager.puzzleSolved());
+        }
     }
 
     /**
@@ -124,6 +129,11 @@ public class GFTest {
             }else{
                 assertTrue(boardManager.isValidTap(40));
             }
+            if (key.equals("t") || key.equals("z")) {
+                assertFalse(boardManager.isValidTap(28));
+            }else{
+                assertTrue(boardManager.isValidTap(28));
+            }
         }
         setUpUnplayable();
         for (String key: Tetromino.tetrominoMap.keySet()){
@@ -131,6 +141,29 @@ public class GFTest {
             for (int i = 0; i < boardManager.getBoard().numTiles(); i++){
                 assertFalse(boardManager.isValidTap(i));
             }
+        }
+    }
+
+    @Test
+    public void testPlaceTiles () {
+        List<GFTile> tiles = new ArrayList<>();
+        int boardSize = 10;
+        boolean placed;
+        for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
+            if (tileNum > 0 && tileNum < 10) {
+                placed = true;
+            } else if (tileNum >= 40 && tileNum % 10 == 0) {
+                placed = true;
+            } else {
+                placed = false;
+            }
+            tiles.add(new GFTile(placed));
+        }
+        GFBoard board = new GFBoard(tiles, boardSize);
+        boardManager = new GFManager(board);
+        boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("i"), 0);
+        for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
+            assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
         }
     }
 }
