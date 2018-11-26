@@ -25,6 +25,8 @@ class GFBoard extends Board implements Serializable, Iterable<Tile> {
      * Set the tile at positions in positionList to revealed and update the rows and columns if they
      * are filled
      * @param positionList list of tile positions to be revealed
+     * @param currentPosition the tapped position
+     * @return the list of positions where the status of tiles changed
      */
     List<Integer> placeTiles(int[] positionList, int currentPosition) {
         List<Integer> moveList = new ArrayList<>();
