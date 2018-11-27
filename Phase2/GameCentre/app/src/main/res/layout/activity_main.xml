@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fall2018.csc2017.slidingtiles.GameActivity" >
+    tools:context="fall2018.csc2017.gamecentre.GameActivity" >
 
-    <fall2018.csc2017.slidingtiles.GestureDetectGridView
+    <fall2018.csc2017.gamecentre.GestureDetectGridView
         android:id="@+id/grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
