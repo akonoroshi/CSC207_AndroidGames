@@ -53,8 +53,7 @@ public class MSTest {
 
     @Test
     public void testMinePopulation() {
-        for(int i = 1; i < 10; i++) {
-            MSBoard board = createEmptyBoard(i);
+            MSBoard board = createEmptyBoard(1);
             board.createMines();
             int mines = 0;
             for (Tile t : board) {
@@ -63,7 +62,6 @@ public class MSTest {
                 }
             }
             assertEquals(mines, board.getTotalMines());
-        }
     }
     
     @Test
@@ -95,4 +93,82 @@ public class MSTest {
 
     }
 
+    @Test
+    public void testgameOverCheck1(){
+        MSBoard board = createEmptyBoard(2);
+        MSManager manager = new MSManager(board);
+        assertFalse(manager.gameOverCheck());
+    }
+
+    @Test
+    public void testgameOverCheck2(){
+        MSBoard board = createEmptyBoard(1);
+        MSManager manager = new MSManager(board);
+        ((MSTile)board.getTile(0)).setRevealed();
+        assertTrue(manager.gameOverCheck());
+    }
+
+    @Test
+    public void testpuzzleSolved1(){
+        MSBoard board = createEmptyBoard(1);
+        MSManager manager = new MSManager(board);
+        ((MSTile)board.getTile(0)).setMine();
+        ((MSTile)board.getTile(0)).setRevealed();
+        assertTrue(manager.puzzleSolved());
+    }
+
+    @Test
+    public void testpuzzleSolved2(){
+        MSBoard board = createEmptyBoard(2);
+        MSManager manager = new MSManager(board);
+        MSTile tile = new MSTile(0);
+        MSTile tile1 = new MSTile(1);
+        board.setTile(0, tile);
+        board.setTile(1, tile1);
+        assertFalse(manager.puzzleSolved());
+    }
+
+    @Test
+    public void testFlag1(){
+        MSBoard board = createEmptyBoard(1);
+        MSManager manager = new MSManager(board);
+        ((MSTile)board.getTile(0)).setMine();
+        manager.remainingMines++;
+        manager.flag(0);
+        assertEquals(0, manager.remainingMines);
+    }
+
+    @Test
+    public void testFlag(){
+        MSBoard board = createEmptyBoard(1);
+        MSManager manager = new MSManager(board);
+        ((MSTile)board.getTile(0)).setMine();
+        manager.remainingMines++;
+        manager.flag(0);
+        manager.flag(0);
+        assertEquals(1, manager.remainingMines);
+    }
+
+    @Test
+    public void testisValidPress(){
+        MSBoard board = createEmptyBoard(1);
+        MSManager manager = new MSManager(board);
+        assertTrue(manager.isValidPress(0));
+    }
+
+    @Test
+    public void testisValidPress1(){
+        MSBoard board = createEmptyBoard(1);
+        MSManager manager = new MSManager(board);
+        ((MSTile)board.getTile(0)).setFlagged();
+        assertTrue(manager.isValidPress(0));
+    }
+
+    @Test
+    public void testisValidPress2(){
+        MSBoard board = createEmptyBoard(1);
+        MSManager manager = new MSManager(board);
+        ((MSTile)board.getTile(0)).setRevealed();
+        assertFalse(manager.isValidPress(0));
+    }
 }
