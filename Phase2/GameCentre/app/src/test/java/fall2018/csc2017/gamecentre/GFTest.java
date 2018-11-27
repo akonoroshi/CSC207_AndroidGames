@@ -1,5 +1,9 @@
 package fall2018.csc2017.gamecentre;
 
+import fall2018.csc2017.gamecentre.gridfiller.GFBoard;
+import fall2018.csc2017.gamecentre.gridfiller.GFManager;
+import fall2018.csc2017.gamecentre.gridfiller.GFTile;
+import fall2018.csc2017.gamecentre.gridfiller.Tetromino;
 import org.junit.Test;
 
 import java.util.ArrayList;

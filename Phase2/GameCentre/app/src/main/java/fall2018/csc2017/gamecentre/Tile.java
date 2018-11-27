@@ -28,7 +28,7 @@ public class Tile implements Comparable<Tile>, Serializable {
      *
      * @param backgroundId the integer going to be set as id after being added by 1
      */
-    void setBackgroundId(int backgroundId) {
+    protected void setBackgroundId(int backgroundId) {
         id = backgroundId + 1;
     }
 

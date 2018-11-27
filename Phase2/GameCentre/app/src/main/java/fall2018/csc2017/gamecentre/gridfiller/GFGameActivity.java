@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.gridfiller;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.content.res.Resources;
+import fall2018.csc2017.gamecentre.GameActivity;
+import fall2018.csc2017.gamecentre.GameCentre;
+import fall2018.csc2017.gamecentre.R;
 
 import java.util.Observable;
 
@@ -18,33 +21,12 @@ public class GFGameActivity extends GameActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         currentCentre = GameCentre.getInstance(this);
-        final Context con = this;
-        boardmanager = currentCentre.loadGame(con, true);
-        createTileButtons(con);
+        boardmanager = currentCentre.loadGame(this, true);
+        createTileButtons(this);
         setContentView(R.layout.activity_gf_main);
 
         // Add View to activity
-        gridView = findViewById(R.id.grid);
-        gridView.setNumColumns(boardmanager.getBoard().getBoardWidth());
-        gridView.setBoardManager(boardmanager);
-        boardmanager.getBoard().addObserver(this);
-        // Observer sets up desired dimensions as well as calls our display function
-        gridView.getViewTreeObserver().addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        gridView.getViewTreeObserver().removeOnGlobalLayoutListener(
-                                this);
-                        int displayWidth = gridView.getMeasuredWidth();
-                        int displayHeight = gridView.getMeasuredHeight();
-
-                        columnWidth = displayWidth / boardmanager.getBoard().getBoardWidth();
-                        columnHeight = displayHeight / boardmanager.getBoard().getBoardHeight();
-
-                        display(con);
-                    }
-                });
-        addSaveButtonListener();
+        setupGridView();
         addUndoButtonListener();
         addReturnButtonListener();
         updateTetromino();
@@ -71,8 +53,7 @@ public class GFGameActivity extends GameActivity {
                 "gf_" + ((GFManager) boardmanager).getTetrominos().get(index).getShape(),
                 "drawable", this.getPackageName()));
     }
-
-    @Override
+    
     void addUndoButtonListener() {
         Button undoButton = findViewById(R.id.UndoButton);
         undoButton.setOnClickListener(new View.OnClickListener() {

@@ -1,9 +1,13 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.gridfiller;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import fall2018.csc2017.gamecentre.BoardManager;
+import fall2018.csc2017.gamecentre.GameAppCompatActivity;
+import fall2018.csc2017.gamecentre.GameCentre;
+import fall2018.csc2017.gamecentre.R;
 
 public class GFPreStartingActivity extends GameAppCompatActivity {
     /**

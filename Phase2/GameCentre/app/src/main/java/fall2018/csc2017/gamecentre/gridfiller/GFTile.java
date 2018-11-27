@@ -1,8 +1,10 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.gridfiller;
+
+import fall2018.csc2017.gamecentre.Tile;
 
 import java.io.Serializable;
 
-class GFTile extends Tile implements Serializable {
+public class GFTile extends Tile implements Serializable {
 
     private boolean placed;
 
@@ -11,7 +13,7 @@ class GFTile extends Tile implements Serializable {
      *
      * @param placed true if the tile is filled
      */
-    GFTile(boolean placed) {
+    public GFTile(boolean placed) {
         super(placed ? 1 : 0);
         this.placed = placed;
     }
@@ -27,7 +29,7 @@ class GFTile extends Tile implements Serializable {
     /**
      * Returns whether the tile is placed
      */
-    boolean isPlaced(){
+    public boolean isPlaced(){
         return placed;
     }
 }

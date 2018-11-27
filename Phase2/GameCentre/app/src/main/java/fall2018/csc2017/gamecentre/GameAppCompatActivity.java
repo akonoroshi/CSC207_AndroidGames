@@ -2,6 +2,7 @@ package fall2018.csc2017.gamecentre;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import fall2018.csc2017.gamecentre.gridfiller.GFGameActivity;
 import fall2018.csc2017.gamecentre.minesweeper.MSGameActivity;
 
 

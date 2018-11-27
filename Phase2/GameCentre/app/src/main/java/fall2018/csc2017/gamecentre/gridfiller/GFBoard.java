@@ -1,5 +1,8 @@
 
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.gridfiller;
+
+import fall2018.csc2017.gamecentre.Board;
+import fall2018.csc2017.gamecentre.Tile;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,7 +11,7 @@ import java.util.List;
 /**
  * The sliding tiles board.
  */
-class GFBoard extends Board implements Serializable, Iterable<Tile> {
+public class GFBoard extends Board implements Serializable, Iterable<Tile> {
 
     /**
      * A new board of tiles in row-major order.
@@ -17,7 +20,7 @@ class GFBoard extends Board implements Serializable, Iterable<Tile> {
      * @param tiles the tiles for the board
      * @param size  the size for the board
      */
-    GFBoard(List<GFTile> tiles, int size) {
+    public GFBoard(List<GFTile> tiles, int size) {
         super(tiles, size, size);
     }
 
@@ -29,7 +32,7 @@ class GFBoard extends Board implements Serializable, Iterable<Tile> {
      * @param currentPosition the position that is tapped
      * @return a list of tiles whose status changed at least once
      */
-    List<Integer> placeTiles(int[] positionList, int currentPosition) {
+    public List<Integer> placeTiles(int[] positionList, int currentPosition) {
         List<Integer> moveList = new ArrayList<>();
         for (int i : positionList) {
             (getTile(currentPosition + i)).placeTile();
@@ -148,7 +151,7 @@ class GFBoard extends Board implements Serializable, Iterable<Tile> {
     }
 
     @Override
-    GFTile getTile(int index) {
+    public GFTile getTile(int index) {
         return (GFTile) super.getTile(index);
     }
 

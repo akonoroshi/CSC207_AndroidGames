@@ -26,10 +26,10 @@
         <activity android:name="fall2018.csc2017.gamecentre.ChooseBackgroundActivity" />
         <activity android:name="fall2018.csc2017.gamecentre.InstructionsActivity" />
         <activity android:name="fall2018.csc2017.gamecentre.GameAppCompatActivity"/>
-        <activity android:name="fall2018.csc2017.gamecentre.GFGameActivity" />
+        <activity android:name="fall2018.csc2017.gamecentre.gridfiller.GFGameActivity" />
         <activity android:name="fall2018.csc2017.gamecentre.minesweeper.MSGameActivity" />
         <activity android:name="fall2018.csc2017.gamecentre.minesweeper.MSPreStartingActivity" />
-        <activity android:name="fall2018.csc2017.gamecentre.GFPreStartingActivity" />
+        <activity android:name="fall2018.csc2017.gamecentre.gridfiller.GFPreStartingActivity" />
     </application>
 
 </manifest>

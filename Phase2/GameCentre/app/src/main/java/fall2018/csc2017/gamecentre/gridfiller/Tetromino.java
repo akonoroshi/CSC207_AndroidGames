@@ -1,4 +1,4 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.gridfiller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,13 +10,13 @@ import java.util.Random;
 /**
  * A Tetromino in Grid Filler game.
  */
-class Tetromino implements Serializable {
+public class Tetromino implements Serializable {
 
     /**
      * Map of tetrominoes with the key being the name of the tetromino and the value being its
      * position relative to the anchor which is at index 0 on a 10x10 board.
      */
-    static final Map<String, int[]> tetrominoMap = new HashMap<String, int[]>(){
+    public static final Map<String, int[]> tetrominoMap = new HashMap<String, int[]>(){
         {
             put("i", new int[]{0,10, 20, 30});
             put("s", new int[]{0, 1, 9, 10});
@@ -48,7 +48,7 @@ class Tetromino implements Serializable {
      *
      * @param shapeName shape of this tetromino
      */
-    Tetromino(String shapeName){
+    public Tetromino(String shapeName){
         shape = shapeName;
     }
 

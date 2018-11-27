@@ -1,4 +1,6 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.gridfiller;
+
+import fall2018.csc2017.gamecentre.BoardManager;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -44,13 +46,13 @@ public class GFManager implements BoardManager, Serializable {
     /**
      * A default BoardManager constructor.
      */
-    GFManager() {
+    public GFManager() {
     }
 
     /**
      * A constructor with a pre-populated GFBoard.
      */
-    GFManager(GFBoard board) {
+    public GFManager(GFBoard board) {
         this.board = board;
         this.tetrominos = new ArrayList<>();
     }
@@ -67,7 +69,7 @@ public class GFManager implements BoardManager, Serializable {
     /**
      * Manage a new shuffled board.
      */
-    GFManager(int size, int numOfUndo) {
+    public GFManager(int size, int numOfUndo) {
         List<GFTile> tiles = new ArrayList<>();
         start = -3;
         end = 0;
@@ -128,7 +130,7 @@ public class GFManager implements BoardManager, Serializable {
      *
      * @param tetrominos a list of tetrominos
      */
-    void setTetrominos(List<Tetromino> tetrominos) {
+    public void setTetrominos(List<Tetromino> tetrominos) {
         this.tetrominos = tetrominos;
         start = 0;
         end = tetrominos.size();
@@ -204,7 +206,7 @@ public class GFManager implements BoardManager, Serializable {
     /**
      * Process an undo, undoing the previous move made.
      */
-    void undo() {
+    public void undo() {
         if (!undoStack.isEmpty()) {
             int lastMoveIndex = undoStack.size() - 1;
             board.switchTiles(undoStack.get(lastMoveIndex));
