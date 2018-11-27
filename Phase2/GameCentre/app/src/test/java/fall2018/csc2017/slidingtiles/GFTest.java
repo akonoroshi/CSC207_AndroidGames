@@ -22,6 +22,8 @@ public class GFTest {
     /**
      * Make a set of tiles that are in order.
      *
+     * @param boardSize the size of the board
+     * @param placed true if a tile is filled
      * @return a set of tiles that are in order
      */
     private List<GFTile> makeTiles(int boardSize, boolean placed) {
@@ -55,6 +57,11 @@ public class GFTest {
         boardManager = new GFManager(board);
     }
 
+    /**
+     * Set an array of a tetromino of a specified shape to GFManager
+     *
+     * @param key the shape of tetromino
+     */
     private void setTetrominos(String key) {
         List<Tetromino> tempList = new ArrayList<>();
         tempList.add(new Tetromino(key));
@@ -70,6 +77,11 @@ public class GFTest {
         for (String key: Tetromino.tetrominoMap.keySet()) {
             setTetrominos(key);
             assertTrue(boardManager.puzzleSolved());
+        }
+        setUpBlank();
+        for (String key: Tetromino.tetrominoMap.keySet()) {
+            setTetrominos(key);
+            assertFalse(boardManager.puzzleSolved());
         }
     }
 
@@ -124,12 +136,76 @@ public class GFTest {
             }else{
                 assertTrue(boardManager.isValidTap(40));
             }
+            if (key.equals("t") || key.equals("z")) {
+                assertFalse(boardManager.isValidTap(28));
+            }else{
+                assertTrue(boardManager.isValidTap(28));
+            }
         }
         setUpUnplayable();
         for (String key: Tetromino.tetrominoMap.keySet()){
             setTetrominos(key);
             for (int i = 0; i < boardManager.getBoard().numTiles(); i++){
                 assertFalse(boardManager.isValidTap(i));
+            }
+        }
+    }
+
+    /**
+     * Test whether placeTiles places and clears tiles properly
+     */
+    @Test
+    public void testPlaceTiles () {
+        List<GFTile> tiles = new ArrayList<>();
+        int boardSize = 10;
+        boolean placed;
+        for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
+            if (tileNum > 0 && tileNum < boardSize) {
+                placed = true;
+            } else {placed = tileNum >= 40 && tileNum % boardSize == 0;}
+            tiles.add(new GFTile(placed));
+        }
+        GFBoard board = new GFBoard(tiles, boardSize);
+        boardManager = new GFManager(board);
+        List<Integer> returned = boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("i"), 0);
+        for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
+            assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
+            if (tileNum < boardSize || tileNum % boardSize == 0) {
+                assertTrue(returned.contains(tileNum));
+            }else{
+                assertFalse(returned.contains(tileNum));
+            }
+        }
+        tiles.clear();
+        for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
+            placed = tileNum < 20 && tileNum % boardSize != 0 && tileNum % boardSize != 1;
+            tiles.add(new GFTile(placed));
+        }
+        board = new GFBoard(tiles, boardSize);
+        boardManager = new GFManager(board);
+        returned = boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("o"), 0);
+        for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
+            assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
+            if (tileNum < 20) {
+                assertTrue(returned.contains(tileNum));
+            }else{
+                assertFalse(returned.contains(tileNum));
+            }
+        }
+        tiles.clear();
+        for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
+            placed = tileNum >= 20 && (tileNum % boardSize == 0 || tileNum % boardSize == 1);
+            tiles.add(new GFTile(placed));
+        }
+        board = new GFBoard(tiles, boardSize);
+        boardManager = new GFManager(board);
+        returned = boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("o"), 0);
+        for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
+            assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
+            if (tileNum % boardSize == 0 || tileNum % boardSize == 1) {
+                assertTrue(returned.contains(tileNum));
+            }else{
+                assertFalse(returned.contains(tileNum));
             }
         }
     }

@@ -24,22 +24,22 @@ public class GFGameActivity extends GameActivity {
         setContentView(R.layout.activity_gf_main);
 
         // Add View to activity
-        setGridView((GestureDetectGridView) findViewById(R.id.grid));
-        getGridView().setNumColumns(boardmanager.getBoard().getBoardWidth());
-        getGridView().setBoardManager(boardmanager);
+        gridView = findViewById(R.id.grid);
+        gridView.setNumColumns(boardmanager.getBoard().getBoardWidth());
+        gridView.setBoardManager(boardmanager);
         boardmanager.getBoard().addObserver(this);
         // Observer sets up desired dimensions as well as calls our display function
-        getGridView().getViewTreeObserver().addOnGlobalLayoutListener(
+        gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
-                        getGridView().getViewTreeObserver().removeOnGlobalLayoutListener(
+                        gridView.getViewTreeObserver().removeOnGlobalLayoutListener(
                                 this);
-                        int displayWidth = getGridView().getMeasuredWidth();
-                        int displayHeight = getGridView().getMeasuredHeight();
+                        int displayWidth = gridView.getMeasuredWidth();
+                        int displayHeight = gridView.getMeasuredHeight();
 
-                        setColumnWidth(displayWidth / boardmanager.getBoard().getBoardWidth());
-                        setColumnHeight(displayHeight / boardmanager.getBoard().getBoardHeight());
+                        columnWidth = displayWidth / boardmanager.getBoard().getBoardWidth();
+                        columnHeight = displayHeight / boardmanager.getBoard().getBoardHeight();
 
                         display(con);
                     }

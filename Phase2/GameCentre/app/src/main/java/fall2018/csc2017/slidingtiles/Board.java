@@ -27,11 +27,11 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      * A new board of tiles in row-major order.
      * Precondition: len(tiles) == BOARD_SIZE * BOARD_SIZE
      *
-     * @param tiles the tiles for the board
-     * @param width the width for the board
+     * @param tiles  the tiles for the board
+     * @param width  the width for the board
      * @param height the height for the board
      */
-    <T extends Tile> Board (List<T> tiles, int width, int height) {
+    <T extends Tile> Board(List<T> tiles, int width, int height) {
         boardWidth = width;
         boardHeight = height;
         this.tiles = new Tile[boardWidth * boardHeight];

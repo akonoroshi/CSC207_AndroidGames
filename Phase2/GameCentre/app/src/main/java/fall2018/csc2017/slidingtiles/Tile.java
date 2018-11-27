@@ -26,10 +26,10 @@ public class Tile implements Comparable<Tile>, Serializable {
     /**
      * Set the tile id.
      *
-     * @param id the id to be set to this tile
+     * @param backgroundId the integer going to be set as id after being added by 1
      */
-    void setBackgroundId(int id) {
-        this.id = id + 1;
+    void setBackgroundId(int backgroundId) {
+        id = backgroundId + 1;
     }
 
     /**
