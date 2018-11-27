@@ -27,8 +27,8 @@
         <activity android:name="fall2018.csc2017.gamecentre.InstructionsActivity" />
         <activity android:name="fall2018.csc2017.gamecentre.GameAppCompatActivity"/>
         <activity android:name="fall2018.csc2017.gamecentre.GFGameActivity" />
-        <activity android:name="fall2018.csc2017.gamecentre.MSGameActivity" />
-        <activity android:name="fall2018.csc2017.gamecentre.MSPreStartingActivity" />
+        <activity android:name="fall2018.csc2017.gamecentre.minesweeper.MSGameActivity" />
+        <activity android:name="fall2018.csc2017.gamecentre.minesweeper.MSPreStartingActivity" />
         <activity android:name="fall2018.csc2017.gamecentre.GFPreStartingActivity" />
     </application>
 

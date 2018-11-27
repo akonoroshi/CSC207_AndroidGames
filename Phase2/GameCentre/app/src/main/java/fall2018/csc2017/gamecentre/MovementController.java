@@ -2,6 +2,7 @@ package fall2018.csc2017.gamecentre;
 
 import android.content.Context;
 import android.widget.Toast;
+import fall2018.csc2017.gamecentre.minesweeper.MSManager;
 
 
 public class MovementController {

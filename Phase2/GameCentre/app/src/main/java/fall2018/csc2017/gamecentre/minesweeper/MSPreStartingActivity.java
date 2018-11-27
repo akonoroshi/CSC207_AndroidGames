@@ -1,10 +1,11 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.minesweeper;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import fall2018.csc2017.gamecentre.*;
 
-public class MSPreStartingActivity extends GameAppCompatActivity{
+public class MSPreStartingActivity extends GameAppCompatActivity {
     /**
      * A reference to the GameCentre singleton instance.
      */

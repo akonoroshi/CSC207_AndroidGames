@@ -79,7 +79,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      *
      * @return the size of the board.
      */
-    int getBoardHeight() {
+    public int getBoardHeight() {
         return boardHeight;
     }
 

@@ -1,4 +1,7 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.minesweeper;
+
+import fall2018.csc2017.gamecentre.BoardManager;
+import fall2018.csc2017.gamecentre.Tile;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,7 +9,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-class MSManager implements BoardManager, Serializable {
+public class MSManager implements BoardManager, Serializable {
 
     /**
      * The board being managed.
@@ -22,12 +25,12 @@ class MSManager implements BoardManager, Serializable {
     /**
      * The number of mines left, after subtracting flagged spaces.
      */
-    int remainingMines;
+    public int remainingMines;
 
     /**
      * A default MSManager constructor.
      */
-    MSManager() {
+    public MSManager() {
 
     }
 
@@ -36,14 +39,14 @@ class MSManager implements BoardManager, Serializable {
      *
      * @param board a pre-populated board.
      */
-    MSManager(MSBoard board) {
+    public MSManager(MSBoard board) {
         this.board = board;
     }
 
     /**
      * Manage a new board.
      */
-    MSManager(int width, int height) {
+    public MSManager(int width, int height) {
         List<MSTile> tiles = new ArrayList<>();
         for (int tileNum = 0; tileNum != width * height; tileNum++) {
             tiles.add(new MSTile(tileNum));
@@ -85,21 +88,21 @@ class MSManager implements BoardManager, Serializable {
     /**
      * Subtract a mine from the remaining mines.
      */
-    void subtractMine() {
+    public void subtractMine() {
         remainingMines--;
     }
 
     /**
      * Add a mine to the remaining mines.
      */
-    void addMine() {
+    public void addMine() {
         remainingMines++;
     }
 
     /**
      * Activate the timer for the game.
      */
-    void activateTimer() {
+    public void activateTimer() {
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
@@ -116,7 +119,7 @@ class MSManager implements BoardManager, Serializable {
      *
      * @return whether the player lost or not.
      */
-    boolean gameOverCheck() {
+    public boolean gameOverCheck() {
         boolean lose = true;
         for (int i = 0; i != board.getBoardWidth() * board.getBoardHeight(); i++) {
             if (!((MSTile) board.getTile(i)).isRevealed()) {

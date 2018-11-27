@@ -1,5 +1,8 @@
 package fall2018.csc2017.gamecentre;
 
+import fall2018.csc2017.gamecentre.minesweeper.MSBoard;
+import fall2018.csc2017.gamecentre.minesweeper.MSManager;
+import fall2018.csc2017.gamecentre.minesweeper.MSTile;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -70,21 +73,6 @@ public class MSTest {
                 }
             }
             assertEquals(mines, board.getTotalMines());
-    }
-    
-    @Test
-    public void testMinePopulation2() {
-        for(int i = 1; i < 10; i++) {
-            MSBoard board = createEmptyBoard(i);
-            board.createMines2();
-            int mines = 0;
-            for (Tile t : board) {
-                if (((MSTile) t).hasAMine()) {
-                    mines++;
-                }
-            }
-            assertEquals(mines, board.getTotalMines());
-        }
     }
 
     @Test

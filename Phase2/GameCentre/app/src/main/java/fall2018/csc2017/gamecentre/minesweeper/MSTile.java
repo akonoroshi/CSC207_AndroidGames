@@ -1,9 +1,11 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.minesweeper;
+
+import fall2018.csc2017.gamecentre.Tile;
 
 /**
  * A class representing a Minesweeper Tile.
  */
-class MSTile extends Tile {
+public class MSTile extends Tile {
 
     /**
      * The number of mines adjacent to this tile, including diagonals.
@@ -29,7 +31,7 @@ class MSTile extends Tile {
      *
      * @param backgroundId the unique id of this tile.
      */
-    MSTile(int backgroundId) {
+    public MSTile(int backgroundId) {
         super(backgroundId);
         revealed = false;
         flagged = false;
@@ -39,7 +41,7 @@ class MSTile extends Tile {
     /**
      * Set this Tile to have a mine.
      */
-    void setMine() {
+    public void setMine() {
         hasMine = true;
     }
 
@@ -48,14 +50,14 @@ class MSTile extends Tile {
      *
      * @return whether this tile has a mine.
      */
-    boolean hasAMine() {
+    public boolean hasAMine() {
         return this.hasMine;
     }
 
     /**
      * Set this tile to be revealed.
      */
-    void setRevealed() {
+    public void setRevealed() {
         revealed = true;
     }
 
@@ -64,7 +66,7 @@ class MSTile extends Tile {
      *
      * @return whether this tile is revealed.
      */
-    boolean isRevealed() {
+    public boolean isRevealed() {
         return this.revealed;
     }
 
@@ -80,7 +82,7 @@ class MSTile extends Tile {
     /**
      * Set this tile to be flagged.
      */
-    void setFlagged() {
+    public void setFlagged() {
         flagged = true;
     }
 

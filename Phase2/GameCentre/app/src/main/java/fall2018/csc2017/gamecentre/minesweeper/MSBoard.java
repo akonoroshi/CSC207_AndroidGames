@@ -1,4 +1,7 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.minesweeper;
+
+import fall2018.csc2017.gamecentre.Board;
+import fall2018.csc2017.gamecentre.Tile;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,7 +12,7 @@ import java.util.Random;
 /**
  * A class representing a MineSweeper Board.
  */
-class MSBoard extends Board implements Serializable, Iterable<Tile> {
+public class MSBoard extends Board implements Serializable, Iterable<Tile> {
 
     /**
      * The board size.
@@ -24,7 +27,7 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
     /**
      * The locations of the mines on the board.
      */
-    ArrayList<Integer> mineLocations;
+    public ArrayList<Integer> mineLocations;
 
     /**
      * Constructor for a Minesweeper Board.
@@ -33,7 +36,7 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
      * @param width  width of the board/number of columns
      * @param height height of the board/number of rows
      */
-    MSBoard(List<MSTile> tiles, int width, int height) {
+    public MSBoard(List<MSTile> tiles, int width, int height) {
         super(tiles, width, height);
         boardSize = width * height;
         totalMines = ((width * height + 6) / 7);
@@ -53,14 +56,14 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
      *
      * @return the total number of mines
      */
-    int getTotalMines() {
+    public int getTotalMines() {
         return totalMines;
     }
 
     /**
      * Generate the locations of the mines.
      */
-    void createMines() {
+    public void createMines() {
         int mines = totalMines;
         ArrayList<Integer> locationList = new ArrayList<>();
         Random r = new Random();
@@ -76,7 +79,7 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
     /**
      * Alternate algorithm for creating mines, guarantees no duplicates.
      */
-    void createMines2() {
+    public void createMines2() {
         ArrayList<Integer> shuffleList = new ArrayList<>();
         ArrayList<Integer> locationList = new ArrayList<>();
         for (int i = 0; i < boardSize; i++) {
@@ -256,7 +259,7 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
     /**
      * Set all tiles to be revealed.
      */
-    void revealAll() {
+    public void revealAll() {
         for (int i = 0; i != boardSize; i++) {
             ((MSTile) getTile(i)).setRevealed();
         }
@@ -304,7 +307,7 @@ class MSBoard extends Board implements Serializable, Iterable<Tile> {
      *
      * @param position location tapped
      */
-    void reveal(int position) {
+    public void reveal(int position) {
         if (((MSTile) getTile(position)).hasAMine()) {
             revealAll();
             setChanged();

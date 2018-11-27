@@ -1,7 +1,10 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.minesweeper;
 
 import android.os.Bundle;
 import android.widget.Toast;
+import fall2018.csc2017.gamecentre.GameActivity;
+import fall2018.csc2017.gamecentre.GameCentre;
+import fall2018.csc2017.gamecentre.R;
 
 import java.util.Observable;
 

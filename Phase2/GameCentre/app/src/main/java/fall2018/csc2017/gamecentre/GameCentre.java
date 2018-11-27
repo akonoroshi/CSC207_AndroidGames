@@ -114,7 +114,7 @@ public class GameCentre {
      * @param temporary When true, load from the temporary save file
      * @return an object representing the loaded game
      */
-    <T> T loadGame(Context context, boolean temporary) {
+    public <T> T loadGame(Context context, boolean temporary) {
         String suffix = temporary ? TEMP_SAVE_FILE_SUFFIX : SAVE_FILE_SUFFIX;
         String filename = GameCentre.concatFilename(new String[]{currentUser, currentGame, suffix});
         return (T) GameCentre.loadFromFile(context, filename);
@@ -127,7 +127,7 @@ public class GameCentre {
      * @param game      an object representing a game
      * @param temporary When true, save to the temporary save file
      */
-    <T> void saveGame(Context context, T game, boolean temporary) {
+    public <T> void saveGame(Context context, T game, boolean temporary) {
         String suffix = temporary ? TEMP_SAVE_FILE_SUFFIX : SAVE_FILE_SUFFIX;
         String filename = GameCentre.concatFilename(new String[]{currentUser, currentGame, suffix});
         GameCentre.saveToFile(context, filename, game);
@@ -140,7 +140,7 @@ public class GameCentre {
      * @param context   a Context used to access local files
      * @param temporary When true, delete the temporary save file
      */
-    void clearSavedGame(Context context, boolean temporary) {
+    public void clearSavedGame(Context context, boolean temporary) {
         String suffix = temporary ? TEMP_SAVE_FILE_SUFFIX : SAVE_FILE_SUFFIX;
         String filename = GameCentre.concatFilename(new String[]{currentUser, currentGame, suffix});
         File saveFile = new File(context.getFilesDir(), filename);
@@ -158,7 +158,7 @@ public class GameCentre {
      * @param reverse    true if lower scores are better
      * @return true if the score was good enough to be added to the scoreboard
      */
-    boolean addScore(Context context, String identifier, int newScore, boolean reverse) {
+    public boolean addScore(Context context, String identifier, int newScore, boolean reverse) {
         int[] scoreboard = loadScoreboard(context, identifier);
         if ((reverse ? newScore >= scoreboard[SCOREBOARD_SIZE - 1] : newScore <= scoreboard[SCOREBOARD_SIZE - 1]) && scoreboard[SCOREBOARD_SIZE - 1] > 0) {
             return false;
@@ -221,7 +221,7 @@ public class GameCentre {
      *
      * @return the game identifier, or an empty String if no game has been selected
      */
-    String getCurrentGame() {
+    public String getCurrentGame() {
         return currentGame;
     }
 

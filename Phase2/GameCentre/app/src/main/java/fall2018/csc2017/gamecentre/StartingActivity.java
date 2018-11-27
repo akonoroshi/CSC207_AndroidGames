@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import fall2018.csc2017.gamecentre.minesweeper.MSManager;
+import fall2018.csc2017.gamecentre.minesweeper.MSPreStartingActivity;
 import fall2018.csc2017.gamecentre.slidingtiles.STManager;
 
 /**

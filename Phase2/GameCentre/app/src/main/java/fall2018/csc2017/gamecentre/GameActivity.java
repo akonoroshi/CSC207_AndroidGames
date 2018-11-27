@@ -21,12 +21,12 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
     /**
      * The board manager.
      */
-    BoardManager boardmanager;
+    protected BoardManager boardmanager;
 
     /**
      * A reference to the GameCentre singleton instance.
      */
-    GameCentre currentCentre;
+    protected GameCentre currentCentre;
 
     /**
      * The buttons to display.
@@ -42,7 +42,7 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
      * of positions, and then call the adapter to set the view.
      */
     // Display
-    void display(Context context) {
+    protected void display(Context context) {
         updateTileButtons(context);
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
     }
@@ -61,7 +61,7 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
         addReturnButtonListener();
     }
     
-    void setupGridView() {
+    protected void setupGridView() {
 		final Context con = this;
 		
 		// Add View to activity
@@ -92,7 +92,7 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
      *
      * @param context the context used to create tile buttons
      */
-    void createTileButtons(Context context) {
+    protected void createTileButtons(Context context) {
         Board board = boardmanager.getBoard();
         tileButtons = new ArrayList<>();
         Resources res = context.getResources();
@@ -125,7 +125,7 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
     /**
      * Activate the save button.
      */
-    void addSaveButtonListener() {
+    protected void addSaveButtonListener() {
         Button saveButton = findViewById(R.id.SaveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +140,7 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
     /**
      * Activate the return button.
      */
-    void addReturnButtonListener() {
+    protected void addReturnButtonListener() {
         Button returnButton = findViewById(R.id.ReturnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,7 +184,7 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
     /**
      * Auto-save the game after a certain amount of moves.
      */
-    void autoSave() {
+    protected void autoSave() {
         if (boardmanager.getScore() % 4 == 0) {
             currentCentre.saveGame(GameActivity.this, (boardmanager), true);
             makeToastAutoSavedText();
