@@ -10,6 +10,11 @@ import static org.junit.Assert.*;
 
 public class MSTest {
 
+    /**
+     * Create an empty MSBoard with size
+     * @param size
+     * @return
+     */
     private MSBoard createEmptyBoard(int size) {
         List<MSTile> tiles = new ArrayList<>();
         for(int i = 0; i < size * size; i++) {
@@ -20,6 +25,9 @@ public class MSTest {
         return board;
     }
 
+    /**
+     * Check if the given board is solved
+     */
     @Test
     public void testRevealedAndSolvedEmptyBoard() {
         MSBoard board = createEmptyBoard(5);
@@ -30,7 +38,7 @@ public class MSTest {
         }
         assertTrue(manager.puzzleSolved());
     }
-    
+
     @Test
     public void testRevealedAndSolvedBoard() {
         MSBoard board = createEmptyBoard(5);
@@ -171,4 +179,74 @@ public class MSTest {
         ((MSTile)board.getTile(0)).setRevealed();
         assertFalse(manager.isValidPress(0));
     }
+
+    @Test
+    public void testtouchMove(){
+        MSBoard board = createEmptyBoard(1);
+        MSManager manager = new MSManager(board);
+        manager.touchMove(0);
+        assertTrue(((MSTile)board.getTile(0)).isRevealed());
+    }
+
+    @Test
+    public void testaddMine(){
+        MSBoard board = createEmptyBoard(1);
+        MSManager manager = new MSManager(board);
+        manager.addMine();
+        assertEquals(1, manager.remainingMines);
+    }
+
+    @Test
+    public void testsubtractMine(){
+        MSBoard board = createEmptyBoard(1);
+        MSManager manager = new MSManager(board);
+        manager.addMine();
+        manager.subtractMine();
+        assertEquals(0, manager.remainingMines);
+    }
+
+    @Test
+    public void testTimer(){
+        MSBoard board = createEmptyBoard(1);
+        MSManager manager = new MSManager(board);
+        manager.activateTimer();
+        assertEquals(0, manager.timer);
+    }
+
+    @Test
+    public void testTileDrawable(){
+        MSBoard board = createEmptyBoard(1);
+        MSManager manager = new MSManager(board);
+        assertEquals("ms_default", manager.getTileDrawable(0));
+    }
+
+    @Test
+    public void testManager(){
+        MSManager ms = new MSManager(1, 2);
+        ms.remainingMines = 0;
+        assertEquals(0, ms.remainingMines);
+    }
+
+    @Test
+    public void testManager1(){
+        MSManager ms = new MSManager();
+        ms.remainingMines = 0;
+        assertEquals(0, ms.remainingMines);
+    }
+
+    @Test
+    public void testBoardandScore(){
+        MSManager ms = new MSManager();
+        int i = ms.getScore();
+        Board b = ms.getBoard();
+        assertEquals(0, ms.remainingMines);
+    }
+
+    @Test
+    public void testisValidTap(){
+        MSBoard board = createEmptyBoard(1);
+        MSManager manager = new MSManager(board);
+        assertTrue(manager.isValidTap(0));
+    }
+
 }
