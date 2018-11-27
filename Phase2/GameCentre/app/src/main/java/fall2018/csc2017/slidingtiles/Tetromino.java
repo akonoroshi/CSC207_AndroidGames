@@ -41,6 +41,13 @@ class Tetromino implements Serializable {
         shape = tempList.get(new Random().nextInt(tempList.size()));
     }
 
+
+    /**
+     * Constructor with a specific shape
+     * Precondition: shapeName is one of the keys of tetrominoMap
+     *
+     * @param shapeName shape of this tetromino
+     */
     Tetromino(String shapeName){
         shape = shapeName;
     }

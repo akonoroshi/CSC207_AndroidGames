@@ -26,7 +26,8 @@ class GFBoard extends Board implements Serializable, Iterable<Tile> {
      * are filled
      *
      * @param positionList list of tile positions to be revealed
-     * @param currentPosition the position that is tapped.
+     * @param currentPosition the position that is tapped
+     * @return a list of tiles whose status changed at least once
      */
     List<Integer> placeTiles(int[] positionList, int currentPosition) {
         List<Integer> moveList = new ArrayList<>();
