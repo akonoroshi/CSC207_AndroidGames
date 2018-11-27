@@ -1,4 +1,7 @@
-package fall2018.csc2017.gamecentre;
+package fall2018.csc2017.gamecentre.slidingtiles;
+
+import fall2018.csc2017.gamecentre.BoardManager;
+import fall2018.csc2017.gamecentre.Tile;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -41,13 +44,13 @@ public class STManager implements BoardManager, Serializable {
     /**
      * A default BoardManager constructor.
      */
-    STManager() {
+    public STManager() {
     }
 
     /**
      * A constructor with a pre-populated STBoard.
      */
-    STManager(STBoard board) {
+    public STManager(STBoard board) {
         this.board = board;
     }
 
@@ -63,7 +66,7 @@ public class STManager implements BoardManager, Serializable {
     /**
      * Manage a new shuffled board.
      */
-    STManager(int size, int numOfUndo, String background) {
+    public STManager(int size, int numOfUndo, String background) {
         List<Tile> tiles = new ArrayList<>();
 
         for (int tileNum = 0; tileNum != size * size; tileNum++) {
@@ -98,7 +101,7 @@ public class STManager implements BoardManager, Serializable {
      *
      * @return the size of the undo stack
      */
-    int getStackLength() {
+    public int getStackLength() {
         return this.undoStack.size();
     }
 
@@ -114,7 +117,7 @@ public class STManager implements BoardManager, Serializable {
     /**
      * Set infinite undo on.
      */
-    void setInfiniteUndo() {
+    public void setInfiniteUndo() {
         this.infiniteUndo = true;
     }
 
@@ -128,7 +131,7 @@ public class STManager implements BoardManager, Serializable {
      * @param tileList The list of tiles
      * @return true if and only if tileList is solvable on STboard
      */
-    boolean checkSolvable(int size, List<Tile> tileList) {
+    public boolean checkSolvable(int size, List<Tile> tileList) {
         int count = 0;
         int blankPosition = 0;
         int numTiles = size * size;
@@ -175,7 +178,7 @@ public class STManager implements BoardManager, Serializable {
      * @param position the tile to check
      * @return int[] of blank tile position in the form {row, col} (or null if no blank neighbour)
      */
-    int findBlankNeighbour(int position) {
+    public int findBlankNeighbour(int position) {
         int blankId = board.numTiles();
         int boardSize = board.getBoardWidth();
 
@@ -242,7 +245,7 @@ public class STManager implements BoardManager, Serializable {
     /**
      * Process an undo, undoing the previous move made.
      */
-    void undo() {
+    public void undo() {
         if (!undoStack.isEmpty()) {
             int lastMoveIndex = undoStack.size() - 1;
             moveTiles(undoStack.get(lastMoveIndex));

@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import fall2018.csc2017.gamecentre.slidingtiles.STManager;
 
 /**
  * The activity before starting the game.

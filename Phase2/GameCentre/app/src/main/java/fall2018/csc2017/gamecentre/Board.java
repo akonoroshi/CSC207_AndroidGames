@@ -31,7 +31,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      * @param width  the width for the board
      * @param height the height for the board
      */
-    <T extends Tile> Board(List<T> tiles, int width, int height) {
+    protected  <T extends Tile> Board(List<T> tiles, int width, int height) {
         boardWidth = width;
         boardHeight = height;
         this.tiles = new Tile[boardWidth * boardHeight];
@@ -51,7 +51,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      * @param index the index of the tile
      * @return the tile at the index
      */
-    Tile getTile(int index) {
+    public Tile getTile(int index) {
         return tiles[index];
     }
 
@@ -61,7 +61,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      * @param index the index of the tile to be set
      * @param tile  the tile to set at index index
      */
-    void setTile(int index, Tile tile) {
+    protected void setTile(int index, Tile tile) {
         tiles[index] = tile;
     }
 
@@ -70,7 +70,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      *
      * @return the size of the board.
      */
-    int getBoardWidth() {
+    public int getBoardWidth() {
         return boardWidth;
     }
 
@@ -88,7 +88,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      *
      * @return the number of tiles on the board.
      */
-    int numTiles() {
+    public int numTiles() {
         return boardWidth * boardHeight;
     }
 

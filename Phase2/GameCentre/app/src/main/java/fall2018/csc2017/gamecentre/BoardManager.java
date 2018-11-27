@@ -3,7 +3,7 @@ package fall2018.csc2017.gamecentre;
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-interface BoardManager{
+public interface BoardManager{
 
     /**
      * Return whether the game has been completed.

@@ -1,5 +1,7 @@
 package fall2018.csc2017.gamecentre;
 
+import fall2018.csc2017.gamecentre.slidingtiles.STBoard;
+import fall2018.csc2017.gamecentre.slidingtiles.STManager;
 import org.junit.Test;
 
 import java.util.ArrayList;

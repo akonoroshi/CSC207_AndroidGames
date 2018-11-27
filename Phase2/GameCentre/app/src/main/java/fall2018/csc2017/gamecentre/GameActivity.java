@@ -7,6 +7,7 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.Toast;
 import android.content.res.Resources;
+import fall2018.csc2017.gamecentre.slidingtiles.STManager;
 
 import java.util.ArrayList;
 import java.util.Observable;
