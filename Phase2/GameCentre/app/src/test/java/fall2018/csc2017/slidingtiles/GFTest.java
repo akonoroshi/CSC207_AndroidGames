@@ -170,9 +170,11 @@ public class GFTest {
         List<Integer> returned = boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("i"), 0);
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
             assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
-        }
-        for (Integer tileNum: returned) {
-            assertTrue(tileNum < boardSize || tileNum % boardSize == 0);
+            if (tileNum < boardSize || tileNum % boardSize == 0) {
+                assertTrue(returned.contains(tileNum));
+            }else{
+                assertFalse(returned.contains(tileNum));
+            }
         }
         tiles.clear();
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
@@ -184,9 +186,11 @@ public class GFTest {
         returned = boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("o"), 0);
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
             assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
-        }
-        for (Integer tileNum: returned) {
-            assertTrue(tileNum < 20);
+            if (tileNum < 20) {
+                assertTrue(returned.contains(tileNum));
+            }else{
+                assertFalse(returned.contains(tileNum));
+            }
         }
         tiles.clear();
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
@@ -198,9 +202,11 @@ public class GFTest {
         returned = boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("o"), 0);
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
             assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
-        }
-        for (Integer tileNum: returned) {
-            assertTrue(tileNum % boardSize == 0 || tileNum % boardSize == 1);
+            if (tileNum % boardSize == 0 || tileNum % boardSize == 1) {
+                assertTrue(returned.contains(tileNum));
+            }else{
+                assertFalse(returned.contains(tileNum));
+            }
         }
     }
 }
