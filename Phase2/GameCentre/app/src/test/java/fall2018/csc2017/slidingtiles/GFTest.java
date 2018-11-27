@@ -167,9 +167,12 @@ public class GFTest {
         }
         GFBoard board = new GFBoard(tiles, boardSize);
         boardManager = new GFManager(board);
-        boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("i"), 0);
+        List<Integer> returned = boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("i"), 0);
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
             assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
+        }
+        for (Integer tileNum: returned) {
+            assertTrue(tileNum < boardSize || tileNum % boardSize == 0);
         }
         tiles.clear();
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
@@ -178,9 +181,12 @@ public class GFTest {
         }
         board = new GFBoard(tiles, boardSize);
         boardManager = new GFManager(board);
-        boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("o"), 0);
+        returned = boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("o"), 0);
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
             assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
+        }
+        for (Integer tileNum: returned) {
+            assertTrue(tileNum < 20);
         }
         tiles.clear();
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
@@ -189,9 +195,12 @@ public class GFTest {
         }
         board = new GFBoard(tiles, boardSize);
         boardManager = new GFManager(board);
-        boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("o"), 0);
+        returned = boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("o"), 0);
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
             assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
+        }
+        for (Integer tileNum: returned) {
+            assertTrue(tileNum % boardSize == 0 || tileNum % boardSize == 1);
         }
     }
 }
