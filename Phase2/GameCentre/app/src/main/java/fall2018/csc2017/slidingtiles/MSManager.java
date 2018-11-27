@@ -112,7 +112,7 @@ class MSManager implements BoardManager, Serializable {
 
 
     /**
-     * Check and return true if the player lost with a tap at position position.
+     * Check and return true if the player lost with a tap at position.
      *
      * @return whether the player lost or not.
      */
