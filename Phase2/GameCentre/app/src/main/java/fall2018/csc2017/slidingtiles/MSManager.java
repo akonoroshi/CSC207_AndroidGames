@@ -22,7 +22,7 @@ class MSManager implements BoardManager, Serializable {
     /**
      * The number of mines left, after subtracting flagged spaces.
      */
-    private int remainingMines;
+    int remainingMines;
 
     /**
      * A default MSManager constructor.
