@@ -281,7 +281,7 @@ public class GameCentre {
         }
     }
 
-    private static String concatFilename(String[] str) {
+    public static String concatFilename(String[] str) {
         StringBuilder builder = new StringBuilder(str[0]);
         for (int i = 1; i < str.length; i++) {
             builder.append("_").append(str[i]);
