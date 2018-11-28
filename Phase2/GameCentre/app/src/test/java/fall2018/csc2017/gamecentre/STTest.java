@@ -93,6 +93,7 @@ public class STTest {
             while (boardManager.findBlankNeighbour(next) == -1) {
                 next = random.nextInt(25);
             }
+            boardManager.touchMove(next);
         }
         for(int i = 0; i < 3; i++){
             boardManager.undo();
