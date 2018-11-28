@@ -34,23 +34,8 @@ public class InstructionsActivity extends GameAppCompatActivity {
      * @param welcomeMessage welcome message to selected game
      */
     private void setInstructions(String game, TextView instructions, TextView welcomeMessage) {
-        String gameName = "<ERROR>", gameInfo = "Game has not been set.";
-        switch(game) {
-            case "ST":
-                gameName = getString(R.string.slidingtiles);
-                gameInfo = getString(R.string.STinstructions);
-                break;
-            case "MS":
-                gameName = getString(R.string.minesweeper);
-                gameInfo = getString(R.string.MSinstructions);
-                break;
-            case "GF":
-                gameName = getString(R.string.gridfiller);
-                gameInfo = getString(R.string.GFinstructions);
-                break;
-        }
-        welcomeMessage.setText(String.format("%s%s", getString(R.string.welcome), gameName));
-        instructions.setText(gameInfo);
+        welcomeMessage.setText(String.format("%s%s", getString(R.string.welcome), getString(GameFactory.getNameID(game))));
+        instructions.setText(getString(GameFactory.getInstructionsID(game)));
     }
 
     /**

@@ -5,11 +5,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import fall2018.csc2017.gamecentre.gridfiller.GFManager;
 import fall2018.csc2017.gamecentre.gridfiller.GFPreStartingActivity;
-import fall2018.csc2017.gamecentre.minesweeper.MSManager;
 import fall2018.csc2017.gamecentre.minesweeper.MSPreStartingActivity;
-import fall2018.csc2017.gamecentre.slidingtiles.STManager;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -202,17 +199,7 @@ public class StartingActivity extends GameAppCompatActivity {
         super.onResume();
         boardManager = currentCentre.loadGame(StartingActivity.this, true);
         if (boardManager == null) {
-            switch (currentCentre.getCurrentGame()) {
-                case "ST":
-                    boardManager = new STManager();
-                    break;
-                case "MS":
-                    boardManager = new MSManager();
-                    break;
-                case "GF":
-                    boardManager = new GFManager();
-                    break;
-            }
+            boardManager = GameFactory.getManager(currentCentre.getCurrentGame());
         }
     }
 
