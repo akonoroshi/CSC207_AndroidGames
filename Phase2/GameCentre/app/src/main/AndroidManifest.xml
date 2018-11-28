@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fall2018.csc2017.slidingtiles">
+    package="fall2018.csc2017.gamecentre">
 
     <application
         android:allowBackup="true"
@@ -9,27 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="fall2018.csc2017.slidingtiles.LoginActivity">
+        <activity android:name="fall2018.csc2017.gamecentre.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="fall2018.csc2017.slidingtiles.GameActivity"></activity>
-        <activity android:name="fall2018.csc2017.slidingtiles.StartingActivity" />
-        <activity android:name="fall2018.csc2017.slidingtiles.RegisterActivity" />
-        <activity android:name = "fall2018.csc2017.slidingtiles.PreStartingActivity" />
-        <activity android:name = "fall2018.csc2017.slidingtiles.SelectingGameActivity" />
-        <activity android:name="fall2018.csc2017.slidingtiles.PreScoreBoardActivity" />
-        <activity android:name="fall2018.csc2017.slidingtiles.ScoreBoardActivity" />
-        <activity android:name="fall2018.csc2017.slidingtiles.ChooseBackgroundActivity" />
-        <activity android:name="fall2018.csc2017.slidingtiles.InstructionsActivity" />
-        <activity android:name="fall2018.csc2017.slidingtiles.GameAppCompatActivity"/>
-        <activity android:name="fall2018.csc2017.slidingtiles.GFGameActivity" />
-        <activity android:name="fall2018.csc2017.slidingtiles.MSGameActivity" />
-        <activity android:name="fall2018.csc2017.slidingtiles.MSPreStartingActivity" />
-        <activity android:name="fall2018.csc2017.slidingtiles.GFPreStartingActivity" />
+        <activity android:name="fall2018.csc2017.gamecentre.GameActivity"></activity>
+        <activity android:name="fall2018.csc2017.gamecentre.StartingActivity" />
+        <activity android:name="fall2018.csc2017.gamecentre.RegisterActivity" />
+        <activity android:name = "fall2018.csc2017.gamecentre.PreStartingActivity" />
+        <activity android:name = "fall2018.csc2017.gamecentre.SelectingGameActivity" />
+        <activity android:name="fall2018.csc2017.gamecentre.PreScoreBoardActivity" />
+        <activity android:name="fall2018.csc2017.gamecentre.ScoreBoardActivity" />
+        <activity android:name="fall2018.csc2017.gamecentre.ChooseBackgroundActivity" />
+        <activity android:name="fall2018.csc2017.gamecentre.InstructionsActivity" />
+        <activity android:name="fall2018.csc2017.gamecentre.GameAppCompatActivity"/>
+        <activity android:name="fall2018.csc2017.gamecentre.gridfiller.GFGameActivity" />
+        <activity android:name="fall2018.csc2017.gamecentre.minesweeper.MSGameActivity" />
+        <activity android:name="fall2018.csc2017.gamecentre.minesweeper.MSPreStartingActivity" />
+        <activity android:name="fall2018.csc2017.gamecentre.gridfiller.GFPreStartingActivity" />
     </application>
 
 </manifest>
