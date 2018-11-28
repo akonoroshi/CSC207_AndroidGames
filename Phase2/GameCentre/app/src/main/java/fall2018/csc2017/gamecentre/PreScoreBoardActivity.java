@@ -32,9 +32,11 @@ public class PreScoreBoardActivity extends GameAppCompatActivity {
     private String[] getChoices(String game) {
         if (game.equals("ST")) {
             return getResources().getStringArray(R.array.STboardsizes);
-        } else {
+        }else if(game.equals("MS")) {
             return getResources().getStringArray(R.array.MSdifficulty);
         }
+        
+        return new String[]{};
     }
 
     /**
