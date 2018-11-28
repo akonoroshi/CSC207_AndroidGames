@@ -1,14 +1,13 @@
 package fall2018.csc2017.gamecentre.gridfiller;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.content.res.Resources;
+
 import fall2018.csc2017.gamecentre.GameActivity;
 import fall2018.csc2017.gamecentre.GameCentre;
 import fall2018.csc2017.gamecentre.R;
@@ -53,7 +52,7 @@ public class GFGameActivity extends GameActivity {
                 "gf_" + ((GFManager) boardmanager).getTetrominos().get(index).getShape(),
                 "drawable", this.getPackageName()));
     }
-    
+
     void addUndoButtonListener() {
         Button undoButton = findViewById(R.id.UndoButton);
         undoButton.setOnClickListener(new View.OnClickListener() {

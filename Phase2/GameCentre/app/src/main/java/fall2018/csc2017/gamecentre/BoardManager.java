@@ -3,7 +3,7 @@ package fall2018.csc2017.gamecentre;
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-public interface BoardManager{
+public interface BoardManager {
 
     /**
      * Return whether the game has been completed.
@@ -33,7 +33,7 @@ public interface BoardManager{
      * @return the score (based on game played)
      */
     int getScore();
-    
+
     /**
      * Return the drawable for the tile at the given index
      *

@@ -7,6 +7,7 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.Toast;
 import android.content.res.Resources;
+
 import fall2018.csc2017.gamecentre.slidingtiles.STManager;
 
 import java.util.ArrayList;
@@ -61,32 +62,32 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
         addUndoButtonListener();
         addReturnButtonListener();
     }
-    
+
     protected void setupGridView() {
-		final Context con = this;
-		
-		// Add View to activity
-		gridView = findViewById(R.id.grid);
-		gridView.setNumColumns(boardmanager.getBoard().getBoardWidth());
-		gridView.setBoardManager(boardmanager);
-		boardmanager.getBoard().addObserver(this);
-		// Observer sets up desired dimensions as well as calls our display function
-		gridView.getViewTreeObserver().addOnGlobalLayoutListener(
-				new ViewTreeObserver.OnGlobalLayoutListener() {
-					@Override
-					public void onGlobalLayout() {
-						gridView.getViewTreeObserver().removeOnGlobalLayoutListener(
-								this);
-						int displayWidth = gridView.getMeasuredWidth();
-						int displayHeight = gridView.getMeasuredHeight();
-					
-						columnWidth = displayWidth / boardmanager.getBoard().getBoardWidth();
-						columnHeight = displayHeight / boardmanager.getBoard().getBoardHeight();
-					
-						display(con);
-					}
-				});
-	}
+        final Context con = this;
+
+        // Add View to activity
+        gridView = findViewById(R.id.grid);
+        gridView.setNumColumns(boardmanager.getBoard().getBoardWidth());
+        gridView.setBoardManager(boardmanager);
+        boardmanager.getBoard().addObserver(this);
+        // Observer sets up desired dimensions as well as calls our display function
+        gridView.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        gridView.getViewTreeObserver().removeOnGlobalLayoutListener(
+                                this);
+                        int displayWidth = gridView.getMeasuredWidth();
+                        int displayHeight = gridView.getMeasuredHeight();
+
+                        columnWidth = displayWidth / boardmanager.getBoard().getBoardWidth();
+                        columnHeight = displayHeight / boardmanager.getBoard().getBoardHeight();
+
+                        display(con);
+                    }
+                });
+    }
 
     /**
      * Create the buttons for displaying the tiles.
@@ -114,10 +115,10 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (((STManager)boardmanager).getStackLength() == 0) {
+                if (((STManager) boardmanager).getStackLength() == 0) {
                     Toast.makeText(GameActivity.this, "Undo failed", Toast.LENGTH_SHORT).show();
                 } else {
-                    ((STManager)boardmanager).undo();
+                    ((STManager) boardmanager).undo();
                 }
             }
         });
@@ -207,9 +208,9 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
         if (boardmanager.puzzleSolved()) {
             currentCentre.clearSavedGame(GameActivity.this, false);
             String size = String.valueOf(boardmanager.getBoard().getBoardWidth());
-            if(currentCentre.addScore(this, size, boardmanager.getScore(), true)) {
+            if (currentCentre.addScore(this, size, boardmanager.getScore(), true)) {
                 Toast.makeText(this, "You got a high score!", Toast.LENGTH_LONG).show();
-            }else {
+            } else {
                 Toast.makeText(this, "You win!", Toast.LENGTH_LONG).show();
             }
             switchToScoreBoard(size, String.format("%sx%s", size, size), boardmanager.getScore());

@@ -32,10 +32,10 @@ public class PreScoreBoardActivity extends GameAppCompatActivity {
     private String[] getChoices(String game) {
         if (game.equals("ST")) {
             return getResources().getStringArray(R.array.STboardsizes);
-        }else if(game.equals("MS")) {
+        } else if (game.equals("MS")) {
             return getResources().getStringArray(R.array.MSdifficulty);
         }
-        
+
         return new String[]{};
     }
 
@@ -49,10 +49,10 @@ public class PreScoreBoardActivity extends GameAppCompatActivity {
             public void onClick(View v) {
                 Spinner mySpinner = findViewById(R.id.BoardSizeChoices);
                 String item = mySpinner.getSelectedItem().toString();
-                if(currentCentre.getCurrentGame().equals("ST")) {
+                if (currentCentre.getCurrentGame().equals("ST")) {
                     String size = item.substring(0, 1);
                     switchToScoreBoard(size, String.format("%sx%s", size, size), 0);
-                }else if(currentCentre.getCurrentGame().equals("MS")) {
+                } else if (currentCentre.getCurrentGame().equals("MS")) {
                     String identifier = getResources().getStringArray(R.array.MSboardsizes)[mySpinner.getSelectedItemPosition()];
                     switchToScoreBoard(identifier, item, 0);
                 }

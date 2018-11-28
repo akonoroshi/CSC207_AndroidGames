@@ -144,9 +144,9 @@ public class GameCentre {
         String suffix = temporary ? TEMP_SAVE_FILE_SUFFIX : SAVE_FILE_SUFFIX;
         String filename = GameCentre.concatFilename(new String[]{currentUser, currentGame, suffix});
         File saveFile = new File(context.getFilesDir(), filename);
-        if(!saveFile.delete()) {
-        	Log.e("GameCentre", "Failed to delete file: " + saveFile.getPath());
-		}
+        if (!saveFile.delete()) {
+            Log.e("GameCentre", "Failed to delete file: " + saveFile.getPath());
+        }
     }
 
     /**
@@ -200,7 +200,7 @@ public class GameCentre {
      * @param identifier the label to give to the scoreboard when saving
      * @param scoreboard the scoreboard to save
      */
-    void saveScoreboard(Context context, String identifier, int[] scoreboard) {
+    private void saveScoreboard(Context context, String identifier, int[] scoreboard) {
         if (scoreboard.length == SCOREBOARD_SIZE) {
             String filename = GameCentre.concatFilename(new String[]{currentUser, currentGame, identifier, SCORE_FILE_SUFFIX});
             GameCentre.saveToFile(context, filename, scoreboard);

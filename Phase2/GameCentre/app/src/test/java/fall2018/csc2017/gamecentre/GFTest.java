@@ -4,6 +4,7 @@ import fall2018.csc2017.gamecentre.gridfiller.GFBoard;
 import fall2018.csc2017.gamecentre.gridfiller.GFManager;
 import fall2018.csc2017.gamecentre.gridfiller.GFTile;
 import fall2018.csc2017.gamecentre.gridfiller.Tetromino;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class GFTest {
      * Make a set of tiles that are in order.
      *
      * @param boardSize the size of the board
-     * @param placed true if a tile is filled
+     * @param placed    true if a tile is filled
      * @return a set of tiles that are in order
      */
     private List<GFTile> makeTiles(int boardSize, boolean placed) {
@@ -78,12 +79,12 @@ public class GFTest {
     @Test
     public void testIsSolved() {
         setUpUnplayable();
-        for (String key: Tetromino.tetrominoMap.keySet()) {
+        for (String key : Tetromino.tetrominoMap.keySet()) {
             setTetrominos(key);
             assertTrue(boardManager.puzzleSolved());
         }
         setUpBlank();
-        for (String key: Tetromino.tetrominoMap.keySet()) {
+        for (String key : Tetromino.tetrominoMap.keySet()) {
             setTetrominos(key);
             assertFalse(boardManager.puzzleSolved());
         }
@@ -102,8 +103,8 @@ public class GFTest {
         for (int i = 0; i < 3; i++) {
             boolean moved = true;
             i = 0;
-            while (moved && i != 100){
-                if (boardManager.isValidTap(i)){
+            while (moved && i != 100) {
+                if (boardManager.isValidTap(i)) {
                     moved = false;
                     boardManager.touchMove(i);
                 }
@@ -126,30 +127,30 @@ public class GFTest {
     @Test
     public void testIsValidTap() {
         setUpBlank();
-        for (String key: Tetromino.tetrominoMap.keySet()){
+        for (String key : Tetromino.tetrominoMap.keySet()) {
             setTetrominos(key);
             assertTrue(boardManager.isValidTap(11));
             assertFalse(boardManager.isValidTap(94));
             if (key.equals("i")) {
                 assertTrue(boardManager.isValidTap(29));
-            }else{
+            } else {
                 assertFalse(boardManager.isValidTap(29));
             }
             if (key.equals("s")) {
                 assertFalse(boardManager.isValidTap(40));
-            }else{
+            } else {
                 assertTrue(boardManager.isValidTap(40));
             }
             if (key.equals("t") || key.equals("z")) {
                 assertFalse(boardManager.isValidTap(28));
-            }else{
+            } else {
                 assertTrue(boardManager.isValidTap(28));
             }
         }
         setUpUnplayable();
-        for (String key: Tetromino.tetrominoMap.keySet()){
+        for (String key : Tetromino.tetrominoMap.keySet()) {
             setTetrominos(key);
-            for (int i = 0; i < boardManager.getBoard().numTiles(); i++){
+            for (int i = 0; i < boardManager.getBoard().numTiles(); i++) {
                 assertFalse(boardManager.isValidTap(i));
             }
         }
@@ -159,14 +160,16 @@ public class GFTest {
      * Test whether placeTiles places and clears tiles properly
      */
     @Test
-    public void testPlaceTiles () {
+    public void testPlaceTiles() {
         List<GFTile> tiles = new ArrayList<>();
         int boardSize = 10;
         boolean placed;
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
             if (tileNum > 0 && tileNum < boardSize) {
                 placed = true;
-            } else {placed = tileNum >= 40 && tileNum % boardSize == 0;}
+            } else {
+                placed = tileNum >= 40 && tileNum % boardSize == 0;
+            }
             tiles.add(new GFTile(placed));
         }
         GFBoard board = new GFBoard(tiles, boardSize);
@@ -176,7 +179,7 @@ public class GFTest {
             assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
             if (tileNum < boardSize || tileNum % boardSize == 0) {
                 assertTrue(returned.contains(tileNum));
-            }else{
+            } else {
                 assertFalse(returned.contains(tileNum));
             }
         }
@@ -192,7 +195,7 @@ public class GFTest {
             assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
             if (tileNum < 20) {
                 assertTrue(returned.contains(tileNum));
-            }else{
+            } else {
                 assertFalse(returned.contains(tileNum));
             }
         }
@@ -208,7 +211,7 @@ public class GFTest {
             assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
             if (tileNum % boardSize == 0 || tileNum % boardSize == 1) {
                 assertTrue(returned.contains(tileNum));
-            }else{
+            } else {
                 assertFalse(returned.contains(tileNum));
             }
         }

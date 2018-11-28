@@ -5,8 +5,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import fall2018.csc2017.gamecentre.gridfiller.GFPreStartingActivity;
-import fall2018.csc2017.gamecentre.minesweeper.MSPreStartingActivity;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -91,7 +89,7 @@ public class StartingActivity extends GameAppCompatActivity {
                 if (tempManager != null) {
                     boardManager = tempManager;
                     currentCentre.saveGame(StartingActivity.this, boardManager, true);
-    
+
                     if (!(currentCentre.getCurrentGame().equals(""))) {
                         makeToastLoadedText(true);
                         switchToGame(currentCentre.getCurrentGame());

@@ -16,9 +16,9 @@ public class Tetromino implements Serializable {
      * Map of tetrominoes with the key being the name of the tetromino and the value being its
      * position relative to the anchor which is at index 0 on a 10x10 board.
      */
-    public static final Map<String, int[]> tetrominoMap = new HashMap<String, int[]>(){
+    public static final Map<String, int[]> tetrominoMap = new HashMap<String, int[]>() {
         {
-            put("i", new int[]{0,10, 20, 30});
+            put("i", new int[]{0, 10, 20, 30});
             put("s", new int[]{0, 1, 9, 10});
             put("z", new int[]{0, 1, 11, 12});
             put("o", new int[]{0, 1, 10, 11});
@@ -48,7 +48,7 @@ public class Tetromino implements Serializable {
      *
      * @param shapeName shape of this tetromino
      */
-    public Tetromino(String shapeName){
+    public Tetromino(String shapeName) {
         shape = shapeName;
     }
 

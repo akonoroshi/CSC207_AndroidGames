@@ -3,6 +3,7 @@ package fall2018.csc2017.gamecentre.minesweeper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
 import fall2018.csc2017.gamecentre.*;
 
 public class MSPreStartingActivity extends GameAppCompatActivity {
@@ -43,7 +44,7 @@ public class MSPreStartingActivity extends GameAppCompatActivity {
     /**
      * Set difficulty as easy
      */
-    private void addEasyButtonListener(){
+    private void addEasyButtonListener() {
         Button easyButton = findViewById(R.id.first);
         easyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +60,7 @@ public class MSPreStartingActivity extends GameAppCompatActivity {
     /**
      * Set difficulty as normal
      */
-    private void addNormalButtonListener(){
+    private void addNormalButtonListener() {
         Button normalButton = findViewById(R.id.second);
         normalButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +76,7 @@ public class MSPreStartingActivity extends GameAppCompatActivity {
     /**
      * Set difficulty as hard
      */
-    private void addHardButtonListener(){
+    private void addHardButtonListener() {
         Button hardButton = findViewById(R.id.third);
         hardButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,10 +91,11 @@ public class MSPreStartingActivity extends GameAppCompatActivity {
 
     /**
      * Create a BoardManager for the game selected
+     *
      * @param difficulty the difficulty of the board being played
      */
     private void createMSManager(String difficulty) {
-        switch (difficulty){
+        switch (difficulty) {
             case "easy":
                 boardManager = new MSManager(6, 8);
                 break;

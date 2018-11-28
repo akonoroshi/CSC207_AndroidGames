@@ -2,6 +2,7 @@ package fall2018.csc2017.gamecentre.minesweeper;
 
 import android.os.Bundle;
 import android.widget.Toast;
+
 import fall2018.csc2017.gamecentre.GameActivity;
 import fall2018.csc2017.gamecentre.GameCentre;
 import fall2018.csc2017.gamecentre.R;
@@ -34,27 +35,31 @@ public class MSGameActivity extends GameActivity {
 
     @Override
     public void update(Observable o, Object arg) {
-        if (((MSManager)boardmanager).gameOverCheck()) {
+        if (((MSManager) boardmanager).gameOverCheck()) {
             currentCentre.clearSavedGame(MSGameActivity.this, false);
             makeToastLoseText();
-        }else if (boardmanager.puzzleSolved()){
+        } else if (boardmanager.puzzleSolved()) {
             currentCentre.clearSavedGame(MSGameActivity.this, false);
             String size = String.valueOf(boardmanager.getBoard().getBoardWidth());
             String title;
-            if(size.equals("10")) {
-                title = getString(R.string.hard);
-            }else if(size.equals("8")) {
-                title = getString(R.string.normal);
-            }else {
-                title = getString(R.string.easy);
+            switch (size) {
+                case "10":
+                    title = getString(R.string.hard);
+                    break;
+                case "8":
+                    title = getString(R.string.normal);
+                    break;
+                default:
+                    title = getString(R.string.easy);
+                    break;
             }
-            if(currentCentre.addScore(this, size, boardmanager.getScore(), true)) {
+            if (currentCentre.addScore(this, size, boardmanager.getScore(), true)) {
                 Toast.makeText(this, "You got a high score!", Toast.LENGTH_LONG).show();
-            }else {
+            } else {
                 Toast.makeText(this, "You win!", Toast.LENGTH_LONG).show();
             }
             switchToScoreBoard(size, title, boardmanager.getScore());
-        } else{
+        } else {
             autoSave();
         }
         display(this);

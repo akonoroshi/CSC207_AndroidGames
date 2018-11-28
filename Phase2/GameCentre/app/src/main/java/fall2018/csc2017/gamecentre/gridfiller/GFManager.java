@@ -94,7 +94,7 @@ public class GFManager implements BoardManager, Serializable {
     public int getScore() {
         return this.score;
     }
-    
+
     @Override
     public String getTileDrawable(int index) {
         return "gf_" + board.getTile(index).getId();

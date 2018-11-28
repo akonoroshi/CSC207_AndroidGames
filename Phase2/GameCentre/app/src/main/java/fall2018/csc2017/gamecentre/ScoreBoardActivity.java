@@ -28,13 +28,13 @@ public class ScoreBoardActivity extends GameAppCompatActivity {
         TextView secondScore = findViewById(R.id.SecondScore);
         TextView thirdScore = findViewById(R.id.ThirdScore);
         TextView currentScore = findViewById(R.id.WinningScore);
-    
+
         titleView.setText(String.format("%s HIGHSCORE", title));
         firstScore.setText(checkEmptyScore(scoreboard[0]));
         secondScore.setText(checkEmptyScore(scoreboard[1]));
         thirdScore.setText(checkEmptyScore(scoreboard[2]));
-    
-        
+
+
         int yourScore = this.getIntent().getIntExtra("current", 0);
         currentScore.setText(yourScore == 0 ? "0" : String.format("Your Score: %s", checkEmptyScore(yourScore)));
     }

@@ -31,7 +31,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      * @param width  the width for the board
      * @param height the height for the board
      */
-    protected  <T extends Tile> Board(List<T> tiles, int width, int height) {
+    protected <T extends Tile> Board(List<T> tiles, int width, int height) {
         boardWidth = width;
         boardHeight = height;
         this.tiles = new Tile[boardWidth * boardHeight];

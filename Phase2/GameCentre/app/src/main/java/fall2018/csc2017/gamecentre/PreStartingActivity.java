@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
 import fall2018.csc2017.gamecentre.slidingtiles.STManager;
 
 /**
@@ -57,10 +58,11 @@ public class PreStartingActivity extends GameAppCompatActivity {
                 }
                 if (und.length() == 0) {
                     boardManager = new STManager(boardSize, 0, background);
-                    ((STManager)boardManager).setInfiniteUndo();// default case: a player can undo infinitely
+                    ((STManager) boardManager).setInfiniteUndo();// default case: a player can undo infinitely
                 } else {
                     boardManager = new STManager(boardSize, Integer.parseInt(und), background);
-                }                save();
+                }
+                save();
                 switchToActivity(GameActivity.class);
             }
         }));
