@@ -42,11 +42,11 @@ public class MSGameActivity extends GameActivity {
             String size = String.valueOf(boardmanager.getBoard().getBoardWidth());
             String title;
             if(size.equals("10")) {
-                title = "Hard";
+                title = getString(R.string.hard);
             }else if(size.equals("8")) {
-                title = "Medium";
+                title = getString(R.string.normal);
             }else {
-                title = "Easy";
+                title = getString(R.string.easy);
             }
             if(currentCentre.addScore(this, size, boardmanager.getScore(), true)) {
                 Toast.makeText(this, "You got a high score!", Toast.LENGTH_LONG).show();
