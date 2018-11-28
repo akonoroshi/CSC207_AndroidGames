@@ -32,9 +32,10 @@ public class GameAppCompatActivity extends AppCompatActivity {
     /**
      * Switch to the Score Board view.
      */
-    protected void switchToScoreBoard(String boardSize, int current) {
+    protected void switchToScoreBoard(String identifier, String title, int current) {
         Intent tmp = new Intent(this, ScoreBoardActivity.class);
-        tmp.putExtra("boardSize", boardSize);
+        tmp.putExtra("identifier", identifier);
+        tmp.putExtra("title", title);
         tmp.putExtra("current", current);
         startActivity(tmp);
     }

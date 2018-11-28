@@ -47,7 +47,8 @@ public class PreScoreBoardActivity extends GameAppCompatActivity {
             public void onClick(View v) {
                 Spinner mySpinner = findViewById(R.id.BoardSizeChoices);
                 String boardSize = mySpinner.getSelectedItem().toString();
-                switchToScoreBoard(boardSize.substring(0, 1), 0);
+                String size = boardSize.substring(0, 1);
+                switchToScoreBoard(size, String.format("%sx%s", size, size), 0);
             }
         }));
     }

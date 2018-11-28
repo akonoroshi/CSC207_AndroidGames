@@ -39,13 +39,21 @@ public class MSGameActivity extends GameActivity {
             makeToastLoseText();
         }else if (boardmanager.puzzleSolved()){
             currentCentre.clearSavedGame(MSGameActivity.this, false);
-            String size = boardmanager.getBoard().getBoardWidth() + "X"+ boardmanager.getBoard().getBoardHeight();
+            String size = String.valueOf(boardmanager.getBoard().getBoardWidth());
+            String title;
+            if(size.equals("10")) {
+                title = "Hard";
+            }else if(size.equals("8")) {
+                title = "Medium";
+            }else {
+                title = "Easy";
+            }
             if(currentCentre.addScore(this, size, boardmanager.getScore(), true)) {
                 Toast.makeText(this, "You got a high score!", Toast.LENGTH_LONG).show();
             }else {
                 Toast.makeText(this, "You win!", Toast.LENGTH_LONG).show();
             }
-            switchToScoreBoard(size, boardmanager.getScore());
+            switchToScoreBoard(size, title, boardmanager.getScore());
         } else{
             autoSave();
         }

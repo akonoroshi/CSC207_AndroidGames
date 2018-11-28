@@ -212,7 +212,7 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
             }else {
                 Toast.makeText(this, "You win!", Toast.LENGTH_LONG).show();
             }
-            switchToScoreBoard(size, boardmanager.getScore());
+            switchToScoreBoard(size, String.format("%sx%s", size, size), boardmanager.getScore());
         } else {
             autoSave();
         }

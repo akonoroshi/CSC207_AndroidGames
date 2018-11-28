@@ -147,7 +147,7 @@ public class StartingActivity extends GameAppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (currentCentre.getCurrentGame().equals("GF")) {
-                    switchToScoreBoard("10", 0);
+                    switchToScoreBoard("10", "", 0);
                 } else {
                     switchToActivity(PreScoreBoardActivity.class);
                 }
