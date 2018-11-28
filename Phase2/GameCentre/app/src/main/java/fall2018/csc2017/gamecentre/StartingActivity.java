@@ -91,9 +91,9 @@ public class StartingActivity extends GameAppCompatActivity {
                 if (tempManager != null) {
                     boardManager = tempManager;
                     currentCentre.saveGame(StartingActivity.this, boardManager, true);
-                    makeToastLoadedText(true);
-
+    
                     if (!(currentCentre.getCurrentGame().equals(""))) {
+                        makeToastLoadedText(true);
                         switchToGame(currentCentre.getCurrentGame());
                     } else {
                         makeToastLoadedText(false);
