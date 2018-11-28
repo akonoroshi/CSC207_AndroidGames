@@ -57,6 +57,7 @@
     <string name="tetrominoes">Tetrominoes</string>
     <string name="next">next:</string>
     <string name="now">now:</string>
+    <string name="userTextPrefix">Logged in as: %s</string>
     <string-array name="STboardsizes">
         <item>@string/_3_x_3</item>
         <item>@string/_4_x_4</item>

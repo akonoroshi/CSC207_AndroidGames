@@ -29,6 +29,9 @@ public class StartingActivity extends GameAppCompatActivity {
         setContentView(R.layout.activity_starting_);
         TextView gameText = findViewById(R.id.GameText);
         gameText.setText(GameFactory.getNameID(currentCentre.getCurrentGame()));
+        String currentUser = currentCentre.getCurrentUser();
+        TextView usernameView = findViewById(R.id.usernameView);
+        usernameView.setText(String.format(getString(R.string.userTextPrefix), currentUser.equals("") ? "Guest" : currentUser));
         addStartButtonListener();
         addLoadButtonListener();
         addLoadAutosaveButtonListener();
