@@ -160,14 +160,14 @@ public class GFTest {
      * Test whether placeTiles places and clears tiles properly
      */
     @Test
-    public void testPlaceTiles() {
+    public void testPlaceTiles1() {
         List<GFTile> tiles = new ArrayList<>();
         int boardSize = 10;
         boolean placed;
-        for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
-            if (tileNum > 0 && tileNum < boardSize) {
+        for(int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
+            if(tileNum > 0 && tileNum < boardSize) {
                 placed = true;
-            } else {
+            }else {
                 placed = tileNum >= 40 && tileNum % boardSize == 0;
             }
             tiles.add(new GFTile(placed));
@@ -175,22 +175,28 @@ public class GFTest {
         GFBoard board = new GFBoard(tiles, boardSize);
         boardManager = new GFManager(board);
         List<Integer> returned = boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("i"), 0);
-        for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
+        for(int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
             assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
-            if (tileNum < boardSize || tileNum % boardSize == 0) {
+            if(tileNum < boardSize || tileNum % boardSize == 0) {
                 assertTrue(returned.contains(tileNum));
-            } else {
+            }else {
                 assertFalse(returned.contains(tileNum));
             }
         }
-        tiles.clear();
+    }
+    
+    @Test
+    public void testPlaceTiles2() {
+        List<GFTile> tiles = new ArrayList<>();
+        int boardSize = 10;
+        boolean placed;
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
             placed = tileNum < 20 && tileNum % boardSize != 0 && tileNum % boardSize != 1;
             tiles.add(new GFTile(placed));
         }
-        board = new GFBoard(tiles, boardSize);
+        GFBoard board = new GFBoard(tiles, boardSize);
         boardManager = new GFManager(board);
-        returned = boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("o"), 0);
+        List<Integer> returned = boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("o"), 0);
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
             assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
             if (tileNum < 20) {
@@ -199,14 +205,20 @@ public class GFTest {
                 assertFalse(returned.contains(tileNum));
             }
         }
-        tiles.clear();
+    }
+    
+    @Test
+    public void testPlaceTiles3() {
+        List<GFTile> tiles = new ArrayList<>();
+        int boardSize = 10;
+        boolean placed;
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
             placed = tileNum >= 20 && (tileNum % boardSize == 0 || tileNum % boardSize == 1);
             tiles.add(new GFTile(placed));
         }
-        board = new GFBoard(tiles, boardSize);
+        GFBoard board = new GFBoard(tiles, boardSize);
         boardManager = new GFManager(board);
-        returned = boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("o"), 0);
+        List<Integer> returned = boardManager.getBoard().placeTiles(Tetromino.tetrominoMap.get("o"), 0);
         for (int tileNum = 0; tileNum != boardSize * boardSize; tileNum++) {
             assertFalse(boardManager.getBoard().getTile(tileNum).isPlaced());
             if (tileNum % boardSize == 0 || tileNum % boardSize == 1) {
