@@ -76,22 +76,6 @@ public class MSBoard extends Board implements Serializable, Iterable<Tile> {
         }
     }
 
-    /**
-     * Alternate algorithm for creating mines, guarantees no duplicates.
-     */
-    public void createMines2() {
-        ArrayList<Integer> shuffleList = new ArrayList<>();
-        ArrayList<Integer> locationList = new ArrayList<>();
-        for (int i = 0; i < boardSize; i++) {
-            shuffleList.add(i);
-        }
-        Collections.shuffle(shuffleList);
-        for (int j = 0; j < totalMines; j++) {
-            ((MSTile) getTile(shuffleList.get(j))).setMine();
-            locationList.add(shuffleList.get(j));
-        }
-        mineLocations = locationList;
-    }
 
     /**
      * Count the number of mines in the adjacent positions of position.
