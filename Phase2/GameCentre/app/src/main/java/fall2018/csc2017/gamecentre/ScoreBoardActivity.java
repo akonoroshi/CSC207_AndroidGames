@@ -30,25 +30,13 @@ public class ScoreBoardActivity extends GameAppCompatActivity {
         TextView currentScore = findViewById(R.id.WinningScore);
     
         titleView.setText(String.format("%s HIGHSCORE", title));
-        setScores(scoreboard, firstScore, secondScore, thirdScore);
-        
-        int yourScore = this.getIntent().getIntExtra("current", 0);
-        currentScore.setText(yourScore == 0 ? "0" : String.format("Your Score: %s", checkEmptyScore(yourScore)));
-    }
-
-    /**
-     * Sets the high score board using scoreboard.
-     *
-     * @param scoreboard  an array of the user's high scores for the game
-     * @param firstScore  best score to be displayed
-     * @param secondScore second best score to be displayed
-     * @param thirdScore  third best score to be displayed
-     */
-
-    private void setScores(int[] scoreboard, TextView firstScore, TextView secondScore, TextView thirdScore) {
         firstScore.setText(checkEmptyScore(scoreboard[0]));
         secondScore.setText(checkEmptyScore(scoreboard[1]));
         thirdScore.setText(checkEmptyScore(scoreboard[2]));
+    
+        
+        int yourScore = this.getIntent().getIntExtra("current", 0);
+        currentScore.setText(yourScore == 0 ? "0" : String.format("Your Score: %s", checkEmptyScore(yourScore)));
     }
 
     /**
