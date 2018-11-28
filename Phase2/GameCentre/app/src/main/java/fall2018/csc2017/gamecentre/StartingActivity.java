@@ -30,33 +30,13 @@ public class StartingActivity extends GameAppCompatActivity {
 
         setContentView(R.layout.activity_starting_);
         TextView gameText = findViewById(R.id.GameText);
-        gameText.setText(getGameName(currentCentre.getCurrentGame()));
+        gameText.setText(GameFactory.getNameID(currentCentre.getCurrentGame()));
         addStartButtonListener();
         addLoadButtonListener();
         addLoadAutosaveButtonListener();
         addLogoutButtonListener();
         addPreScoreBoardButtonListener();
         addBacktoSelectionButtonListener();
-    }
-
-    /**
-     * Returns the name of the game currently selected.
-     *
-     * @param currentGame Keyword for selected game
-     * @return name of the game currently selected based on keyword, else returns empty string
-     */
-
-    private String getGameName(String currentGame) {
-        switch (currentGame) {
-            case "ST":
-                return getString(R.string.slidingtiles);
-            case "MS":
-                return getString(R.string.minesweeper);
-            case "GF":
-                return getString(R.string.gridfiller);
-            default:
-                return "Game not set";
-        }
     }
 
     /**
@@ -94,20 +74,7 @@ public class StartingActivity extends GameAppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (currentCentre.getCurrentGame()) {
-                    case "ST":
-                        switchToActivity(PreStartingActivity.class);
-                        break;
-                    case "MS":
-                        switchToActivity(MSPreStartingActivity.class);
-                        break;
-                    case "GF":
-                        switchToActivity(GFPreStartingActivity.class);
-                        break;
-                    default:
-                        makeToastLoadedText(false);
-                        break;
-                }
+                switchToPreStarting(currentCentre.getCurrentGame());
             }
         });
     }
