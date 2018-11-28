@@ -5,11 +5,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import fall2018.csc2017.gamecentre.gridfiller.GFManager;
 import fall2018.csc2017.gamecentre.gridfiller.GFPreStartingActivity;
-import fall2018.csc2017.gamecentre.minesweeper.MSManager;
 import fall2018.csc2017.gamecentre.minesweeper.MSPreStartingActivity;
-import fall2018.csc2017.gamecentre.slidingtiles.STManager;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -33,33 +30,13 @@ public class StartingActivity extends GameAppCompatActivity {
 
         setContentView(R.layout.activity_starting_);
         TextView gameText = findViewById(R.id.GameText);
-        gameText.setText(getGameName(currentCentre.getCurrentGame()));
+        gameText.setText(GameFactory.getNameID(currentCentre.getCurrentGame()));
         addStartButtonListener();
         addLoadButtonListener();
         addLoadAutosaveButtonListener();
         addLogoutButtonListener();
         addPreScoreBoardButtonListener();
         addBacktoSelectionButtonListener();
-    }
-
-    /**
-     * Returns the name of the game currently selected.
-     *
-     * @param currentGame Keyword for selected game
-     * @return name of the game currently selected based on keyword, else returns empty string
-     */
-
-    private String getGameName(String currentGame) {
-        switch (currentGame) {
-            case "ST":
-                return getString(R.string.slidingtiles);
-            case "MS":
-                return getString(R.string.minesweeper);
-            case "GF":
-                return getString(R.string.gridfiller);
-            default:
-                return "Game not set";
-        }
     }
 
     /**
@@ -97,20 +74,7 @@ public class StartingActivity extends GameAppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (currentCentre.getCurrentGame()) {
-                    case "ST":
-                        switchToActivity(PreStartingActivity.class);
-                        break;
-                    case "MS":
-                        switchToActivity(MSPreStartingActivity.class);
-                        break;
-                    case "GF":
-                        switchToActivity(GFPreStartingActivity.class);
-                        break;
-                    default:
-                        makeToastLoadedText(false);
-                        break;
-                }
+                switchToPreStarting(currentCentre.getCurrentGame());
             }
         });
     }
@@ -127,9 +91,9 @@ public class StartingActivity extends GameAppCompatActivity {
                 if (tempManager != null) {
                     boardManager = tempManager;
                     currentCentre.saveGame(StartingActivity.this, boardManager, true);
-                    makeToastLoadedText(true);
-
+    
                     if (!(currentCentre.getCurrentGame().equals(""))) {
+                        makeToastLoadedText(true);
                         switchToGame(currentCentre.getCurrentGame());
                     } else {
                         makeToastLoadedText(false);
@@ -150,7 +114,7 @@ public class StartingActivity extends GameAppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (currentCentre.getCurrentGame().equals("GF")) {
-                    switchToScoreBoard("10", 0);
+                    switchToScoreBoard("10", "", 0);
                 } else {
                     switchToActivity(PreScoreBoardActivity.class);
                 }
@@ -202,17 +166,7 @@ public class StartingActivity extends GameAppCompatActivity {
         super.onResume();
         boardManager = currentCentre.loadGame(StartingActivity.this, true);
         if (boardManager == null) {
-            switch (currentCentre.getCurrentGame()) {
-                case "ST":
-                    boardManager = new STManager();
-                    break;
-                case "MS":
-                    boardManager = new MSManager();
-                    break;
-                case "GF":
-                    boardManager = new GFManager();
-                    break;
-            }
+            boardManager = GameFactory.getManager(currentCentre.getCurrentGame());
         }
     }
 

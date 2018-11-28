@@ -28,7 +28,7 @@ public class PreStartingActivity extends GameAppCompatActivity {
         currentCentre = GameCentre.getInstance(this);
         setContentView(R.layout.activity_choosing);
         Spinner mySpinner = findViewById(R.id.BoardSizeSelect);
-        String[] choicesArray = getResources().getStringArray(R.array.boardsizechoices);
+        String[] choicesArray = getResources().getStringArray(R.array.STboardsizes);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, choicesArray);
         myAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);

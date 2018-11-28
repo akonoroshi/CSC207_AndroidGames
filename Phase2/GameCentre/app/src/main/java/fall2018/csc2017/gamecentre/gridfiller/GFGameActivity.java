@@ -79,7 +79,7 @@ public class GFGameActivity extends GameActivity {
             } else {
                 Toast.makeText(this, "You win!", Toast.LENGTH_LONG).show();
             }
-            switchToScoreBoard(size, boardmanager.getScore() * 4);
+            switchToScoreBoard(size, "", boardmanager.getScore() * 4);
         } else {
             autoSave();
 

@@ -20,63 +20,23 @@ public class ScoreBoardActivity extends GameAppCompatActivity {
         currentCentre = GameCentre.getInstance(this);
         setContentView(R.layout.activity_scoreboard_);
         addBackButtonListener();
-        String boardSize = this.getIntent().getStringExtra("boardSize");
-        int[] scoreboard = currentCentre.loadScoreboard(ScoreBoardActivity.this, boardSize);
-        TextView title = findViewById(R.id.ScoreTitle);
+        String identifier = this.getIntent().getStringExtra("identifier");
+        String title = this.getIntent().getStringExtra("title");
+        int[] scoreboard = currentCentre.loadScoreboard(ScoreBoardActivity.this, identifier);
+        TextView titleView = findViewById(R.id.ScoreTitle);
         TextView firstScore = findViewById(R.id.FirstScore);
         TextView secondScore = findViewById(R.id.SecondScore);
         TextView thirdScore = findViewById(R.id.ThirdScore);
         TextView currentScore = findViewById(R.id.WinningScore);
-        setScoreTitle(title);
-        setScores(scoreboard, firstScore, secondScore, thirdScore);
-        setCurrentScore(currentScore);
-
-    }
-
-    /**
-     * Sets the players current score (winning score) to currentScore if given, else set it to to be
-     * empty.
-     *
-     * @param currentScore the currentScore to be displayed
-     */
-    private void setCurrentScore(TextView currentScore) {
-        int yourScore = this.getIntent().getIntExtra("current", 0);
-        if (yourScore == 0) {
-            currentScore.setText("");
-        } else {
-            currentScore.setText(String.format("Your Score: %s", checkEmptyScore(yourScore)));
-            currentCentre.clearSavedGame(ScoreBoardActivity.this, true);
-        }
-    }
-
-    /**
-     * Sets the title of the high score board.
-     *
-     * @param title the title of the high score board to be displayed
-     */
-
-    private void setScoreTitle(TextView title) {
-        if ("ST".equals(currentCentre.getCurrentGame())) {
-            String boardSize = this.getIntent().getStringExtra("boardSize");
-            title.setText(String.format("%s x %s HIGHSCORE", boardSize, boardSize));
-        } else if ("GF".equals(currentCentre.getCurrentGame())) {
-            title.setText(R.string.highscore);
-        }
-    }
-
-    /**
-     * Sets the high score board using scoreboard.
-     *
-     * @param scoreboard  an array of the user's high scores for the game
-     * @param firstScore  best score to be displayed
-     * @param secondScore second best score to be displayed
-     * @param thirdScore  third best score to be displayed
-     */
-
-    private void setScores(int[] scoreboard, TextView firstScore, TextView secondScore, TextView thirdScore) {
+    
+        titleView.setText(String.format("%s HIGHSCORE", title));
         firstScore.setText(checkEmptyScore(scoreboard[0]));
         secondScore.setText(checkEmptyScore(scoreboard[1]));
         thirdScore.setText(checkEmptyScore(scoreboard[2]));
+    
+        
+        int yourScore = this.getIntent().getIntExtra("current", 0);
+        currentScore.setText(yourScore == 0 ? "0" : String.format("Your Score: %s", checkEmptyScore(yourScore)));
     }
 
     /**
