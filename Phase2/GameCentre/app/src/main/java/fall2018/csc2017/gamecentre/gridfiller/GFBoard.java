@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The sliding tiles board.
+ * The grid filler board.
  */
 public class GFBoard extends Board implements Serializable, Iterable<Tile> {
 

@@ -6,6 +6,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manages of GFBoard and current and next tetrominos
+ */
 public class GFManager implements BoardManager, Serializable {
 
     /**
