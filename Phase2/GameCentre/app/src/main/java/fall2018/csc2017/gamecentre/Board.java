@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Observable;
 
 /**
- * The sliding tiles board.
+ * The board players interact with.
  */
 public class Board extends Observable implements Serializable, Iterable<Tile> {
 
@@ -40,9 +40,6 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         for (int i = 0; i != boardWidth * boardHeight; i++) {
             this.tiles[i] = iter.next();
         }
-    }
-
-    Board() {
     }
 
     /**
