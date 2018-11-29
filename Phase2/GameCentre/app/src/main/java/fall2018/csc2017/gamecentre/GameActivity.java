@@ -110,7 +110,7 @@ public class GameActivity extends GameAppCompatActivity implements Observer {
     /**
      * Activate the undo button.
      */
-    void addUndoButtonListener() {
+    protected void addUndoButtonListener() {
         Button undoButton = findViewById(R.id.UndoButton);
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override

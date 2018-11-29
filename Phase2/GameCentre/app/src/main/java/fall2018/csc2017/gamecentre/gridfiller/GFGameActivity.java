@@ -53,7 +53,8 @@ public class GFGameActivity extends GameActivity {
                 "drawable", this.getPackageName()));
     }
 
-    void addUndoButtonListener() {
+    @Override
+    protected void addUndoButtonListener() {
         Button undoButton = findViewById(R.id.UndoButton);
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
