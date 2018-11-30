@@ -19,19 +19,46 @@ public class MSManager implements BoardManager, Serializable {
     /**
      * The score for the game.
      */
-    public int timer = 0;
+    private int timer = 0;
 
 
     /**
      * The number of mines left, after subtracting flagged spaces.
      */
-    public int remainingMines;
+    private int remainingMines;
 
     /**
      * A default MSManager constructor.
      */
     public MSManager() {
 
+    }
+
+    /**
+     * Return the remaining mines on a minesweeper board.
+     *
+     * @return the remaining mines on the board
+     */
+    public int getRemainingMines() {
+        return remainingMines;
+    }
+
+    /**
+     * Set the number of mines on the board
+     *
+     * @param num the number of mines that are to be placed
+     */
+    public void setRemainingMines(int num){
+        remainingMines = num;
+    }
+
+    /**
+     * Return the timer for the current game
+     *
+     * @return the timer of the manager
+     */
+    public int getTimer() {
+        return timer;
     }
 
     /**
