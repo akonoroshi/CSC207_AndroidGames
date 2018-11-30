@@ -158,9 +158,9 @@ public class MSTest {
         MSBoard board = createEmptyBoard(1);
         MSManager manager = new MSManager(board);
         ((MSTile) board.getTile(0)).setMine();
-        manager.remainingMines++;
+        manager.setRemainingMines(manager.getRemainingMines() + 1);
         manager.flag(0);
-        assertEquals(0, manager.remainingMines);
+        assertEquals(0, manager.getRemainingMines());
     }
 
     /**
@@ -171,10 +171,10 @@ public class MSTest {
         MSBoard board = createEmptyBoard(1);
         MSManager manager = new MSManager(board);
         ((MSTile) board.getTile(0)).setMine();
-        manager.remainingMines++;
+        manager.setRemainingMines(manager.getRemainingMines() + 1);
         manager.flag(0);
         manager.flag(0);
-        assertEquals(1, manager.remainingMines);
+        assertEquals(1, manager.getRemainingMines());
     }
 
     /**
@@ -229,7 +229,7 @@ public class MSTest {
         MSBoard board = createEmptyBoard(1);
         MSManager manager = new MSManager(board);
         manager.addMine();
-        assertEquals(1, manager.remainingMines);
+        assertEquals(1, manager.getRemainingMines());
     }
 
     /**
@@ -241,7 +241,7 @@ public class MSTest {
         MSManager manager = new MSManager(board);
         manager.addMine();
         manager.subtractMine();
-        assertEquals(0, manager.remainingMines);
+        assertEquals(0, manager.getRemainingMines());
     }
 
     /**
@@ -252,7 +252,7 @@ public class MSTest {
         MSBoard board = createEmptyBoard(1);
         MSManager manager = new MSManager(board);
         manager.activateTimer();
-        assertEquals(0, manager.timer);
+        assertEquals(0, manager.getTimer());
     }
 
     /**
@@ -335,8 +335,8 @@ public class MSTest {
     @Test
     public void testManager() {
         MSManager ms = new MSManager(1, 2);
-        ms.remainingMines = 0;
-        assertEquals(0, ms.remainingMines);
+        ms.setRemainingMines(0);
+        assertEquals(0, ms.getRemainingMines());
     }
 
     /**
@@ -345,8 +345,8 @@ public class MSTest {
     @Test
     public void testManager1() {
         MSManager ms = new MSManager();
-        ms.remainingMines = 0;
-        assertEquals(0, ms.remainingMines);
+        ms.setRemainingMines(0);
+        assertEquals(0, ms.getRemainingMines());
     }
 
     /**
