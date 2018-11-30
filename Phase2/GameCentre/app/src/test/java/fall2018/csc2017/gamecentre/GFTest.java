@@ -25,11 +25,11 @@ public class GFTest {
     private GFManager boardManager;
 
     /**
-     * Make a set of tiles that are in order.
+     * Make a set of tiles that have the same status (filled or not filled).
      *
      * @param boardSize the size of the board
      * @param placed    true if a tile is filled
-     * @return a set of tiles that are in order
+     * @return a set of tiles that have the same status
      */
     private List<GFTile> makeTiles(int boardSize, boolean placed) {
         List<GFTile> tiles = new ArrayList<>();
