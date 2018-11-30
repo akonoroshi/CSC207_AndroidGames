@@ -20,7 +20,7 @@ class MovementController {
     void processTapMovement(Context context, int position, boolean display) {
         if (boardManager.isValidTap(position)) {
             boardManager.touchMove(position);
-        } else {
+        } else if (display){
             Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
         }
     }
@@ -28,7 +28,9 @@ class MovementController {
     void processPressMovement(Context context, int position, boolean display) {
         if (boardManager instanceof MSManager && ((MSManager) boardManager).isValidPress(position)) {
             ((MSManager) boardManager).flag(position);
-            Toast.makeText(context, "Flagged/Unflagged successfully", Toast.LENGTH_SHORT).show();
+            if (display) {
+                Toast.makeText(context, "Flagged/Unflagged successfully", Toast.LENGTH_SHORT).show();
+            }
         } else {
             processTapMovement(context, position, display);
         }

@@ -58,6 +58,7 @@ public class GFManager implements BoardManager, Serializable {
     public GFManager(GFBoard board) {
         this.board = board;
         this.tetrominos = new ArrayList<>();
+        this.undoStack = new ArrayList<>();
     }
 
     /**

@@ -75,7 +75,7 @@ public class MSTile extends Tile {
      *
      * @return whether this tile is flagged.
      */
-    boolean isFlagged() {
+    public boolean isFlagged() {
         return this.flagged;
     }
 

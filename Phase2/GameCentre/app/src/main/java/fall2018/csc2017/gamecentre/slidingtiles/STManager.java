@@ -52,6 +52,7 @@ public class STManager implements BoardManager, Serializable {
      */
     public STManager(STBoard board) {
         this.board = board;
+        this.undoStack = new ArrayList<>();
     }
 
     /**
