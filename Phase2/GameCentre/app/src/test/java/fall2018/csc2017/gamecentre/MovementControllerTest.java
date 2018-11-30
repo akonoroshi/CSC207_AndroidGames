@@ -117,6 +117,8 @@ public class MovementControllerTest {
     public void testProcessTapMovementST() {
         STManager manager = setUpCorrect();
         mc.setBoardManager(manager);
+        mc.processTapMovement(con, 5, false);
+        assertTrue(manager.puzzleSolved());
         mc.processTapMovement(con, 11, false);
         assertFalse(manager.puzzleSolved());
     }
