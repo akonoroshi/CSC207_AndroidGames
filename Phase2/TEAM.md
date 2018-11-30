@@ -22,6 +22,29 @@ We have decided to work individually.
 
 Commit log
 ==================
+Author: Yuya <yuya.asano@mail.utoronto.ca>
+Date:   Fri Nov 30 09:18:19 2018 -0500
+
+    Increased the coverage by doing invalid tap
+
+commit 5492841893adab7c3960481383b0698e6803a013
+Author: Yuya <yuya.asano@mail.utoronto.ca>
+Date:   Fri Nov 30 09:12:18 2018 -0500
+
+    Divided tests
+
+commit 7184a9e4d1010e04374814f4d5b48eda0ea04181
+Author: Zhiheng Zou <zhiheng.zou@mail.utoronto.ca>
+Date:   Fri Nov 30 00:43:39 2018 -0500
+
+    TEAM
+
+commit b70fb84366ec0ad9979fd29c934bf823fc6d5b2c
+Author: Zhiheng Zou <zhiheng.zou@mail.utoronto.ca>
+Date:   Fri Nov 30 00:43:03 2018 -0500
+
+    README
+
 commit fd4fad745ba2ed28c949f442d500485f1a516054
 Author: Yuya <yuya.asano@mail.utoronto.ca>
 Date:   Thu Nov 29 23:49:38 2018 -0500
