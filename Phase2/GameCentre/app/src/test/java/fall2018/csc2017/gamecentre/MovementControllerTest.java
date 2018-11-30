@@ -9,17 +9,16 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import fall2018.csc2017.gamecentre.gridfiller.GFBoard;
 import fall2018.csc2017.gamecentre.gridfiller.GFManager;
 import fall2018.csc2017.gamecentre.gridfiller.GFTile;
-import fall2018.csc2017.gamecentre.gridfiller.Tetromino;
 import fall2018.csc2017.gamecentre.minesweeper.MSBoard;
 import fall2018.csc2017.gamecentre.minesweeper.MSManager;
 import fall2018.csc2017.gamecentre.minesweeper.MSTile;
 import fall2018.csc2017.gamecentre.slidingtiles.STBoard;
 import fall2018.csc2017.gamecentre.slidingtiles.STManager;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class MovementControllerTest {
     private Context con;
